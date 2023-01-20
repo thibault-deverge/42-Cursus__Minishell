@@ -7,8 +7,8 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+//# include <readline/readline.h>
+//# include <readline/history.h>
 
 /*******************************************************/
 /*                         DEFINES                     */
@@ -18,6 +18,8 @@
 /*                       STRUCTURES                    */
 /*******************************************************/
 
+/*linked list that contains the env                    */
+/*the index corresponds to the ascii order             */
 typedef struct s_env
 {
 	char			*name;

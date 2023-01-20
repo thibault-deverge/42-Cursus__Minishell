@@ -1,5 +1,17 @@
 #include "minishell.h"
 
+static int	ft_strlen(char *str)
+{
+	int	i;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
+
 static t_env	*to_fill_env_data(t_env *envp, char *str)
 {
 	int	i;
@@ -10,7 +22,7 @@ static t_env	*to_fill_env_data(t_env *envp, char *str)
 	while (str[i] && str[i] != '=')
 		i++;
 	envp->name = malloc(sizeof(char) * (i + 1));
-	envp->content = malloc(sizeof(char) * (strlen(str) - i + 1));
+	envp->content = malloc(sizeof(char) * (ft_strlen(str) - i + 1));
 	i = 0;
 	while (str[i] && str[i] != '=')
 	{
