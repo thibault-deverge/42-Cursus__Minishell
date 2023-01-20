@@ -24,6 +24,7 @@ typedef struct s_env
 {
 	char			*name;
 	char			*content;
+	int			index;
 	struct s_env	*next;
 }					t_env;
 
