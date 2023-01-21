@@ -7,7 +7,8 @@ CC	= clang
 LIBFT = ./libft/libft.a
 
 SRCS =	./main.c \
-		./parsing/init_env.c \
+		./builtins/init_env.c \
+		./builtins/export.c \
 
 INCDIR	= includes
 

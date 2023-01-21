@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void	print_envp(t_data *data)
+void	print_envp(t_data *data)
 {
 	t_env	*tmp;
 
@@ -8,12 +8,13 @@ static void	print_envp(t_data *data)
 	printf("env :\n");
 	while (tmp)
 	{
-		printf("%s = %s\n", tmp->name, tmp->content);
+		if (tmp->content)
+			printf("%s=%s\n", tmp->name, tmp->content);
 		tmp = tmp->next;
 	}
 }
 
-static void	print_export(t_data *data)
+void	print_export(t_data *data)
 {
 	int	index;
 	t_env	*tmp;
@@ -25,7 +26,10 @@ static void	print_export(t_data *data)
 	{
 		if (index == tmp->index)
 		{
-			printf("declare -x %s = %s\n", tmp->name, tmp->content);
+			if (tmp->content)
+				printf("declare -x %s=%s\n", tmp->name, tmp->content);
+			else
+				printf("declare -x %s\n", tmp->name);
 			tmp = data->envp;
 			index++;
 		}
@@ -42,6 +46,10 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	data.envp = NULL;
 	get_envp(&data, env);
+	export("toto", 0, &data);
+	export("titi=tutu", 0, &data);
+	export("riri=titi", 0, &data);
+	export(NULL, 0, &data);
 	print_envp(&data);
-	print_export(&data);
+	//print_export(&data);
 }

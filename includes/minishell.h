@@ -8,6 +8,7 @@
 # include "../libft/includes/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdbool.h>
 //# include <readline/readline.h>
 //# include <readline/history.h>
 
@@ -39,10 +40,32 @@ typedef struct s_data
 /*******************************************************/
 
 /*                        PARSING                      */
-void	get_envp(t_data *data, char **env);
 
 /*                       EXECUTION                     */
 
 /*                       BUILT-IN                      */
+
+/*			   echo         	       */
+
+/*			    cd          	       */
+
+/*			    pwd         	       */
+
+/*			   export		       */
+void	export(char *cmd, bool pipe, t_data *data);
+
+/*			   unset         	       */
+
+/*			    env			       */
+void	get_envp(t_data *data, char **env);
+t_data	*add_env(t_data *data, char *str);
+void	init_ascii_index(t_data *data);
+
+/*			    exit		       */
+
+/*                        DISPLAY                      */
+
+void	print_envp(t_data *data);
+void	print_export(t_data *data);
 
 #endif
