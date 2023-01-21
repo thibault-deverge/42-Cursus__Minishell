@@ -1,8 +1,10 @@
 NAME	= minishell
 
-CFLAGS	= -Wall -Wextra -Werror -I$(INCDIR) -g
+CFLAGS	= -Wall -Wextra -Werror -I$(INCDIR) -Ilibft -g
 
 CC	= clang
+
+LIBFT = ./libft/libft.a
 
 SRCS =	./main.c \
 		./parsing/init_env.c \
@@ -17,13 +19,16 @@ OBJS	= $(SRCS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	make -s -C ./libft
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT)
 	
 clean:
 	rm -f $(OBJS)
+	make -s -C ./libft clean
 
 fclean: clean
 	rm -f $(NAME)
+	make -s -C ./libft fclean
 
 re: fclean all
 

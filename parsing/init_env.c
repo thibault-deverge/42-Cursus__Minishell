@@ -1,17 +1,5 @@
 #include "minishell.h"
 
-static int	ft_strlen(char *str)
-{
-	int	i;
-
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
-
 static void	init_ascii_index(t_data *data)
 {
 	t_env	*tmp_sort;
@@ -52,7 +40,11 @@ static t_env	*to_fill_env_data(t_env *envp, char *str)
 	while (str[i] && str[i] != '=')
 		i++;
 	envp->name = malloc(sizeof(char) * (i + 1));
-	envp->content = malloc(sizeof(char) * (ft_strlen(str) - i + 1));
+	if (!envp->name)
+		return (NULL);
+	envp->content = malloc(sizeof(char) * ((int)ft_strlen(str) - i + 1));
+	if (!envp->content)
+		return (NULL);
 	i = 0;
 	while (str[i] && str[i] != '=')
 	{
