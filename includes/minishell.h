@@ -52,7 +52,7 @@ typedef struct s_data
 /*			    pwd         	       */
 
 /*			   export		       */
-void	export(char *cmd, bool pipe, t_data *data);
+void	export(char *cmd, t_data *data);
 
 /*			   unset         	       */
 

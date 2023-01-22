@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static void	check_variable(t_data *data)
+/*static void	check_variable(t_data *data)
 {
 	t_env	*tmp_command;
 	t_env	*tmp_env;
@@ -19,18 +19,17 @@ static void	check_variable(t_data *data)
 		}
 		tmp_env = tmp_env->next;
 	}
-}
+}*/
 
-void	export(char *cmd, bool pipe, t_data *data)
+void	export(char *cmd, t_data *data)
 {
-	if (!cmd && !pipe)
+	if (!cmd)
 		print_export(data);
-	else if (!cmd && pipe)
-		return ;
 	else
 	{
+		check_variable(cmd, data);
 		add_env(data, cmd);
 		init_ascii_index(data);
-		check_variable(data);
+		//check_variable(data);
 	}
 }

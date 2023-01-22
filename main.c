@@ -27,7 +27,7 @@ void	print_export(t_data *data)
 		if (index == tmp->index)
 		{
 			if (tmp->content)
-				printf("declare -x %s=%s\n", tmp->name, tmp->content);
+				printf("declare -x %s=\"%s\"\n", tmp->name, tmp->content);
 			else
 				printf("declare -x %s\n", tmp->name);
 			tmp = data->envp;
@@ -46,9 +46,9 @@ int	main(int argc, char **argv, char **env)
 	(void)argv;
 	data.envp = NULL;
 	get_envp(&data, env);
-	export("toto", 0, &data);
-	export("titi=tutu", 0, &data);
-	export("riri=titi", 0, &data);
+	export("toto", &data);
+	export("titi=tutu", &data);
+	export("riri=titi", &data);
 	export(NULL, 0, &data);
 	print_envp(&data);
 	//print_export(&data);
