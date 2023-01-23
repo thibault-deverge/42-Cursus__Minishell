@@ -7,8 +7,9 @@ CC	= clang
 LIBFT = ./libft/libft.a
 
 SRCS =	./main.c \
-		./builtins/init_env.c \
-		./builtins/export.c \
+		./sources/builtins/init_env.c \
+		./sources/builtins/export.c \
+		./sources/display/print.c \
 
 INCDIR	= includes
 
@@ -21,7 +22,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -s -C ./libft
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIBFT) -lreadline
 	
 clean:
 	rm -f $(OBJS)

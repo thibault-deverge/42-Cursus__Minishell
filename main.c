@@ -1,55 +1,34 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pmieuzet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/23 10:02:02 by pmieuzet          #+#    #+#             */
+/*   Updated: 2023/01/23 12:12:18 by pmieuzet         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
-
-void	print_envp(t_data *data)
-{
-	t_env	*tmp;
-
-	tmp = data->envp;
-	printf("env :\n");
-	while (tmp)
-	{
-		if (tmp->content)
-			printf("%s=%s\n", tmp->name, tmp->content);
-		tmp = tmp->next;
-	}
-}
-
-void	print_export(t_data *data)
-{
-	int	index;
-	t_env	*tmp;
-
-	index = 0;
-	tmp = data->envp;
-	printf("\nexport :\n");
-	while (tmp)
-	{
-		if (index == tmp->index)
-		{
-			if (tmp->content)
-				printf("declare -x %s=\"%s\"\n", tmp->name, tmp->content);
-			else
-				printf("declare -x %s\n", tmp->name);
-			tmp = data->envp;
-			index++;
-		}
-		else
-			tmp = tmp->next;
-	}
-}
 
 int	main(int argc, char **argv, char **env)
 {
-	t_data	data;
+	t_env	envp;
+	char	*cmd;
 
-	(void)argc;
 	(void)argv;
-	data.envp = NULL;
-	get_envp(&data, env);
-	export("toto", &data);
-	export("titi=tutu", &data);
-	export("riri=titi", &data);
-	export(NULL, 0, &data);
-	print_envp(&data);
-	//print_export(&data);
+	if (argc > 1)
+		return (1);
+	get_envp(&envp, env);
+	cmd = readline(">");
+	while (cmd)
+	{
+		//parse(&lst, cmd);
+		free(cmd);
+		cmd = readline(">");
+	}
+	free(cmd);
+	print_envp(&envp);
+	print_export(&envp);
 }

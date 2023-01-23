@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pmieuzet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/06 01:24:57 by tdeverge          #+#    #+#             */
-/*   Updated: 2022/11/13 17:25:26 by tdeverge         ###   ########.fr       */
+/*   Created: 2023/01/23 11:17:41 by pmieuzet          #+#    #+#             */
+/*   Updated: 2023/01/23 11:55:36 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "../../includes/libft.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+# include "minishell.h"
+
+static t_data	*add_cmd_to_ast(char *cmd, t_data *data)
 {
-	if (!del || !lst)
-		return ;
-	(*del)(lst->content);
-	free(lst);
+}
+
+t_data	*parse(const char *arg, t_data *data)
+{
 }

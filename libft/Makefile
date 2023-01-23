@@ -54,15 +54,6 @@ SRCS =	./sources/conversion/ft_atoi.c \
 		./sources/print/ft_putstr_fd.c \
 		./sources/print/ft_putendl_fd.c \
 		./sources/print/ft_putnbr_fd.c \
-		./sources/linked_list/ft_lstnew.c \
-		./sources/linked_list/ft_lstadd_front.c \
-		./sources/linked_list/ft_lstsize.c \
-		./sources/linked_list/ft_lstlast.c \
-		./sources/linked_list/ft_lstadd_back.c \
-		./sources/linked_list/ft_lstdelone.c \
-		./sources/linked_list/ft_lstclear.c \
-		./sources/linked_list/ft_lstiter.c \
-		./sources/linked_list/ft_lstmap.c \
 		./sources/printf/ft_printf.c \
 		./sources/printf/count.c \
 		./sources/printf/identify.c \

@@ -9,8 +9,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
-//# include <readline/readline.h>
-//# include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 /*******************************************************/
 /*                         DEFINES                     */
@@ -22,50 +22,64 @@
 
 /*linked list that contains the env                    */
 /*the index corresponds to the ascii order             */
+typedef struct s_variable
+{
+	char				*name;
+	char				*content;
+	int					index;
+	struct s_variable	*next;
+}						t_variable;
+
 typedef struct s_env
 {
-	char			*name;
-	char			*content;
-	int			index;
-	struct s_env	*next;
-}					t_env;
+	t_variable	*variable;
+}				t_env;
 
-typedef struct s_data
+/*linked list that contains the commands               */
+typedef struct s_command
 {
-	t_env	*envp;
-}			t_data;
+	char				**cmd;
+	char				**redi;
+	struct s_command	*next;
+	
+}			t_command;
+
+typedef struct s_list
+{
+	size_t		nb_cmd;
+	t_command	*cmd;
+}				t_list;
 
 /*******************************************************/
 /*                       PROTOTYPES                    */
 /*******************************************************/
-
 /*                        PARSING                      */
 
 /*                       EXECUTION                     */
 
-/*                       BUILT-IN                      */
+/*                       BUILT-INS                     */
 
-/*			   echo         	       */
+/*			  			   echo         	           */
 
-/*			    cd          	       */
+/*			    		    cd          	           */
 
-/*			    pwd         	       */
+/*			   			   pwd         	               */
 
-/*			   export		       */
-void	export(char *cmd, t_data *data);
+/*			              export		               */
+void	export(char *cmd, t_env *envp);
 
-/*			   unset         	       */
+/*			              unset             	       */
 
-/*			    env			       */
-void	get_envp(t_data *data, char **env);
-t_data	*add_env(t_data *data, char *str);
-void	init_ascii_index(t_data *data);
+/*	              		   env			               */
+void	get_envp(t_env *envp, char **env);
+t_env	*add_variable(t_env *envp, char *str);
+void	init_ascii_index(t_env *envp);
 
-/*			    exit		       */
+/*           			  exit		                   */
 
-/*                        DISPLAY                      */
+/*                       DISPLAY                       */
 
-void	print_envp(t_data *data);
-void	print_export(t_data *data);
+void	print_envp(t_env *envp);
+void	print_export(t_env *envp);
 
 #endif
