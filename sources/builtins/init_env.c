@@ -6,7 +6,7 @@
 /*   By: pmieuzet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 09:29:11 by pmieuzet          #+#    #+#             */
-/*   Updated: 2023/01/23 12:14:04 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/01/23 14:32:23 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	get_envp(t_env *envp, char **env)
 	int	i;
 
 	i = 0;
+	envp->variable = NULL;
 	while (env[i])
 	{
 		envp = add_variable(envp, env[i]);

@@ -6,7 +6,7 @@
 #    By: tdeverge <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/03 18:11:43 by tdeverge          #+#    #+#              #
-#    Updated: 2022/11/14 20:58:32 by tdeverge         ###   ########.fr        #
+#    Updated: 2023/01/23 14:18:11 by pmieuzet         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRCS =	./sources/conversion/ft_atoi.c \
 		./sources/string/ft_strlcat.c \
 		./sources/string/ft_strlcpy.c \
 		./sources/string/ft_strlen.c \
+		./sources/string/ft_strcmp.c \
 		./sources/string/ft_strncmp.c \
 		./sources/string/ft_strnstr.c \
 		./sources/string/ft_strrchr.c \

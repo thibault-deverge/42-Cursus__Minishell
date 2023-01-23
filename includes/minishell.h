@@ -50,6 +50,14 @@ typedef struct s_list
 	t_command	*cmd;
 }				t_list;
 
+/*singleton of builtins								   */
+
+typedef struct s_builtins
+{
+	char	*name;
+//	void	(f*)(t_command *command, t_env *envp); 
+}			t_builtins;
+
 /*******************************************************/
 /*                       PROTOTYPES                    */
 /*******************************************************/
