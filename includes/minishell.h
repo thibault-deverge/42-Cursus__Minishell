@@ -50,6 +50,18 @@ typedef struct s_list
 	t_command	*cmd;
 }				t_list;
 
+/*linked list to parse the args						   */
+typedef struct s_token
+{
+	char			*arg;
+	struct s_token	*next;
+}					t_token;
+
+typedef struct s_parse
+{
+	t_token	*token;
+}			t_parse;
+
 /*singleton of builtins								   */
 
 typedef struct s_builtins

@@ -6,7 +6,7 @@
 /*   By: pmieuzet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 10:02:02 by pmieuzet          #+#    #+#             */
-/*   Updated: 2023/01/23 12:12:18 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/01/24 09:49:52 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv, char **env)
 {
 	t_env	envp;
+	t_list	lst;
 	char	*cmd;
 
 	(void)argv;
@@ -24,11 +25,12 @@ int	main(int argc, char **argv, char **env)
 	cmd = readline(">");
 	while (cmd)
 	{
-		//parse(&lst, cmd);
+		//parse(&lst, cmd, &envp);
+		//execution(&lst, &envp);
 		free(cmd);
 		cmd = readline(">");
 	}
 	free(cmd);
-	print_envp(&envp);
-	print_export(&envp);
+	//print_envp(&envp);
+	//print_export(&envp);
 }
