@@ -32,7 +32,7 @@ typedef struct s_variable
 
 typedef struct s_env
 {
-	t_variable	*variable;
+	t_variable	*var;
 }				t_env;
 
 /*linked list that contains the commands               */
@@ -41,13 +41,12 @@ typedef struct s_command
 	char				**cmd;
 	char				**redi;
 	struct s_command	*next;
-	
 }			t_command;
 
 typedef struct s_list
 {
 	size_t		nb_cmd;
-	t_command	*cmd;
+	t_command	*first;
 }				t_list;
 
 /*linked list to parse the args						   */
@@ -63,7 +62,6 @@ typedef struct s_parse
 }			t_parse;
 
 /*singleton of builtins								   */
-
 typedef struct s_builtins
 {
 	char	*name;

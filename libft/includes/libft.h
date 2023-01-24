@@ -6,7 +6,7 @@
 /*   By: tdeverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:33:42 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/01/23 14:18:29 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/01/24 17:02:59 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 int		ft_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
+int		ft_is_whitespace(char c);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
@@ -67,7 +68,7 @@ void	ft_putull_base(unsigned long int n, char *base);
 char	*get_next_line(int fd);
 char	*read_file(char *stock, int fd);
 char	*save_buffer(char *stock, char *buffer);
-char 	*extract_line(char *stock);
+char	*extract_line(char *stock);
 char	*update_stock(char *stock);
 char	*add_to_stock(char *stock, char *buffer);
 void	*ft_calloc(size_t nmemb, size_t size);

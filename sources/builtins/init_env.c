@@ -1,32 +1,20 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   init_env.c                                         :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: pmieuzet <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/23 09:29:11 by pmieuzet          #+#    #+#             */
-/*   Updated: 2023/01/23 14:32:23 by pmieuzet         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "minishell.h"
 
-void	init_ascii_index(t_env *envp)
+void	init_ascii_index(t_env *env)
 {
 	t_variable	*tmp_env;
 	t_variable	*tmp_var;
-	int	i;
+	int			i;
 
-	tmp_var = envp->variable;
-	tmp_env = envp->variable;
+	tmp_var = env->var;
+	tmp_env = env->var;
 	while (tmp_var->next)
 		tmp_var = tmp_var->next;
 	while (tmp_env != tmp_var)
 	{
 		i = 0;
 		while (tmp_var->name[i] && tmp_env->name[i]
-				&& tmp_var->name[i] == tmp_env->name[i])
+			&& tmp_var->name[i] == tmp_env->name[i])
 			i++;
 		if (!tmp_env->name[i] || tmp_var->name[i] - 48 > tmp_env->name[i] - 48)
 			tmp_var->index += 1;
@@ -57,7 +45,7 @@ static t_variable	*to_fill_env_variable(t_variable *var, char *str)
 	return (var);
 }
 
-t_env	*add_variable(t_env *envp, char *str)
+t_env	*add_variable(t_env *env, char *str)
 {
 	t_variable	*new;
 	t_variable	*tmp;
@@ -70,33 +58,33 @@ t_env	*add_variable(t_env *envp, char *str)
 		return (NULL);
 	new->next = NULL;
 	new->index = 0;
-	if (!envp->variable)
-		envp->variable = new;
+	if (!env->var)
+		env->var = new;
 	else
 	{
-		tmp = envp->variable;
+		tmp = env->var;
 		while (tmp && tmp->next)
 			tmp = tmp->next;
 		tmp->next = new;
 	}
-	return (envp);
+	return (env);
 }
 
-void	get_envp(t_env *envp, char **env)
+void	get_env(t_env *env, char **envp)
 {
 	int	i;
 
 	i = 0;
-	envp->variable = NULL;
-	while (env[i])
+	env->var = NULL;
+	while (envp[i])
 	{
-		envp = add_variable(envp, env[i]);
-		if (!envp)
+		env = add_variable(env, envp[i]);
+		if (!env)
 		{
 			//free all
 			return ;
 		}
-		init_ascii_index(envp);
+		init_ascii_index(env);
 		i++;
 	}
 }
