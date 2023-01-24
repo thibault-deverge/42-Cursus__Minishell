@@ -1,5 +1,9 @@
 #include "minishell.h"
 
+/*
+ * @summary:
+ * 		- A RAJOUTER
+*/
 void	init_ascii_index(t_env *env)
 {
 	t_variable	*tmp_env;
@@ -24,6 +28,12 @@ void	init_ascii_index(t_env *env)
 	}
 }
 
+/*
+ * @summary:
+ * 		- Fill the information about environment variable passed as parameter
+ * 		('str') to a node variable and return the node.
+ * 		- Store first its name then its content in two distinct function.
+*/
 static t_variable	*to_fill_env_variable(t_variable *var, char *str)
 {
 	size_t	i;
@@ -45,6 +55,14 @@ static t_variable	*to_fill_env_variable(t_variable *var, char *str)
 	return (var);
 }
 
+/*
+ * @summary:
+ * 		- Initialize a new variable in the heap and fill it
+ * 		with information passed with the env variable 'str'.
+ * 		- Add node variable at the end of linked list passed
+ * 		as parameter ('end').
+ * 		- return the linked list
+*/
 t_env	*add_variable(t_env *env, char *str)
 {
 	t_variable	*new;
@@ -70,6 +88,13 @@ t_env	*add_variable(t_env *env, char *str)
 	return (env);
 }
 
+/*
+ * @summary:
+ * 		- Loop through environment and add every variable to 
+ * 		a linked list 'env' passed as parameter.
+ * 		- Call a function to initialize its index based 
+ * 		on ASCII order.
+*/
 void	get_env(t_env *env, char **envp)
 {
 	int	i;

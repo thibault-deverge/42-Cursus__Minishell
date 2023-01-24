@@ -1,19 +1,24 @@
+####################
+## VARIABLES
+
 NAME	= minishell
-
 CFLAGS	= -Wall -Wextra -Werror -I$(INCDIR) -Ilibft -g
-
 CC	= clang
-
 LIBFT = ./libft/libft.a
+INCDIR	= includes
+
+####################
+## SOURCES
 
 SRCS =	./main.c \
 		./sources/builtins/init_env.c \
 		./sources/builtins/export.c \
 		./sources/display/print.c \
 
-INCDIR	= includes
-
 OBJS	= $(SRCS:.c=.o)
+
+####################
+## RULES
 
 %.o:%.c
 		$(CC) -c $< -o $@ $(CFLAGS)
