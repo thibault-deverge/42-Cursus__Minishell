@@ -1,5 +1,9 @@
 #include "minishell.h"
 
+/*
+ * @summary:
+ * 		- Loop through the 'env' linked list and print every variables.
+*/
 void	print_env(t_env *env)
 {
 	t_variable	*tmp;
@@ -14,6 +18,11 @@ void	print_env(t_env *env)
 	}
 }
 
+/*
+ * @summary:
+ * 		- Loop through the environment linked list and print all variable
+ * 		as the built-in 'export' would do using ASCII order.
+*/
 void	print_export(t_env *env)
 {
 	int			index;
