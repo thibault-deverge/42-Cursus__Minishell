@@ -10,6 +10,8 @@ SRCS =	./main.c \
 		./sources/builtins/init_env.c \
 		./sources/builtins/export.c \
 		./sources/display/print.c \
+		./sources/parsing/parsing.c \
+		./sources/parsing/get_commands.c \
 
 INCDIR	= includes
 

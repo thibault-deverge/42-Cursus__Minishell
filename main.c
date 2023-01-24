@@ -13,7 +13,7 @@ int	main(int argc, char **argv, char **envp)
 	cmd = readline(">");
 	while (cmd)
 	{
-		//parse(&lst, cmd, &envp);
+		parse(&lst, cmd, &env);
 		//execution(&lst, &envp);
 		free(cmd);
 		cmd = readline(">");

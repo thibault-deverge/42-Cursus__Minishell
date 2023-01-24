@@ -73,6 +73,9 @@ typedef struct s_builtins
 /*******************************************************/
 /*                        PARSING                      */
 
+t_list	*parse(t_list *lst, char *cmd, t_env *env);
+t_list	*get_commands(t_parse *parse);
+
 /*                       EXECUTION                     */
 
 /*                       BUILT-INS                     */
@@ -89,7 +92,7 @@ void	export(char *cmd, t_env *envp);
 /*			              unset             	       */
 
 /*	              		   env			               */
-void	get_envp(t_env *envp, char **env);
+void	get_env(t_env *env, char **envp);
 t_env	*add_variable(t_env *envp, char *str);
 void	init_ascii_index(t_env *envp);
 

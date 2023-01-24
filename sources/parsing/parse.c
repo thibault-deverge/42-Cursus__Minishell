@@ -81,7 +81,7 @@ static t_list	*add_command(char *command, int len, t_list *lst)
 	return (lst);
 }
 
-t_list	*parse(t_list *lst, char *arg)
+t_list	*parsing(t_list *lst, char *arg)
 {
 	int	i;
 

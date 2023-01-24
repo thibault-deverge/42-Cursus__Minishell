@@ -29,6 +29,7 @@ SRCS =	./sources/conversion/ft_atoi.c \
 		./sources/checker/ft_isascii.c \
 		./sources/checker/ft_isdigit.c \
 		./sources/checker/ft_isprint.c \
+		./sources/checker/ft_is_whitespace.c \
 		./sources/memory/ft_memchr.c \
 		./sources/memory/ft_memcmp.c \
 		./sources/memory/ft_memcpy.c \
