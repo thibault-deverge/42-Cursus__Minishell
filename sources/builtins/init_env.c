@@ -2,7 +2,10 @@
 
 /*
  * @summary:
- * 		- A RAJOUTER
+ * 		- Initialize a variable node and traverse to last element added.
+ * 		- Compare last element added with every other element and update 
+ * 		its index everytime the last element is bigger than another one
+ * 		in ASCII.
 */
 void	init_ascii_index(t_env *env)
 {
@@ -106,7 +109,7 @@ void	get_env(t_env *env, char **envp)
 		env = add_variable(env, envp[i]);
 		if (!env)
 		{
-			//free all
+			free_env(env->var);
 			return ;
 		}
 		init_ascii_index(env);

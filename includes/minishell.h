@@ -100,4 +100,12 @@ void	init_ascii_index(t_env *envp);
 void	print_envp(t_env *envp);
 void	print_export(t_env *envp);
 
+/*						PROMPT							*/
+char	*get_input(t_env *env);
+char	*get_prompt(t_env *env);
+char	*get_var_content(t_env *env, char *var_name);
+
+/*						HELPERS							*/
+void	free_env(t_variable *var);
+
 #endif
