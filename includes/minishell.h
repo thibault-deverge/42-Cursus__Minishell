@@ -16,6 +16,11 @@
 /*                         DEFINES                     */
 /*******************************************************/
 
+# define ERROR_PROMPT "\nExit minishell - prompt receive NULL\n"
+
+# define EXIT_PROMPT 1
+# define EXIT_ALLOC 2
+
 /*******************************************************/
 /*                       STRUCTURES                    */
 /*******************************************************/
@@ -105,10 +110,13 @@ void	print_export(t_env *envp);
 
 /*						PROMPT							*/
 char	*get_input(t_env *env);
-char	*get_prompt(t_env *env);
-char	*get_var_content(t_env *env, char *var_name);
 
 /*						HELPERS							*/
+/*						environment.c					*/
+char	*get_var_content(t_env *env, char *var_name);
 void	free_env(t_variable *var);
+/*						errors.c						*/
+void	throw_error(char *err_msg, int exit_value);
+void	throw_perror(int exit_value);
 
 #endif

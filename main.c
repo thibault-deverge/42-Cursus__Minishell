@@ -38,11 +38,12 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		cmd = get_input(&env);
-		// parse(&lst, cmd, &envp);
+		parse(&lst, cmd, &env);
 		// execution(&lst, &envp);
 		free(cmd);
 	}
-	free(cmd);
 	// print_envp(&envp);
 	// print_export(&envp);
+	rl_clear_history();
+	return (0);
 }

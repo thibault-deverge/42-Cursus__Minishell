@@ -17,7 +17,8 @@ SRCS =	./main.c \
 		./sources/display/print.c \
 		./sources/parsing/parsing.c \
 		./sources/parsing/get_commands.c \
-		./sources/helpers/free.c \
+		./sources/helpers/environment.c \
+		./sources/helpers/errors.c \
 
 OBJS	= $(SRCS:.c=.o)
 

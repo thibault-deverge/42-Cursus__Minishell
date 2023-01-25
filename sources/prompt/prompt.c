@@ -2,21 +2,14 @@
 
 /*
  * @summary:
- * 		- Search in environment via name of the variable passed as parameter
- * 		and return its content.
+ * 		- Clear history of commands, free environment and throw an
+ * 		error.
 */
-char	*get_var_content(t_env *env, char *var_name)
+static void	exit_command_empty(t_env *env)
 {
-	t_variable	*tmp;
-
-	tmp = env->var;
-	while (tmp)
-	{
-		if (!ft_strcmp(tmp->name, var_name))
-			return (tmp->content);
-		tmp = tmp->next;
-	}
-	return (0);
+	rl_clear_history();
+	free_env(env->var);
+	throw_error(ERROR_PROMPT, EXIT_PROMPT);
 }
 
 /*
@@ -24,7 +17,7 @@ char	*get_var_content(t_env *env, char *var_name)
  * 		- Search in environment list for USER and PWD variable.
  * 		- Join these in a way to have a prompt : $USER:PWD >
 */
-char	*get_prompt(t_env *env)
+static char	*get_prompt(t_env *env)
 {
 	char	*user_env;
 	char	*pwd_env;
@@ -56,13 +49,16 @@ char	*get_input(t_env *env)
 	char	*prompt;
 
 	prompt = get_prompt(env);
+	if (prompt == NULL)
+	{
+		free_env(env->var);
+		throw_perror(EXIT_ALLOC);
+	}
 	command = readline(prompt);
 	if (!command)
-	{
-		rl_clear_history();
-		return (NULL);
-	}
-	add_history(command);
+		exit_command_empty(env);
+	if (command[0] && command[0] != '\n')
+		add_history(command);
 	free(prompt);
 	return (command);
 }

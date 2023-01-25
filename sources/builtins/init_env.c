@@ -110,7 +110,7 @@ void	get_env(t_env *env, char **envp)
 		if (!env)
 		{
 			free_env(env->var);
-			return ;
+			throw_perror(EXIT_ALLOC);
 		}
 		init_ascii_index(env);
 		i++;
