@@ -200,6 +200,6 @@ t_list	*parse(t_list *lst, char *cmd, t_env *env)
 	}
 	add_new_token(cmd, start, len, &parse);
 	print_arg(&parse);
-	//lst = get_commands(lst, &parse);
+	lst = get_commands(lst, &parse);
 	return (lst);
 }
