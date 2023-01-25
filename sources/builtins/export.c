@@ -28,8 +28,8 @@ void	export(char *cmd, t_env *envp)
 	else
 	{
 		//check_variable(cmd, envp);
-		add_variable(envp, cmd);
-		init_ascii_index(envp);
+		insert_var_node(envp, cmd);
+		set_var_content(envp);
 		//check_variable(envp);
 	}
 }

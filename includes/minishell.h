@@ -77,46 +77,32 @@ typedef struct s_builtins
 /*                       PROTOTYPES                    */
 /*******************************************************/
 /*                        PARSING                      */
-
-t_list	*parse(t_list *lst, char *cmd, t_env *env);
-t_list	*get_commands(t_parse *parse);
-
+t_list		*parse(t_list *lst, char *cmd, t_env *env);
+t_list		*get_commands(t_parse *parse);
 /*                       EXECUTION                     */
-
 /*                       BUILT-INS                     */
-
-/*			  			   echo         	           */
-
 /*			    		    cd          	           */
-
 /*			   			   pwd         	               */
-
 /*			              export		               */
-void	export(char *cmd, t_env *envp);
-
 /*			              unset             	       */
-
 /*	              		   env			               */
-void	get_env(t_env *env, char **envp);
-t_env	*add_variable(t_env *envp, char *str);
-void	init_ascii_index(t_env *envp);
-
+void		get_env(t_env *env, char **envp);
+t_env		*add_variable(t_env *envp, char *str);
+void		init_ascii_index(t_env *envp);
 /*           			  exit		                   */
-
 /*                       DISPLAY                       */
-
-void	print_envp(t_env *envp);
-void	print_export(t_env *envp);
-
+void		print_envp(t_env *envp);
+void		print_export(t_env *envp);
 /*						PROMPT							*/
-char	*get_input(t_env *env);
-
+char		*get_input(t_env *env);
 /*						HELPERS							*/
 /*						environment.c					*/
-char	*get_var_content(t_env *env, char *var_name);
-void	free_env(t_variable *var);
+t_env		*insert_var_node(t_env *env, char *str);
+char		*get_var_content(t_env *env, char *var_name);
+t_variable	*set_var_content(t_variable *var, char *str);
+void		free_env(t_variable *var);
 /*						errors.c						*/
-void	throw_error(char *err_msg, int exit_value);
-void	throw_perror(int exit_value);
+void		throw_error(char *err_msg, int exit_value);
+void		throw_perror(int exit_value);
 
 #endif
