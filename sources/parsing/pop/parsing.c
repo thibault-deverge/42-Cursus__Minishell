@@ -199,6 +199,7 @@ t_list	*parse(t_list *lst, char *cmd, t_env *env)
 			len++;
 	}
 	add_new_token(cmd, start, len, &parse);
+	free(cmd);
 	print_arg(&parse);
 	lst = get_commands(lst, &parse);
 	return (lst);

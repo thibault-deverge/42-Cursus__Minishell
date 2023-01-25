@@ -63,8 +63,8 @@ typedef struct s_list
 typedef struct s_token
 {
 	char			*arg;
-	int			index;
-	int			rule;
+	int				index;
+	int				rule;
 	struct s_token	*next;
 }					t_token;
 
