@@ -16,10 +16,13 @@
 /*                         DEFINES                     */
 /*******************************************************/
 
-# define ERROR_PROMPT "\nExit minishell - prompt receive NULL\n"
+# define ERROR_PROMPT	"\nExit minishell - prompt receive NULL\n"
 
-# define EXIT_PROMPT 1
-# define EXIT_ALLOC 2
+# define EXIT_PROMPT	1
+# define EXIT_ALLOC		2
+
+# define COMMAND		1
+# define REDI			0
 
 /*******************************************************/
 /*                       STRUCTURES                    */
@@ -55,9 +58,13 @@ typedef struct s_list
 }				t_list;
 
 /*linked list to parse the args						   */
+/*the index corresponds to the order of the linked list*/
+/*the rule that contains if the arg is COMMAND or REDI */
 typedef struct s_token
 {
 	char			*arg;
+	int			index;
+	int			rule;
 	struct s_token	*next;
 }					t_token;
 

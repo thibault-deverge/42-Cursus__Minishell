@@ -15,7 +15,6 @@ SRCS =	./main.c \
 		./sources/builtins/init_env.c \
 		./sources/display/print.c \
 		./sources/parsing/parsing.c \
-		./sources/parsing/get_commands.c \
 		./sources/helpers/environment.c \
 		./sources/helpers/errors.c \
 
