@@ -88,14 +88,12 @@ static char	*get_content_of_key_value(char *key_value, int len, t_env *env)
 static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 {
 	int		i;
-	int		start;
 	char	*add_content;
 	
 	i = 1;
-	start = 1;
 	while (arg[i] && arg[i] != ' ' && arg[i] != '"')
 		i++;
-	add_content = get_content_of_key_value(&arg[start], i - start, env);
+	add_content = get_content_of_key_value(&arg[1], i - 1, env);
 	if (add_content)
 		add_new_token(add_content, 0, ft_strlen(add_content), parse);
 	else
@@ -114,10 +112,9 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env)
 	{
 		if (arg[i] == '$')
 		{
-			if (add_new_token(arg, start, i, parse))
+			if (add_new_token(arg, start, i - start, parse))
 				define_rule_arg(parse, COMMAND);
-//faire un manage key value unique pour les doubles quotes
-			i = manage_key_value(&arg[i], parse, env);
+			i += manage_key_value(&arg[i], parse, env) - 1;
 			start = i;
 		}
 		if (!arg[i])
@@ -199,8 +196,7 @@ t_list	*parse(t_list *lst, char *cmd, t_env *env)
 			len++;
 	}
 	add_new_token(cmd, start, len, &parse);
-	free(cmd);
 	print_arg(&parse);
-	lst = get_commands(lst, &parse);
+	//lst = get_commands(lst, &parse);
 	return (lst);
 }

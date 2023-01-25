@@ -12,9 +12,9 @@ INCDIR	= includes
 
 SRCS =	./main.c \
 		./sources/prompt/prompt.c \
-		./sources/builtins/init_env.c \
 		./sources/display/print.c \
 		./sources/parsing/pop/parsing.c \
+		./sources/parsing/env/init_env.c \
 		./sources/helpers/environment.c \
 		./sources/helpers/errors.c \
 
