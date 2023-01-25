@@ -4,10 +4,10 @@ void	free_env(t_variable *var)
 {
 	t_variable	*tmp;
 
-	if (!env)
+	if (!var)
 		return ;
 	tmp = var;
-	while (env)
+	while (var)
 	{
 		var = var->next;
 		free(tmp->name);

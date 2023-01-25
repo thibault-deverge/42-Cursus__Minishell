@@ -11,11 +11,13 @@ INCDIR	= includes
 ## SOURCES
 
 SRCS =	./main.c \
+		./sources/prompt/prompt.c \
 		./sources/builtins/init_env.c \
 		./sources/builtins/export.c \
 		./sources/display/print.c \
 		./sources/parsing/parsing.c \
 		./sources/parsing/get_commands.c \
+		./sources/helpers/free.c \
 
 OBJS	= $(SRCS:.c=.o)
 

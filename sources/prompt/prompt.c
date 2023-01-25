@@ -12,7 +12,7 @@ char	*get_var_content(t_env *env, char *var_name)
 	tmp = env->var;
 	while (tmp)
 	{
-		if (tmp->name == var_name)
+		if (!ft_strcmp(tmp->name, var_name))
 			return (tmp->content);
 		tmp = tmp->next;
 	}
@@ -28,13 +28,12 @@ char	*get_prompt(t_env *env)
 {
 	char	*user_env;
 	char	*pwd_env;
-	char	*temp_str;
 	char	*custom_prompt;
 
 	user_env = ft_strjoin(get_var_content(env, "USER"), ":");
 	if (!user_env)
 		return (NULL);
-	pwd_env = ft_strjoin(get_var_content(env, "PWD"), " >");
+	pwd_env = ft_strjoin(get_var_content(env, "PWD"), " > ");
 	if (!pwd_env)
 	{
 		free(user_env);
@@ -64,5 +63,6 @@ char	*get_input(t_env *env)
 		return (NULL);
 	}
 	add_history(command);
+	free(prompt);
 	return (command);
 }

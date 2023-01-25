@@ -31,11 +31,13 @@ int	main(int argc, char **argv, char **envp)
 	t_list	lst;
 	char	*cmd;
 
+	(void)argc;
 	(void)argv;
+	(void)lst;
 	get_env(&env, envp);
 	while (1)
 	{
-		cmd = get_prompt(env);
+		cmd = get_input(&env);
 		// parse(&lst, cmd, &envp);
 		// execution(&lst, &envp);
 		free(cmd);
