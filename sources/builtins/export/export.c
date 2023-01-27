@@ -21,15 +21,21 @@
 	}
 }*/
 
-void	export(char *cmd, t_env *envp)
+
+
+void	export(t_command *command, t_env *env)
 {
-	if (!cmd)
-		print_export(envp);
-	else
+	int	i;
+
+	i = 1;
+	if (!command[i])
 	{
-		//check_variable(cmd, envp);
-		insert_var_node(envp, cmd);
-		set_var_content(envp);
-		//check_variable(envp);
+		print_export(env);
+		return ;
+	}
+	while (command[i])
+	{
+		manage_variable(command[i], env);
+		i++;
 	}
 }
