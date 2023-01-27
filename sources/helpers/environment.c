@@ -80,6 +80,25 @@ char	*get_var_content(t_env *env, char *var_name)
 
 /*
  * @summary:
+ * 		- Search in environment via name of the variable passed as parameter
+ * 		and return its pointer.
+*/
+t_variable	*get_variable(t_env *env, char *var_name)
+{
+	t_variable	*tmp;
+
+	tmp = env->var;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->name, var_name))
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+/*
+ * @summary:
  * 		- Loop through the environment and free every variable with its content.
 */
 void	free_env(t_variable *var)
