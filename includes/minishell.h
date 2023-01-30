@@ -79,7 +79,7 @@ typedef struct s_parse
 typedef struct s_builtins
 {
 	char	*name;
-//	void	(f*)(t_command *command, t_env *envp); 
+//	void	(f*)(t_command *command, t_env *env); 
 }			t_builtins;
 
 /* *******************************************	*/
@@ -115,6 +115,8 @@ int			is_pipe(char *token);
 /* *******************************************	*/
 /*					BUILT-IN					*/
 /* *******************************************	*/
+/*					echo						*/
+void		exec_echo(t_command *command, t_env env);
 
 /* *******************************************	*/
 /*					EXECUTION					*/

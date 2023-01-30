@@ -21,6 +21,7 @@ SRCS =	./main.c \
 		./sources/parsing/parsing_commands/check_type.c \
 		./sources/parsing/parsing_commands/commands.c \
 		./sources/parsing/parsing_commands/redirections.c \
+		./sources/builtins/echo.echo.c \
 		./sources/utils/insert_matrice.c \
 		./sources/helpers/display/print.c \
 		./sources/helpers/error/errors.c \
