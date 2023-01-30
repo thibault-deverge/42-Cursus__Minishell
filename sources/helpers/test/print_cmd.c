@@ -8,7 +8,7 @@ static void	print_matrice(char **matrice, int index)
 	if (index == 1)
 		printf("1: matrice des commands\n");
 	if (index == 2)
-		printf("1: matrice des redis\n");
+		printf("2: matrice des redis\n");
 	if (!matrice)
 	{
 		printf("this matrice is empty.\n");
