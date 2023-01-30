@@ -96,24 +96,3 @@ t_variable	*get_variable(t_env *env, char *var_name)
 	}
 	return (0);
 }
-
-/*
- * @summary:
- * 		- Loop through the environment and free every variable with its content.
-*/
-void	free_env(t_variable *var)
-{
-	t_variable	*tmp;
-
-	if (!var)
-		return ;
-	tmp = var;
-	while (var)
-	{
-		var = var->next;
-		free(tmp->name);
-		free(tmp->content);
-		free(tmp);
-		tmp = var;
-	}
-}

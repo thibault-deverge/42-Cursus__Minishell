@@ -103,10 +103,10 @@ static void	print_arg(t_parse *parse)
 	t_token	*tmp;
 
 	tmp = parse->token;
-	printf("\nARG LIST : \n");
+	//printf("\nARG LIST : \n");
 	while (tmp)
 	{
-		printf("%s\n", tmp->arg);
+		//printf("%s\n", tmp->arg);
 		tmp = tmp->next;
 	}
 }
@@ -133,6 +133,10 @@ t_list	*parse(t_list *lst, char *cmd, t_env *env)
 	}
 	add_new_token(cmd, start, len, &parse);
 	print_arg(&parse);
-	//lst = get_commands(lst, &parse);
+	if (!parse_commands(lst, &parse))
+	{
+		free_all(env->var, lst->first, (&parse)->token);
+		exit(EXIT_PARSE_CMD);
+	}
 	return (lst);
 }

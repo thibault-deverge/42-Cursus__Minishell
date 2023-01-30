@@ -57,7 +57,7 @@ char	*get_input(t_env *env)
 	command = readline(prompt);
 	if (!command)
 		exit_command_empty(env);
-	if (command[0] && command[0] != '\n')
+	if (command[0])
 		add_history(command);
 	free(prompt);
 	return (command);

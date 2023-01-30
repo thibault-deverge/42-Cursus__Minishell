@@ -17,9 +17,11 @@
 /*******************************************************/
 
 # define ERROR_PROMPT	"\nExit minishell - prompt receive NULL\n"
+# define ERROR_SYNTAX	"syntax error near redirection\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
+# define EXIT_PARSE_CMD 3
 
 # define COMMAND		1
 # define REDI			0
@@ -89,12 +91,19 @@ void	define_rule_arg(t_parse *parse, int rule);
 int		check_arg(char c);
 t_parse	*add_new_token(char *arg, int start, int len, t_parse *parse);
 char	*get_value_of_key(char *key, int len, t_env *env);
+/*						parse_command.c				   */
+t_list		*parse_commands(t_list *list_commands, t_parse *list_tokens);
+/*						check_type.c				   */
+int			is_redirection_invalid(char c);
+int			is_redirection(char *token);
+int			is_command(t_token *token);
+int			is_pipe(char *token);
+/*						commands.c						*/
+int			handle_command(t_command *command, t_token *token);
+t_command	*initialize_command(void);
+/*						redirections.c					*/
+int			handle_redirection(t_command *command, t_token *token);
 /*                       EXECUTION                     */
-/*                       BUILT-INS                     */
-/*			    		    cd          	           */
-/*			   			   pwd         	               */
-/*			              export		               */
-/*			              unset             	       */
 /*	              		   env			               */
 void		get_env(t_env *env, char **envp);
 t_env		*add_variable(t_env *envp, char *str);
@@ -110,9 +119,18 @@ char		*get_input(t_env *env);
 t_env		*insert_var_node(t_env *env, char *str);
 char		*get_var_content(t_env *env, char *var_name);
 t_variable	*set_var_content(t_variable *var, char *str);
+/*						matrice.c						*/
+char		**insert_matrice(char **matrice, char *str);
+/*						free.c							*/
+void		free_all(t_variable *var, t_command *cmd, t_token *tok);
 void		free_env(t_variable *var);
+void		free_commands(t_command *command);
+void		free_tokens(t_token *token);
+void		free_matrice(char **matrice);
 /*						errors.c						*/
 void		throw_error(char *err_msg, int exit_value);
 void		throw_perror(int exit_value);
+int			print_error(char *err_msg);
+int			print_perror(void);
 
 #endif
