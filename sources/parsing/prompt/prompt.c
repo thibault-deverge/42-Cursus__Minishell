@@ -26,7 +26,7 @@ static char	*get_prompt(t_env *env)
 	user_env = ft_strjoin(get_var_content(env, "USER"), ":");
 	if (!user_env)
 		return (NULL);
-	pwd_env = ft_strjoin(get_var_content(env, "PWD"), " > ");
+	pwd_env = ft_strjoin(get_var_content(env, "PWD"), "$ ");
 	if (!pwd_env)
 	{
 		free(user_env);

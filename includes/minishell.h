@@ -17,7 +17,7 @@
 /*******************************************************/
 
 # define ERROR_PROMPT	"\nExit minishell - prompt receive NULL\n"
-# define ERROR_SYNTAX	"syntax error near redirection\n"
+# define ERROR_SYNTAX	"Error: syntax error near redirection\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2

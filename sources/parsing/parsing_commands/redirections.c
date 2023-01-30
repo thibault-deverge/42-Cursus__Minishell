@@ -16,7 +16,7 @@ static int	insert_file_to_redi(t_command *command, t_token *token)
 	while (token)
 	{
 		if (is_redirection(token->arg))
-			return (print_error(ERROR_SYNTAX));
+			return (0);
 		if (!ft_strcmp(token->arg, " "))
 			next_token++;
 		else
@@ -89,6 +89,6 @@ int	handle_redirection(t_command *command, t_token *token)
 		return (1);
 	nb_next_token = insert_file_to_redi(command, token->next);
 	if (!nb_next_token)
-		return (0);
+		return (print_error(ERROR_SYNTAX));
 	return (nb_next_token);
 }
