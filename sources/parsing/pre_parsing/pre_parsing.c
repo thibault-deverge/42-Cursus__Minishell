@@ -35,7 +35,7 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env)
 	{
 		if (arg[i] == '$')
 		{
-			if (add_new_token(arg, start, i - start, parse))
+			if (start != i && add_new_token(arg, start, i - start, parse))
 				define_rule_arg(parse, COMMAND);
 			i += manage_key_value(&arg[i], parse, env) - 1;
 			start = i;
@@ -69,6 +69,16 @@ static int	manage_redi(char *cmd, t_parse *parse)
 	while (check_arg(cmd[i]) < 0)
 		i++;
 	add_new_token(cmd, 0, i, parse);
+	if (strncmp(cmd, "<<", 2) == 0 && check_arg(cmd[2]) != -1)
+	{
+		while (ft_is_whitespace(cmd[i]))
+			i++;
+		if (cmd[i] == '$')
+		{
+			add_new_token(cmd, i, i + 1, parse);
+			return (i);
+		}
+	}
 	return (i - 1);
 }
 
@@ -87,12 +97,7 @@ static int	manage_arg(char *cmd, t_parse *parse, int len, t_env *env)
 		return (len);
 	}
 	else if (cmd[len] == '$')
-	{
-		if (len == 0 || check_arg(cmd[len - 1]) != -1)
-			len = manage_key_value(&cmd[len], parse, env);
-		else
-			add_new_token(cmd, len, 1, parse);
-	}
+		len += manage_key_value(&cmd[len], parse, env);
 	else if (check_arg(cmd[len]) < 0)
 		len += manage_redi(&cmd[len], parse);
 	return (len + 1);
@@ -103,10 +108,10 @@ static void	print_arg(t_parse *parse)
 	t_token	*tmp;
 
 	tmp = parse->token;
-	//printf("\nARG LIST : \n");
+	printf("\nARG LIST : \n");
 	while (tmp)
 	{
-		//printf("%s\n", tmp->arg);
+		printf("%s\n", tmp->arg);
 		tmp = tmp->next;
 	}
 }
