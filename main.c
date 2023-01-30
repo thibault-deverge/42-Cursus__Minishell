@@ -15,9 +15,8 @@ int	main(int argc, char **argv, char **envp)
 		main_parsing(&lst, cmd, &env);
 		// execution(&lst, &envp);
 		free(cmd);
+		print_cmd(&lst);
 	}
-	// print_envp(&envp);
-	// print_export(&envp);
 	rl_clear_history();
 	return (0);
 }

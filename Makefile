@@ -25,6 +25,7 @@ SRCS =	./main.c \
 		./sources/helpers/display/print.c \
 		./sources/helpers/error/errors.c \
 		./sources/helpers/error/free.c \
+		./sources/helpers/test/print_cmd.c \
 
 OBJS	= $(SRCS:.c=.o)
 

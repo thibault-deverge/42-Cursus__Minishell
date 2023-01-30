@@ -143,5 +143,7 @@ int			print_perror(void);
 /*					display.c					*/
 void		print_envp(t_env *envp);
 void		print_export(t_env *envp);
+/*					test.c						*/
+void		print_cmd(t_list *list_commands);
 
 #endif
