@@ -16,7 +16,7 @@ int	check_arg(char c)
 {
 	if (c == '\'' || c == '"' || c == '$' || ft_is_whitespace(c))
 		return (1);
-	if (c == '>' || c == '<')
+	else if (c == '>' || c == '<')
 		return (-1);
 	else if (c == '|')
 		return (-2);
@@ -44,7 +44,7 @@ static void	place_back_token(t_parse *parse, t_token *new)
 	}
 }
 
-static t_parse	*add_new_token(char *arg, int start, int len, t_parse *parse)
+t_parse	*add_new_token(char *arg, int start, int len, t_parse *parse)
 {
 	t_token	*new;
 	int		i;
@@ -71,14 +71,14 @@ static t_parse	*add_new_token(char *arg, int start, int len, t_parse *parse)
 	return (parse);
 }
 
-static char	*get_content_of_key_value(char *key_value, int len, t_env *env)
+char	*get_value_of_key(char *key, int len, t_env *env)
 {
 	t_variable	*tmp;
 
 	tmp = env->var;
 	while (tmp)
 	{
-		if (ft_strncmp(key_value, tmp->name, len) == 0)
+		if (ft_strncmp(key, tmp->name, len) == 0)
 			return (tmp->content);
 		tmp = tmp->next;
 	}

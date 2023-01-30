@@ -84,8 +84,11 @@ typedef struct s_builtins
 /*                       PROTOTYPES                    */
 /*******************************************************/
 /*                        PARSING                      */
-t_list		*parse(t_list *lst, char *cmd, t_env *env);
-t_list		*get_commands(t_parse *parse);
+t_list	*parse(t_list *lst, char *cmd, t_env *env);
+void	define_rule_arg(t_parse *parse, int rule);
+int		check_arg(char c);
+t_parse	*add_new_token(char *arg, int start, int len, t_parse *parse);
+char	*get_value_of_key(char *key, int len, t_env *env);
 /*                       EXECUTION                     */
 /*                       BUILT-INS                     */
 /*			    		    cd          	           */

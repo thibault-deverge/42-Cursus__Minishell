@@ -8,11 +8,13 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 	i = 1;
 	while (arg[i] && arg[i] != ' ' && arg[i] != '"' && arg[i] != '\'')
 		i++;
-	add_content = get_content_of_key_value(&arg[1], i - 1, env);
+	add_content = get_value_of_key(&arg[1], i - 1, env);
 	if (add_content)
 		add_new_token(add_content, 0, ft_strlen(add_content), parse);
-	else
-		add_new_token(arg, 0, i, parse);
+	else if (i == 1)
+		add_new_token(arg, 0, 1, parse);
+	else if (ft_isdigit(arg[1]))
+		add_new_token(arg, 2, i, parse);
 	return (i);
 }
 
@@ -57,6 +59,17 @@ static int	manage_simple_quotes(char *arg, t_parse *parse)
 	return (i);
 }
 
+static int	manage_redi(char *cmd, t_parse *parse)
+{
+	int	i;
+
+	i = 0;
+	while (check_arg(cmd[i]) < 0)
+		i++;
+	add_new_token(cmd, 0, i, parse);
+	return (i - 1);
+}
+
 static int	manage_arg(char *cmd, t_parse *parse, int len, t_env *env)
 {
 	add_new_token(cmd, 0, len, parse);
@@ -78,6 +91,8 @@ static int	manage_arg(char *cmd, t_parse *parse, int len, t_env *env)
 		else
 			add_new_token(cmd, len, 1, parse);
 	}
+	else if (check_arg(cmd[len]) < 0)
+		len += manage_redi(&cmd[len], parse);
 	return (len + 1);
 }
 
@@ -105,7 +120,7 @@ t_list	*parse(t_list *lst, char *cmd, t_env *env)
 	len = 0;
 	while (cmd[len])
 	{
-		if (check_arg(cmd[len]) > 0)
+		if (check_arg(cmd[len]) != 0)
 		{
 			len = manage_arg(&cmd[start], &parse, len - start, env);
 			len += start;
