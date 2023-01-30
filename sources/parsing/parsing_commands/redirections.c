@@ -89,6 +89,6 @@ int	handle_redirection(t_command *command, t_token *token)
 		return (1);
 	nb_next_token = insert_file_to_redi(command, token->next);
 	if (!nb_next_token)
-		return (print_error(ERROR_SYNTAX));
+		return (0);
 	return (nb_next_token);
 }
