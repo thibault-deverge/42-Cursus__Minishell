@@ -6,14 +6,16 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 	char	*add_content;
 
 	i = 1;
+	add_content = NULL;
 	while (arg[i] && arg[i] != ' ' && arg[i] != '"' && arg[i] != '\'')
 		i++;
-	add_content = get_value_of_key(&arg[1], i - 1, env);
+	if (i > 1)
+		add_content = get_value_of_key(&arg[1], i - 1, env);
 	if (add_content)
 		add_new_token(add_content, 0, ft_strlen(add_content), parse);
 	else if (i == 1)
 		add_new_token(arg, 0, 1, parse);
-	else if (ft_isdigit(arg[1]))
+	else if (!ft_isalpha(arg[1]))
 		add_new_token(arg, 2, i, parse);
 	return (i);
 }
@@ -42,7 +44,7 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env)
 			return (-1);
 		i++;
 	}
-	add_new_token(arg, start, i - 1, parse);
+	add_new_token(arg, start, i, parse);
 	define_rule_arg(parse, COMMAND);
 	return (i);
 }

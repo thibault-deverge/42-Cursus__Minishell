@@ -52,7 +52,7 @@ t_parse	*add_new_token(char *arg, int start, int len, t_parse *parse)
 	if (start == len)
 		return (NULL);
 	new = malloc(sizeof(t_token));
-	new->arg = ft_substr(arg, start, len);
+	new->arg = ft_substr(arg, start, len - start);
 	if (!new->arg)
 		return (NULL);
 	new->next = NULL;
