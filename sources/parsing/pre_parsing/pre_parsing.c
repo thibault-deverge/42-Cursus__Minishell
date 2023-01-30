@@ -37,12 +37,13 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env)
 		{
 			if (start != i && add_new_token(arg, start, i - start, parse))
 				define_rule_arg(parse, COMMAND);
-			i += manage_key_value(&arg[i], parse, env) - 1;
+			i += manage_key_value(&arg[i], parse, env);
 			start = i;
 		}
-		if (!arg[i])
+		else if (!arg[i])
 			return (-1);
-		i++;
+		else
+			i++;
 	}
 	add_new_token(arg, start, i, parse);
 	define_rule_arg(parse, COMMAND);
@@ -54,9 +55,11 @@ static int	manage_simple_quotes(char *arg, t_parse *parse)
 	int	i;
 
 	i = 1;
-	while (arg[i] != '\'')
+	while (arg[i] && arg[i] != '\'')
 		i++;
-	add_new_token(arg, 1, i - 1, parse);
+	if (!arg[i])
+		return (-1);
+	add_new_token(arg, 1, i, parse);
 	define_rule_arg(parse, COMMAND);
 	return (i);
 }
