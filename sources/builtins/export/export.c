@@ -10,7 +10,7 @@ static void	manage_variable(char *new_var, t_env *env)
 	
 }
 
-void	export(t_command *command, t_env *env)
+void	export(char *command, t_env *env)
 {
 	int	i;
 
