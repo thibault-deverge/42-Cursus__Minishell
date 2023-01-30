@@ -12,7 +12,7 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		cmd = get_input(&env);
-		parse(&lst, cmd, &env);
+		main_parsing(&lst, cmd, &env);
 		// execution(&lst, &envp);
 		free(cmd);
 	}

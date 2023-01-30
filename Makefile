@@ -11,6 +11,7 @@ INCDIR	= includes
 ## SOURCES
 
 SRCS =	./main.c \
+		./sources/parsing/main_parsing.c \
 		./sources/parsing/prompt/prompt.c \
 		./sources/parsing/environment/init_env.c \
 		./sources/parsing/environment/environment.c \

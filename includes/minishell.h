@@ -85,6 +85,8 @@ typedef struct s_builtins
 /* *******************************************	*/
 /*					PARSING						*/
 /* *******************************************	*/
+/*					main_parsing				*/
+t_list		*main_parsing(t_list *lst, char *cmd, t_env *env);
 /*					prompt						*/
 char		*get_input(t_env *env);
 /*					environment					*/
@@ -95,7 +97,7 @@ t_env		*insert_var_node(t_env *env, char *str);
 char		*get_var_content(t_env *env, char *var_name);
 t_variable	*set_var_content(t_variable *var, char *str);
 /*					pre_parsing					*/
-t_list		*parse(t_list *lst, char *cmd, t_env *env);
+t_parse		*pre_parse(t_parse *parse, char *cmd, t_env *env);
 void		define_rule_arg(t_parse *parse, int rule);
 int			check_arg(char c);
 t_parse		*add_new_token(char *arg, int start, int len, t_parse *parse);

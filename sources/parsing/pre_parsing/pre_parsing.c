@@ -111,32 +111,25 @@ static void	print_arg(t_parse *parse)
 	}
 }
 
-t_list	*parse(t_list *lst, char *cmd, t_env *env)
+t_parse	*pre_parse(t_parse *parse, char *cmd, t_env *env)
 {
-	t_parse	parse;
 	int		len;
 	int		start;
 
-	parse.token = NULL;
 	start = 0;
 	len = 0;
 	while (cmd[len])
 	{
 		if (check_arg(cmd[len]) != 0)
 		{
-			len = manage_arg(&cmd[start], &parse, len - start, env);
+			len = manage_arg(&cmd[start], parse, len - start, env);
 			len += start;
 			start = len;
 		}
 		else
 			len++;
 	}
-	add_new_token(cmd, start, len, &parse);
-	print_arg(&parse);
-	if (!parse_commands(lst, &parse))
-	{
-		free_all(env->var, lst->first, (&parse)->token);
-		exit(EXIT_PARSE_CMD);
-	}
-	return (lst);
+	add_new_token(cmd, start, len, parse);
+	print_arg(parse);
+	return (parse);
 }
