@@ -11,19 +11,19 @@ INCDIR	= includes
 ## SOURCES
 
 SRCS =	./main.c \
-		./sources/prompt/prompt.c \
-		./sources/display/print.c \
-		./sources/parsing/pop/pre_parsing.c \
-		./sources/parsing/pop/pre_parsing_utils.c \
-		./sources/parsing/env/init_env.c \
-		./sources/parsing/tibo/parse_commands.c \
-		./sources/parsing/tibo/check_type.c \
-		./sources/parsing/tibo/commands.c \
-		./sources/parsing/tibo/redirections.c \
-		./sources/helpers/environment.c \
-		./sources/helpers/matrice.c \
-		./sources/helpers/errors.c \
-		./sources/helpers/free.c \
+		./sources/parsing/prompt/prompt.c \
+		./sources/parsing/environment/init_env.c \
+		./sources/parsing/environment/environment.c \
+		./sources/parsing/pre_parsing/pre_parsing.c \
+		./sources/parsing/pre_parsing/pre_parsing_utils.c \
+		./sources/parsing/parsing_commands/parse_commands.c \
+		./sources/parsing/parsing_commands/check_type.c \
+		./sources/parsing/parsing_commands/commands.c \
+		./sources/parsing/parsing_commands/redirections.c \
+		./sources/utils/insert_matrice.c \
+		./sources/helpers/display/print.c \
+		./sources/helpers/error/errors.c \
+		./sources/helpers/error/free.c \
 
 OBJS	= $(SRCS:.c=.o)
 
