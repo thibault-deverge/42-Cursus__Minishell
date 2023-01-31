@@ -23,6 +23,7 @@ SRCS =	./main.c \
 		./sources/parsing/parsing_commands/redirections.c \
 		./sources/builtins/echo/exec_echo.c \
 		./sources/builtins/pwd/exec_pwd.c \
+		./sources/builtins/cd/exec_cd.c \
 		./sources/utils/insert_matrice.c \
 		./sources/helpers/display/print.c \
 		./sources/helpers/error/errors.c \
