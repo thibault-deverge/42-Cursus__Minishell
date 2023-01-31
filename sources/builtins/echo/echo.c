@@ -13,14 +13,11 @@ int	check_option_echo(char *flag)
 	i = 2;
 	if (ft_strncmp(flag, "-n", 2))
 		return (0);
-	else
+	while (flag[i])
 	{
-		while (flag[i])
-		{
-			if (flag[i] != 'n')
-				return (0);
-			i++;
-		}
+		if (flag[i] != 'n')
+			return (0);
+		i++;
 	}
 	return (1);
 }
