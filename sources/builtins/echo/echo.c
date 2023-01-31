@@ -39,15 +39,19 @@ void	exec_echo(t_command *command, t_env env)
 	i = 1;
 	is_option = 0;
 	cmd_args = command->cmd;
+	(void)env;
 	while (check_option_echo(cmd_args[i]))
 	{
 		is_option = 1;
 		i++;
 	}
+	if (cmd_args[i])
+		ft_putstr_fd(cmd_args[i++], 1);
 	while (cmd_args[i])
 	{
-		ft_putstr_fd(cmd_args[i], 1);
 		ft_putchar_fd(' ', 1);
+		ft_putstr_fd(cmd_args[i], 1);
+		i++;
 	}
 	if (!is_option)
 		ft_putchar_fd('\n', 1);
