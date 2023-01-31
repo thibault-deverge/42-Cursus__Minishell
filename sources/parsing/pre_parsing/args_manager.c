@@ -31,7 +31,7 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env)
 
 	i = 1;
 	start = 1;
-	while (arg[i] != '"')
+	while (arg[i] && arg[i] != '"')
 	{
 		if (arg[i] == '$')
 		{
@@ -40,11 +40,11 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env)
 			i += manage_key_value(&arg[i], parse, env);
 			start = i;
 		}
-		else if (!arg[i])
-			return (-1);
 		else
 			i++;
 	}
+	if (!arg[i])
+		return (-1);
 	add_new_token(arg, start, i, parse);
 	define_rule_arg(parse, COMMAND);
 	return (i);

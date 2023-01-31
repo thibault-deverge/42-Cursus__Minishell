@@ -78,7 +78,7 @@ char	*get_value_of_key(char *key, int len, t_env *env)
 	tmp = env->var;
 	while (tmp)
 	{
-		if (ft_strncmp(key, tmp->name, len) == 0)
+		if (ft_strncmp(key, tmp->name, len) == 0 && ft_strncmp(key, tmp->name, ft_strlen(tmp->name) == 0))
 			return (tmp->content);
 		tmp = tmp->next;
 	}
