@@ -97,6 +97,7 @@ void		init_ascii_index(t_env *envp);
 t_env		*insert_var_node(t_env *env, char *str);
 char		*get_var_content(t_env *env, char *var_name);
 t_variable	*set_var_content(t_variable *var, char *str);
+t_variable	*get_variable(t_env *env, char *var_name, int len);
 /*					pre_parsing					*/
 t_parse		*pre_parse(t_parse *parse, char *cmd, t_env *env);
 int		manage_arg(char *cmd, t_parse *parse, int len, t_env *env);
@@ -117,11 +118,13 @@ int			is_pipe(char *token);
 /* *******************************************	*/
 /*					BUILT-IN					*/
 /* *******************************************	*/
-
+/*			     	export						*/
+void	export(char **command, t_env *env);
 /* *******************************************	*/
 /*					EXECUTION					*/
 /* *******************************************	*/
-
+/*					main_execution				*/
+t_list	*main_execution(t_list *lst, t_env *env);
 /* *******************************************	*/
 /*					UTILS						*/
 /* *******************************************	*/

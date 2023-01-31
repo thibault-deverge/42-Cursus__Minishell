@@ -83,16 +83,17 @@ char	*get_var_content(t_env *env, char *var_name)
  * 		- Search in environment via name of the variable passed as parameter
  * 		and return its pointer.
 */
-t_variable	*get_variable(t_env *env, char *var_name)
+t_variable	*get_variable(t_env *env, char *var_name, int len)
 {
 	t_variable	*tmp;
 
 	tmp = env->var;
 	while (tmp)
 	{
-		if (!ft_strcmp(tmp->name, var_name))
+		if (ft_strncmp(tmp->name, var_name, ft_strlen(tmp->name)) == 0
+			&& ft_strncmp(tmp->name, var_name, len) == 0)
 			return (tmp);
 		tmp = tmp->next;
 	}
-	return (0);
+	return (NULL);
 }
