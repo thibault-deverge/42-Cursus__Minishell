@@ -13,9 +13,10 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmd = get_input(&env);
 		main_parsing(&lst, cmd, &env);
-		exec_echo(lst.first, env);
+		//exec_echo(lst.first, &env);
+		//exec_pwd(lst.first, &env);
 		// execution(&lst, &envp);
-		//free(cmd);
+		free(cmd);
 		//print_cmd(&lst);
 	}
 	rl_clear_history();
