@@ -34,7 +34,7 @@ int	handle_command(t_command *command, t_token *token)
 
 	i = 1;
 	token_tmp = token->next;
-	if (!ft_strcmp(token->arg, " "))
+	if (token->rule == SPACEBAR)
 		return (1);
 	command_tmp = ft_strdup(token->arg);
 	command_join = command_tmp;

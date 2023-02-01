@@ -40,12 +40,12 @@ t_list	*parse_commands(t_list *list_commands, t_parse *list_tokens)
 	while (token)
 	{
 		next_token = 1;
-		if (is_pipe(token->arg) && token->rule == REDI)
+		if (token->rule == PIPE)
 		{
 			command->next = initialize_command();
 			command = command->next;
 		}
-		else if (is_redirection(token->arg) && token->rule == REDI)
+		else if (token->rule == REDI)
 			next_token = handle_redirection(command, token);
 		else
 			next_token = handle_command(command, token);
