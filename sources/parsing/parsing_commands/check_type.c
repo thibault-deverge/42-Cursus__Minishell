@@ -2,32 +2,6 @@
 
 /*
  * @summary:
- * 		- Check if the string passed as parameter is a pipe to
- * 		handle it as a delimiter of command.
-*/
-int	is_pipe(char *token)
-{
-	if (!ft_strcmp(token, "|"))
-		return (1);
-	return (0);
-}
-
-/*
- * @summary:
- * 		- Check is the string passed as parameter begin include
- * 		a redirection in its two first characters.
-*/
-int	is_redirection(char *token)
-{
-	if (!ft_strncmp(token, "<", 1) || !ft_strncmp(token, "<<", 2))
-		return (1);
-	else if (!ft_strncmp(token, ">", 1) || !ft_strncmp(token, ">>", 2))
-		return (1);
-	return (0);
-}
-
-/*
- * @summary:
  * 		- Check if char 'c' passed as a character is not a redirection
  * 		or a pipe.
  * 		- Use to check the third character of a redirection to check if 

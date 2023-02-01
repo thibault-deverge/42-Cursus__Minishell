@@ -13,8 +13,11 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmd = get_input(&env);
 		main_parsing(&lst, cmd, &env);
+		//exec_echo(lst.first, &env);
+		//exec_pwd(lst.first, &env);
 		main_execution(&lst, &env);
-		free(cmd);
+    free(cmd);
+		print_cmd(&lst);
 	}
 	// print_env(&env);
 	// print_export(&env);

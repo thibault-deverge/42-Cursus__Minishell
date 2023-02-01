@@ -17,7 +17,7 @@
 /*******************************************************/
 
 # define ERROR_PROMPT	"\nExit minishell - prompt receive NULL\n"
-# define ERROR_SYNTAX	"syntax error near redirection\n"
+# define ERROR_SYNTAX	"error: syntax error near redirection\n"
 # define ERROR_QUOTES	"error: missing terminating quote character\n"
 # define ERROR_EXPORT	"not a valid identifier\n"
 
@@ -114,13 +114,17 @@ t_command	*initialize_command(void);
 int			handle_redirection(t_command *command, t_token *token);
 int			handle_command(t_command *command, t_token *token);
 int			is_redirection_invalid(char c);
-int			is_redirection(char *token);
 int			is_command(t_token *token);
-int			is_pipe(char *token);
 
 /* *******************************************	*/
 /*					BUILT-IN					*/
 /* *******************************************	*/
+/*					echo						*/
+void		exec_echo(t_command *command, t_env *env);
+/*					pwd							*/
+void		exec_pwd(t_command *command, t_env *env);
+/*					cd							*/
+//void		exec_cd(t_command *command, t_env *env);
 /*			     	export						*/
 void		export(char **command, t_env *env);
 int			get_key_len(char *var);
@@ -160,5 +164,7 @@ int			print_perror(void);
 /*					display.c					*/
 void		print_envp(t_env *envp);
 void		print_export(t_env *envp);
+/*					test.c						*/
+void		print_cmd(t_list *list_commands);
 
 #endif

@@ -22,15 +22,18 @@ SRCS =	./main.c \
 		./sources/parsing/parsing_commands/check_type.c \
 		./sources/parsing/parsing_commands/commands.c \
 		./sources/parsing/parsing_commands/redirections.c \
-		./sources/execution/main_execution.c \
+		./sources/builtins/echo/exec_echo.c \
+		./sources/builtins/pwd/exec_pwd.c \
 		./sources/builtins/export/export.c \
 		./sources/builtins/export/variable.c \
 		./sources/builtins/export/key.c \
 		./sources/builtins/export/value.c \
+    ./sources/execution/main_execution.c \
 		./sources/utils/insert_matrice.c \
 		./sources/helpers/display/print.c \
 		./sources/helpers/error/errors.c \
 		./sources/helpers/error/free.c \
+		./sources/helpers/test/print_cmd.c \
 
 OBJS	= $(SRCS:.c=.o)
 
