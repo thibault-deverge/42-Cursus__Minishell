@@ -17,14 +17,18 @@
 /*******************************************************/
 
 # define ERROR_PROMPT	"\nExit minishell - prompt receive NULL\n"
-# define ERROR_SYNTAX	"Error: syntax error near redirection\n"
+# define ERROR_SYNTAX	"error: syntax error near redirection\n"
+# define ERROR_QUOTES	"error: missing terminating quote character\n"
+# define ERROR_EXPORT	"not a valid identifier\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
 # define EXIT_PARSE_CMD 3
 
-# define COMMAND		1
-# define REDI			0
+# define COMMAND		0
+# define REDI			1
+# define SPACEBAR		2
+# define PIPE			3
 
 /*******************************************************/
 /*                       STRUCTURES                    */
@@ -96,8 +100,10 @@ void		init_ascii_index(t_env *envp);
 t_env		*insert_var_node(t_env *env, char *str);
 char		*get_var_content(t_env *env, char *var_name);
 t_variable	*set_var_content(t_variable *var, char *str);
+t_variable	*get_variable(t_env *env, char *var_name, int len);
 /*					pre_parsing					*/
 t_parse		*pre_parse(t_parse *parse, char *cmd, t_env *env);
+int		manage_arg(char *cmd, t_parse *parse, int len, t_env *env);
 void		define_rule_arg(t_parse *parse, int rule);
 int			check_arg(char c);
 t_parse		*add_new_token(char *arg, int start, int len, t_parse *parse);
@@ -119,11 +125,21 @@ void		exec_echo(t_command *command, t_env *env);
 void		exec_pwd(t_command *command, t_env *env);
 /*					cd							*/
 //void		exec_cd(t_command *command, t_env *env);
+/*			     	export						*/
+void		export(char **command, t_env *env);
+int			get_key_len(char *var);
+t_variable	*manage_key(char *new_var, int key_len, t_env *env);
+char		*set_new_content(t_variable *var, char *value);
+int			add_new_content(t_variable *var, char *value);
+t_variable	*add_new_variable(char *var, int len, t_env *env);
+void		manage_variable(char *new_var, t_env *env);
+t_variable	*get_last_var(t_env *env);
 
 /* *******************************************	*/
 /*					EXECUTION					*/
 /* *******************************************	*/
-
+/*					main_execution				*/
+t_list	*main_execution(t_list *lst, t_env *env);
 /* *******************************************	*/
 /*					UTILS						*/
 /* *******************************************	*/
@@ -142,6 +158,7 @@ void		free_matrice(char **matrice);
 /*					errors.c					*/
 void		throw_error(char *err_msg, int exit_value);
 void		throw_perror(int exit_value);
+int			print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_msg);
 int			print_error(char *err_msg);
 int			print_perror(void);
 /*					display.c					*/

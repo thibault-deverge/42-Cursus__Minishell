@@ -7,7 +7,8 @@ t_list	*main_parsing(t_list *lst, char *cmd, t_env *env)
 	parse.token = NULL;
 	if (!pre_parse(&parse, cmd, env))
 	{
-		// gestion d'erreur
+		free_tokens((&parse)->token);
+		return (0);
 	}
 	if (!parse_commands(lst, &parse))
 	{
@@ -15,5 +16,5 @@ t_list	*main_parsing(t_list *lst, char *cmd, t_env *env)
 		rl_clear_history();
 		exit(EXIT_PARSE_CMD);
 	}
-	return (0);
+	return (lst);
 }

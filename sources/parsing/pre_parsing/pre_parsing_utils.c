@@ -47,7 +47,6 @@ static void	place_back_token(t_parse *parse, t_token *new)
 t_parse	*add_new_token(char *arg, int start, int len, t_parse *parse)
 {
 	t_token	*new;
-	int		i;
 
 	if (start == len)
 		return (NULL);
@@ -57,16 +56,12 @@ t_parse	*add_new_token(char *arg, int start, int len, t_parse *parse)
 		return (NULL);
 	new->next = NULL;
 	place_back_token(parse, new);
-	i = 0;
-	while (new->arg[i])
-	{
-		if (check_arg(new->arg[i]) < 0)
-		{
-			define_rule_arg(parse, REDI);
-			return (parse);
-		}
-		i++;
-	}
+	if (check_arg(new->arg[0]) == -1)
+		define_rule_arg(parse, REDI);
+	else if (new->arg[0] == '|')
+		define_rule_arg(parse, PIPE);
+	else
+		define_rule_arg(parse, COMMAND);
 	define_rule_arg(parse, COMMAND);
 	return (parse);
 }
@@ -78,7 +73,7 @@ char	*get_value_of_key(char *key, int len, t_env *env)
 	tmp = env->var;
 	while (tmp)
 	{
-		if (ft_strncmp(key, tmp->name, len) == 0)
+		if (ft_strncmp(key, tmp->name, len) == 0 && ft_strncmp(key, tmp->name, ft_strlen(tmp->name)) == 0)
 			return (tmp->content);
 		tmp = tmp->next;
 	}

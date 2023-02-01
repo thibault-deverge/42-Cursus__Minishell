@@ -16,6 +16,7 @@ SRCS =	./main.c \
 		./sources/parsing/environment/init_env.c \
 		./sources/parsing/environment/environment.c \
 		./sources/parsing/pre_parsing/pre_parsing.c \
+		./sources/parsing/pre_parsing/args_manager.c \
 		./sources/parsing/pre_parsing/pre_parsing_utils.c \
 		./sources/parsing/parsing_commands/parse_commands.c \
 		./sources/parsing/parsing_commands/check_type.c \
@@ -23,6 +24,11 @@ SRCS =	./main.c \
 		./sources/parsing/parsing_commands/redirections.c \
 		./sources/builtins/echo/exec_echo.c \
 		./sources/builtins/pwd/exec_pwd.c \
+		./sources/builtins/export/export.c \
+		./sources/builtins/export/variable.c \
+		./sources/builtins/export/key.c \
+		./sources/builtins/export/value.c \
+    ./sources/execution/main_execution.c \
 		./sources/utils/insert_matrice.c \
 		./sources/helpers/display/print.c \
 		./sources/helpers/error/errors.c \
