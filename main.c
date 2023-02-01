@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **envp)
 		//exec_pwd(lst.first, &env);
 		// execution(&lst, &envp);
 		free(cmd);
-		//print_cmd(&lst);
+		print_cmd(&lst);
 	}
 	rl_clear_history();
 	return (0);

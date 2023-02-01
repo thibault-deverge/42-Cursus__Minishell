@@ -120,7 +120,7 @@ void		exec_echo(t_command *command, t_env *env);
 /*					pwd							*/
 void		exec_pwd(t_command *command, t_env *env);
 /*					cd							*/
-void		exec_cd(t_command *command, t_env *env);
+//void		exec_cd(t_command *command, t_env *env);
 
 /* *******************************************	*/
 /*					EXECUTION					*/
