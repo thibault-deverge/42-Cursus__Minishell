@@ -5,10 +5,10 @@ static void	print_arg(t_parse *parse)
 	t_token	*tmp;
 
 	tmp = parse->token;
-//	printf("\nARG LIST : \n");
+	printf("\nARG LIST : \n");
 	while (tmp)
 	{
-//		printf("%s\n", tmp->arg);
+		printf("%s\n", tmp->arg);
 		tmp = tmp->next;
 	}
 }

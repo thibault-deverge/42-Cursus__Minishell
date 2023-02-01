@@ -25,8 +25,10 @@
 # define EXIT_ALLOC		2
 # define EXIT_PARSE_CMD 3
 
-# define COMMAND		1
-# define REDI			0
+# define COMMAND		0
+# define REDI			1
+# define SPACEBAR		2
+# define PIPE			3
 
 /*******************************************************/
 /*                       STRUCTURES                    */

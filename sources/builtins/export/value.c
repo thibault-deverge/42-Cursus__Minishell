@@ -11,8 +11,10 @@ char	*set_new_content(t_variable *var, char *value)
 int	add_new_content(t_variable *var, char *value)
 {
 	if (!var->content)
+	{
 		if (set_new_content(var, value))
 			return (0);
+	}
 	else
 	{
 		var->content = ft_strjoin(var->content, value);

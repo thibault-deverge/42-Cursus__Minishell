@@ -38,7 +38,7 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env)
 			if (start != i && add_new_token(arg, start, i - start, parse))
 				define_rule_arg(parse, COMMAND);
 			i += manage_key_value(&arg[i], parse, env);
-			start = i;
+			start = i + 1;
 		}
 		else
 			i++;
@@ -95,6 +95,7 @@ int	manage_arg(char *cmd, t_parse *parse, int len, t_env *env)
 	else if (ft_is_whitespace(cmd[len]))
 	{
 		add_new_token(" ", 0, 1, parse);
+		define_rule_arg(parse, SPACEBAR);
 		while (ft_is_whitespace(cmd[len]))
 			len++;
 		return (len);
