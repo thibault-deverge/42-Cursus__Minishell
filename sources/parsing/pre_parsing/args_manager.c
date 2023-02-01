@@ -17,7 +17,7 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 		add_new_token(arg, 0, 1, parse);
 	else if (!ft_isalpha(arg[1]))
 		add_new_token(arg, 2, i, parse);
-	return (i);
+	return (i - 1);
 }
 
 /*

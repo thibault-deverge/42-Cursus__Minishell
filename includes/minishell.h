@@ -19,6 +19,7 @@
 # define ERROR_PROMPT	"\nExit minishell - prompt receive NULL\n"
 # define ERROR_SYNTAX	"syntax error near redirection\n"
 # define ERROR_QUOTES	"error: missing terminating quote character\n"
+# define ERROR_EXPORT	"not a valid identifier\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
@@ -80,7 +81,7 @@ typedef struct s_parse
 typedef struct s_builtins
 {
 	char	*name;
-//	void	(f*)(t_command *command, t_env *envp); 
+//	void	(f*)(t_command *command, t_env *env); 
 }			t_builtins;
 
 /* *******************************************	*/
@@ -119,7 +120,15 @@ int			is_pipe(char *token);
 /*					BUILT-IN					*/
 /* *******************************************	*/
 /*			     	export						*/
-void	export(char **command, t_env *env);
+void		export(char **command, t_env *env);
+int			get_key_len(char *var);
+t_variable	*manage_key(char *new_var, int key_len, t_env *env);
+char		*set_new_content(t_variable *var, char *value);
+int			add_new_content(t_variable *var, char *value);
+t_variable	*add_new_variable(char *var, int len, t_env *env);
+void		manage_variable(char *new_var, t_env *env);
+t_variable	*get_last_var(t_env *env);
+
 /* *******************************************	*/
 /*					EXECUTION					*/
 /* *******************************************	*/
@@ -143,6 +152,7 @@ void		free_matrice(char **matrice);
 /*					errors.c					*/
 void		throw_error(char *err_msg, int exit_value);
 void		throw_perror(int exit_value);
+int			print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_msg);
 int			print_error(char *err_msg);
 int			print_perror(void);
 /*					display.c					*/
