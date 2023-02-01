@@ -108,9 +108,7 @@ t_command	*initialize_command(void);
 int			handle_redirection(t_command *command, t_token *token);
 int			handle_command(t_command *command, t_token *token);
 int			is_redirection_invalid(char c);
-int			is_redirection(char *token);
 int			is_command(t_token *token);
-int			is_pipe(char *token);
 
 /* *******************************************	*/
 /*					BUILT-IN					*/
