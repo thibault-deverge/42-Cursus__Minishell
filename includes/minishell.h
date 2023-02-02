@@ -11,6 +11,9 @@
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 /*******************************************************/
 /*                         DEFINES                     */
@@ -55,6 +58,7 @@ typedef struct s_command
 {
 	char				**cmd;
 	char				**redi;
+	int					fds[2];
 	struct s_command	*next;
 }			t_command;
 
