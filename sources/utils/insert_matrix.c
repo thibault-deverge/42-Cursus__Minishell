@@ -31,7 +31,7 @@ char	**insert_matrix(char **matrice, char *str)
 	int		i;
 
 	i = 0;
-	matrice_len = count_word_matrice(matrice);
+	matrice_len = count_word_matrice(matrice) + 1;
 	new_matrice = malloc(sizeof(char *) * (matrice_len + 1));
 	if (!new_matrice)
 		return (NULL);
