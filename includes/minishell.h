@@ -20,7 +20,7 @@
 # define ERROR_SYNTAX	"error: syntax error near redirection\n"
 # define ERROR_QUOTES	"error: missing terminating quote character\n"
 # define INVALID_KEY	"not a valid identifier\n"
-# define ERROR_ENV	"env: too many arguments\n"
+# define ERROR_ENV		"env: too many arguments\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
@@ -84,7 +84,7 @@ typedef struct s_parse
 typedef struct s_builtins
 {
 	char	*name;
-	int	(*f)(t_command *command, t_env *env); 
+	int		(*f)(t_command *command, t_env *env);
 }			t_builtins;
 
 /* *******************************************	*/
@@ -104,7 +104,7 @@ t_variable	*set_var_content(t_variable *var, char *str);
 t_variable	*get_variable(t_env *env, char *var_name, int len);
 /*					pre_parsing					*/
 t_parse		*pre_parse(t_parse *parse, char *cmd, t_env *env);
-int		manage_arg(char *cmd, t_parse *parse, int len, t_env *env);
+int			manage_arg(char *cmd, t_parse *parse, int len, t_env *env);
 void		define_rule_arg(t_parse *parse, int rule);
 int			check_arg(char c);
 t_parse		*add_new_token(char *arg, int start, int len, t_parse *parse);
@@ -121,13 +121,13 @@ int			is_command(t_token *token);
 /*					BUILT-IN					*/
 /* *******************************************	*/
 /*					echo						*/
-int		exec_echo(t_command *command, t_env *env);
+int			exec_echo(t_command *command, t_env *env);
 /*					pwd							*/
-int		exec_pwd(t_command *command, t_env *env);
+int			exec_pwd(t_command *command, t_env *env);
 /*					cd							*/
 //void		exec_cd(t_command *command, t_env *env);
 /*			     	export						*/
-int		export(t_command *command, t_env *env);
+int			export(t_command *command, t_env *env);
 int			get_key_len(char *var);
 t_variable	*manage_key(char *new_var, int key_len, t_env *env);
 char		*set_new_content(t_variable *var, char *value);
@@ -135,17 +135,17 @@ int			add_new_content(t_variable *var, char *value);
 t_variable	*add_new_variable(char *var, int len, t_env *env);
 void		manage_variable(char *new_var, t_env *env);
 t_variable	*get_last_var(t_env *env);
-int		check_key_name(char *key, int len, char *built);
+int			check_key_name(char *key, int len, char *built);
 /*					env							*/
-int		env(t_command *command, t_env *env);		
+int			env(t_command *command, t_env *env);		
 /*					unset						*/
-int		unset(t_command *command, t_env *env);
+int			unset(t_command *command, t_env *env);
 
 /* *******************************************	*/
 /*					EXECUTION					*/
 /* *******************************************	*/
 /*					main_execution				*/
-t_list	*main_execution(t_list *lst, t_env *env);
+t_list		*main_execution(t_list *lst, t_env *env);
 /* *******************************************	*/
 /*					UTILS						*/
 /* *******************************************	*/
