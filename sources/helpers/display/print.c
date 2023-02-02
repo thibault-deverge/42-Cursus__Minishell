@@ -9,7 +9,6 @@ void	print_env(t_env *env)
 	t_variable	*tmp;
 
 	tmp = env->var;
-	printf("env :\n");
 	while (tmp)
 	{
 		if (tmp->content)
@@ -30,7 +29,6 @@ void	print_export(t_env *env)
 
 	index = 0;
 	tmp = env->var;
-	printf("\nexport :\n");
 	while (tmp)
 	{
 		if (index == tmp->index)
