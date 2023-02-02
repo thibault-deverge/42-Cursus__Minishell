@@ -35,9 +35,9 @@ void	print_export(t_env *env)
 	{
 		if (index == tmp->index)
 		{
-			if (tmp->content)
+			if (tmp->content && ft_strcmp(tmp->name, "_") != 0)
 				printf("declare -x %s=\"%s\"\n", tmp->name, tmp->content);
-			else
+			else if (!tmp->content && ft_strcmp(tmp->name, " ") != 0)
 				printf("declare -x %s\n", tmp->name);
 			tmp = env->var;
 			index++;

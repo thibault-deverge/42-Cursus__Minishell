@@ -102,8 +102,10 @@ int	manage_arg(char *cmd, t_parse *parse, int len, t_env *env)
 	}
 	else if (cmd[len] == '$')
 		len += manage_key_value(&cmd[len], parse, env);
-	else if (check_arg(cmd[len]) < 0)
+	else if (check_arg(cmd[len]) == -1)
 		len += manage_redi(&cmd[len], parse);
+	else if (cmd[len] == '|')
+		add_new_token("|", 0, 1, parse);
 	if (len < 0)
 		print_error(ERROR_QUOTES);
 	return (len + 1);

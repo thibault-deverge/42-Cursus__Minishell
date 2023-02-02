@@ -15,9 +15,9 @@ static int	insert_file_to_redi(t_command *command, t_token *token)
 	next_token = 1;
 	while (token)
 	{
-		if (is_redirection(token->arg))
+		if (token->rule == REDI)
 			return (0);
-		if (!ft_strcmp(token->arg, " "))
+		if (token->rule == SPACEBAR)
 			next_token++;
 		else
 		{

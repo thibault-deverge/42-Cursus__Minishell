@@ -19,7 +19,8 @@
 # define ERROR_PROMPT	"\nExit minishell - prompt receive NULL\n"
 # define ERROR_SYNTAX	"error: syntax error near redirection\n"
 # define ERROR_QUOTES	"error: missing terminating quote character\n"
-# define ERROR_EXPORT	"not a valid identifier\n"
+# define INVALID_KEY	"not a valid identifier\n"
+# define ERROR_ENV	"env: too many arguments\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
@@ -83,7 +84,7 @@ typedef struct s_parse
 typedef struct s_builtins
 {
 	char	*name;
-//	void	(f*)(t_command *command, t_env *env); 
+	int	(*f)(t_command *command, t_env *env); 
 }			t_builtins;
 
 /* *******************************************	*/
@@ -120,13 +121,13 @@ int			is_command(t_token *token);
 /*					BUILT-IN					*/
 /* *******************************************	*/
 /*					echo						*/
-void		exec_echo(t_command *command, t_env *env);
+int		exec_echo(t_command *command, t_env *env);
 /*					pwd							*/
-void		exec_pwd(t_command *command, t_env *env);
+int		exec_pwd(t_command *command, t_env *env);
 /*					cd							*/
 //void		exec_cd(t_command *command, t_env *env);
 /*			     	export						*/
-void		export(char **command, t_env *env);
+int		export(t_command *command, t_env *env);
 int			get_key_len(char *var);
 t_variable	*manage_key(char *new_var, int key_len, t_env *env);
 char		*set_new_content(t_variable *var, char *value);
@@ -134,6 +135,11 @@ int			add_new_content(t_variable *var, char *value);
 t_variable	*add_new_variable(char *var, int len, t_env *env);
 void		manage_variable(char *new_var, t_env *env);
 t_variable	*get_last_var(t_env *env);
+int		check_key_name(char *key, int len, char *built);
+/*					env							*/
+int		env(t_command *command, t_env *env);		
+/*					unset						*/
+int		unset(t_command *command, t_env *env);
 
 /* *******************************************	*/
 /*					EXECUTION					*/
@@ -162,8 +168,8 @@ int			print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_
 int			print_error(char *err_msg);
 int			print_perror(void);
 /*					display.c					*/
-void		print_envp(t_env *envp);
-void		print_export(t_env *envp);
+void		print_env(t_env *env);
+void		print_export(t_env *env);
 /*					test.c						*/
 void		print_cmd(t_list *list_commands);
 

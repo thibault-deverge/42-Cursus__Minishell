@@ -62,7 +62,6 @@ t_parse	*add_new_token(char *arg, int start, int len, t_parse *parse)
 		define_rule_arg(parse, PIPE);
 	else
 		define_rule_arg(parse, COMMAND);
-	define_rule_arg(parse, COMMAND);
 	return (parse);
 }
 

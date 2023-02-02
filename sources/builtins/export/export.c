@@ -1,18 +1,19 @@
 #include "minishell.h"
 
-void	export(char **command, t_env *env)
+int	export(t_command *command, t_env *env)
 {
 	int	i;
 
 	i = 1;
-	if (!command[i])
+	if (!command->cmd[i])
 	{
 		print_export(env);
-		return ;
+		return (0);
 	}
-	while (command[i])
+	while (command->cmd[i])
 	{
-		manage_variable(command[i], env);
+		manage_variable(command->cmd[i], env);
 		i++;
 	}
+	return (0);
 }

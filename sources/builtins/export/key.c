@@ -12,21 +12,21 @@ int	get_key_len(char *var)
 	return (i);
 }
 
-static int	check_key_name(char *key, int len)
+int	check_key_name(char *key, int len, char *built)
 {
 	int	i;
 
 	i = 0;
 	if (!ft_isalpha(key[0]) && key[0] != '_')
 	{
-		print_complete_error("export:", key, len, ERROR_EXPORT);
+		print_complete_error(built, key, len, INVALID_KEY);
 		return (0);
 	}
 	while (i < len)
 	{
 		if (!ft_isalnum(key[i]) && key[i] != '_')
 		{
-			print_complete_error("export:", key, len, ERROR_EXPORT);
+			print_complete_error(built, key, len, INVALID_KEY);
 			return (0);
 		}
 		i++;
@@ -43,7 +43,7 @@ t_variable	*manage_key(char *new_var, int key_len, t_env *env)
 		return (NULL);
 	if (var_env)
 		return (var_env);
-	else if (check_key_name(new_var, key_len))
+	else if (check_key_name(new_var, key_len, "export"))
 	{
 		add_new_variable(new_var, key_len, env);
 		return (get_last_var(env));

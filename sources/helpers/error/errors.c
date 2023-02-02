@@ -39,7 +39,7 @@ int	print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_ms
 
 	i = 0;
 	ft_putstr_fd(err_src, 2);
-	ft_putstr_fd(" \'", 2);
+	ft_putstr_fd(": \'", 2);
 	while (i < len_sub)
 	{
 		ft_putchar_fd(err_sub[i], 2);

@@ -17,7 +17,7 @@ int	main(int argc, char **argv, char **envp)
 		//exec_pwd(lst.first, &env);
 		main_execution(&lst, &env);
     free(cmd);
-		print_cmd(&lst);
+	//	print_cmd(&lst);
 	}
 	// print_env(&env);
 	// print_export(&env);

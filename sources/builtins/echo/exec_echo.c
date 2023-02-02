@@ -30,7 +30,7 @@ int	check_option_echo(char *flag)
  * 		- Print the other args with a space characher in between.
  * 		- End with a '\n' or not depend if flag '-n' were present.
 */
-void	exec_echo(t_command *command, t_env *env)
+int	exec_echo(t_command *command, t_env *env)
 {
 	char	**cmd_args;
 	int		is_option;
@@ -55,4 +55,5 @@ void	exec_echo(t_command *command, t_env *env)
 	}
 	if (!is_option)
 		ft_putchar_fd('\n', 1);
+	return (0);
 }
