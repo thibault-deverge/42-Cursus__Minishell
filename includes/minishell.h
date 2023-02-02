@@ -11,6 +11,9 @@
 # include <stdbool.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 /*******************************************************/
 /*                         DEFINES                     */
@@ -55,6 +58,7 @@ typedef struct s_command
 {
 	char				**cmd;
 	char				**redi;
+	int					fds[2];
 	struct s_command	*next;
 }			t_command;
 
@@ -147,11 +151,17 @@ int			unset(t_command *command, t_env *env);
 /* *******************************************	*/
 /*					main_execution				*/
 t_list		*main_execution(t_list *lst, t_env *env);
+/*					builtins					*/
+int			check_builtins(t_command *command, t_env *env);
+/*				convert_env						*/
+char		**convert_env(t_env *env);
+
 /* *******************************************	*/
 /*					UTILS						*/
 /* *******************************************	*/
 /*					insert_matrice.c			*/
 char		**insert_matrix(char **matrice, char *str);
+char		*ft_sepjoin(const char *s1, const char *s2, char c);
 
 /* *******************************************	*/
 /*					HELPERS						*/
