@@ -24,10 +24,12 @@
 # define ERROR_QUOTES	"error: missing terminating quote character\n"
 # define INVALID_KEY	"not a valid identifier\n"
 # define ERROR_ENV		"env: too many arguments\n"
+# define ERROR_CD		"cd: too many arguments\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
 # define EXIT_PARSE_CMD 3
+# define EXIT_CD		4
 
 # define COMMAND		0
 # define REDI			1
