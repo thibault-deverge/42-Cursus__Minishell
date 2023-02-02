@@ -114,6 +114,7 @@ t_list		*parse_commands(t_list *list_commands, t_parse *list_tokens);
 t_command	*initialize_command(void);
 int			handle_redirection(t_command *command, t_token *token);
 int			handle_command(t_command *command, t_token *token);
+int			is_empty_command(t_command *command);
 int			is_redirection_invalid(char c);
 int			is_command(t_token *token);
 

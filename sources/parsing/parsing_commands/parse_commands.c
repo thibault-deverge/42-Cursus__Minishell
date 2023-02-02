@@ -20,7 +20,12 @@ static t_token	*traverse_next_token(t_token *token, int next_token)
 	return (tmp_token);
 }
 
-int	manage_commands(t_command *command, t_token *token)
+/*
+ * @Summary:
+ * 		- Hub to manage if the matrices are commands or redirections
+ * 		and send to valid function to handle it.
+*/
+static int	manage_commands(t_command *command, t_token *token)
 {
 	int	next_token;
 
@@ -29,17 +34,6 @@ int	manage_commands(t_command *command, t_token *token)
 	else
 		next_token = handle_command(command, token);
 	return (next_token);
-}
-
-
-int	is_empty_command(t_command *command)
-{
-	if (!command->cmd && !command->redi)
-	{
-		print_error(ERROR_SYNTAX);
-		return (0);
-	}
-	return (1);
 }
 
 /*
