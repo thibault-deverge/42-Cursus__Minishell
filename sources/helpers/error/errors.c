@@ -33,6 +33,11 @@ int	print_error(char *err_msg)
 	return (0);
 }
 
+/*
+ * @summary:
+ * 		- Print complete error in the form :
+ * 		"<err_src>: '<err_sub>': <err_msg>"
+*/
 int	print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_msg)
 {
 	int	i;
