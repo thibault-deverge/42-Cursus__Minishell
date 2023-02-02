@@ -22,7 +22,7 @@ static int	insert_file_to_redi(t_command *command, t_token *token)
 		else
 		{
 			next_token++;
-			command->redi = insert_matrice(command->redi, token->arg);
+			command->redi = insert_matrix(command->redi, token->arg);
 			return (next_token);
 		}
 		token = token->next;
@@ -45,7 +45,7 @@ static int	insert_redirection(t_command *command, t_token *token, int redi_idx)
 	redi = ft_substr(token->arg, 0, redi_idx);
 	if (!redi)
 		return (print_perror());
-	command->redi = insert_matrice(command->redi, redi);
+	command->redi = insert_matrix(command->redi, redi);
 	free(redi);
 	redi = NULL;
 	if (token->arg[redi_idx])
@@ -53,7 +53,7 @@ static int	insert_redirection(t_command *command, t_token *token, int redi_idx)
 		redi = ft_substr(token->arg, redi_idx, ft_strlen(token->arg));
 		if (!redi)
 			return (0);
-		command->redi = insert_matrice(command->redi, redi);
+		command->redi = insert_matrix(command->redi, redi);
 		free(redi);
 		redi = NULL;
 	}

@@ -30,8 +30,8 @@ SRCS =	./main.c \
 		./sources/builtins/export/value.c \
 		./sources/builtins/env/env.c \
 		./sources/builtins/unset/unset.c \
-    ./sources/execution/main_execution.c \
-		./sources/utils/insert_matrice.c \
+    	./sources/execution/main_execution.c \
+		./sources/utils/insert_matrix.c \
 		./sources/helpers/display/print.c \
 		./sources/helpers/error/errors.c \
 		./sources/helpers/error/free.c \

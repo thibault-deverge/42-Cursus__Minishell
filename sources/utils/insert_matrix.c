@@ -24,7 +24,7 @@ static int	count_word_matrice(char **matrice)
  * 		- Passed by reference all internal strings from old matrice and 
  * 		duplicate 'str' passed by parameter.
 */
-char	**insert_matrice(char **matrice, char *str)
+char	**insert_matrix(char **matrice, char *str)
 {
 	char	**new_matrice;
 	int		matrice_len;

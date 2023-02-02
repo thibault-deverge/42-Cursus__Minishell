@@ -48,8 +48,8 @@ void	free_commands(t_command *command)
 	while (command)
 	{
 		command = command->next;
-		free_matrice(tmp->cmd);
-		free_matrice(tmp->redi);
+		free_matrix(tmp->cmd);
+		free_matrix(tmp->redi);
 		free(tmp);
 		tmp = command;
 	}
@@ -80,7 +80,7 @@ void	free_tokens(t_token *token)
  * 		- Iterate throught the matrice and free every strings it contains.
  * 		- Free the matrice itself.
 */
-void	free_matrice(char **matrice)
+void	free_matrix(char **matrice)
 {
 	int	i;
 
