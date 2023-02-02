@@ -31,7 +31,7 @@ char	**convert_env(t_env	*env)
 		envp[i] = ft_sepjoin(tmp->name, tmp->content, '=');
 		if (!envp[i])
 		{
-			free_matrice(envp);
+			free_matrix(envp);
 			return (NULL);
 		}
 		tmp = tmp->next;
