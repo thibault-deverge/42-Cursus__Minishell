@@ -2,6 +2,21 @@
 
 /*
  * @summary:
+ * 		- Check if command is empty and print error if its
+ * 		the case.
+*/
+int	is_empty_command(t_command *command)
+{
+	if (!command->cmd && !command->redi)
+	{
+		print_error(ERROR_SYNTAX);
+		return (0);
+	}
+	return (1);
+}
+
+/*
+ * @summary:
  * 		- Check if char 'c' passed as a character is not a redirection
  * 		or a pipe.
  * 		- Use to check the third character of a redirection to check if 

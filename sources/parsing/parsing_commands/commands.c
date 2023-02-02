@@ -48,7 +48,7 @@ int	handle_command(t_command *command, t_token *token)
 		token_tmp = token_tmp->next;
 		i++;
 	}
-	command->cmd = insert_matrice(command->cmd, command_join);
+	command->cmd = insert_matrix(command->cmd, command_join);
 	free(command_join);
 	return (i);
 }

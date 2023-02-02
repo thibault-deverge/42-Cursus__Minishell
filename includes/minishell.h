@@ -88,7 +88,7 @@ typedef struct s_parse
 typedef struct s_builtins
 {
 	char	*name;
-	int	(*f)(t_command *command, t_env *env); 
+	int		(*f)(t_command *command, t_env *env);
 }			t_builtins;
 
 /* *******************************************	*/
@@ -118,6 +118,7 @@ t_list		*parse_commands(t_list *list_commands, t_parse *list_tokens);
 t_command	*initialize_command(void);
 int			handle_redirection(t_command *command, t_token *token);
 int			handle_command(t_command *command, t_token *token);
+int			is_empty_command(t_command *command);
 int			is_redirection_invalid(char c);
 int			is_command(t_token *token);
 
@@ -159,7 +160,7 @@ char		**convert_env(t_env *env);
 /*					UTILS						*/
 /* *******************************************	*/
 /*					insert_matrice.c			*/
-char		**insert_matrice(char **matrice, char *str);
+char		**insert_matrix(char **matrice, char *str);
 char		*ft_sepjoin(const char *s1, const char *s2, char c);
 
 /* *******************************************	*/
@@ -170,7 +171,7 @@ void		free_all(t_variable *var, t_command *cmd, t_token *tok);
 void		free_env(t_variable *var);
 void		free_commands(t_command *command);
 void		free_tokens(t_token *token);
-void		free_matrice(char **matrice);
+void		free_matrix(char **matrice);
 /*					errors.c					*/
 void		throw_error(char *err_msg, int exit_value);
 void		throw_perror(int exit_value);

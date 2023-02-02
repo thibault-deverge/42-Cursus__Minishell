@@ -21,6 +21,22 @@ static t_token	*traverse_next_token(t_token *token, int next_token)
 }
 
 /*
+ * @Summary:
+ * 		- Hub to manage if the matrices are commands or redirections
+ * 		and send to valid function to handle it.
+*/
+static int	manage_commands(t_command *command, t_token *token)
+{
+	int	next_token;
+
+	if (token->rule == REDI)
+		next_token = handle_redirection(command, token);
+	else
+		next_token = handle_command(command, token);
+	return (next_token);
+}
+
+/*
  * @summary:
  * 		- Iterate throught the list_tokens and populate the list_commands
  * 		with the corrects values.
@@ -42,13 +58,13 @@ t_list	*parse_commands(t_list *list_commands, t_parse *list_tokens)
 		next_token = 1;
 		if (token->rule == PIPE)
 		{
+			if (!is_empty_command(command))
+				return (NULL);
 			command->next = initialize_command();
 			command = command->next;
 		}
-		else if (token->rule == REDI)
-			next_token = handle_redirection(command, token);
 		else
-			next_token = handle_command(command, token);
+			next_token = manage_commands(command, token);
 		if (!next_token)
 			return (NULL);
 		token = traverse_next_token(token, next_token);
