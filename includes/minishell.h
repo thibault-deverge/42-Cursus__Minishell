@@ -135,7 +135,7 @@ int			exec_echo(t_command *command, t_env *env);
 /*					pwd							*/
 int			exec_pwd(t_command *command, t_env *env);
 /*					cd							*/
-//void		exec_cd(t_command *command, t_env *env);
+int			exec_cd(t_command *command, t_env *env);
 /*			     	export						*/
 int			export(t_command *command, t_env *env);
 int			get_key_len(char *var);

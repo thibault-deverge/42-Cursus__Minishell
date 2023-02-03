@@ -10,7 +10,6 @@
 static int	modify_var_content(t_env *env, char *name, char *content)
 {
 	t_variable	*tmp_var;
-	size_t		i;
 
 	tmp_var = env->var;
 	if (!content)
@@ -44,13 +43,13 @@ int	exec_cd(t_command *command, t_env *env)
 		return (print_error(ERROR_CD_ARG));
 	if (!getcwd(old_pwd, 1024))
 		return (print_perror());
-	if (!modify_var_content(env, "OLDPWD", ft_strdup(old_pwd)) == -1)
+	if (modify_var_content(env, "OLDPWD", ft_strdup(old_pwd)) == -1)
 		return (print_perror());
 	if (chdir(command->cmd[1]))
 		return (print_error(ERROR_CD_FILE));
 	if (!getcwd(pwd, 1024))
 		return (print_perror());
-	if (!modify_var_content(env, "PWD", ft_strdup(pwd)) == -1)
+	if (modify_var_content(env, "PWD", ft_strdup(pwd)) == -1)
 		return (print_perror());
 	return (1);
 }
