@@ -16,7 +16,7 @@ static void	exit_command_empty(void)
  * 		- Search in environment list for USER and PWD variable.
  * 		- Join these in a way to have a prompt : $USER:PWD >
 */
-static char	*get_prompt(t_env *env)
+static char	*get_prompt(void)
 {
 	char	*user_env;
 	char	*pwd_env;
@@ -25,7 +25,7 @@ static char	*get_prompt(t_env *env)
 
 	if (!getcwd(pwd_buf, PATH_SIZE))
 		return (NULL);
-	user_env = ft_strjoin(get_var_content(env, "USER"), ":");
+	user_env = ft_strjoin("DREAMTEAM", ":");
 	if (!user_env)
 		return (NULL);
 	pwd_env = ft_strjoin(pwd_buf, "$ ");
@@ -45,12 +45,12 @@ static char	*get_prompt(t_env *env)
  * 		- Ask user to enter a prompt and return it.
  * 		- Return NULL if user enter EOF.
 */
-char	*get_input(t_env *env)
+char	*get_input(void)
 {
 	char	*command;
 	char	*prompt;
 
-	prompt = get_prompt(env);
+	prompt = get_prompt();
 	if (prompt == NULL)
 		throw_perror(EXIT_ALLOC);
 	command = readline(prompt);

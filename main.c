@@ -11,7 +11,7 @@ int	main(int argc, char **argv, char **envp)
 	get_env(&env, envp);
 	while (1)
 	{
-		cmd = get_input(&env);
+		cmd = get_input();
 		main_parsing(&lst, cmd, &env);
 		//heredoc_manager(&lst);
 		main_execution(&lst, &env);
