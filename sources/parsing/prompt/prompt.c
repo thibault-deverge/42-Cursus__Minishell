@@ -2,6 +2,17 @@
 
 /*
  * @summary:
+ * 		- Display error message passed as parameter on STDERR
+ * 		and exit with integer passed as 'exit value'.
+*/
+static void	throw_error(char *err_msg, int exit_value)
+{
+	ft_putstr_fd(err_msg, 2);
+	exit(exit_value);
+}
+
+/*
+ * @summary:
  * 		- Clear history of commands, free environment and throw an
  * 		error.
 */

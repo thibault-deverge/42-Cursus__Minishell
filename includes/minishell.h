@@ -178,7 +178,6 @@ void		free_commands(t_command *command);
 void		free_tokens(t_token *token);
 void		free_matrix(char **matrice);
 /*					errors.c					*/
-void		throw_error(char *err_msg, int exit_value);
 void		throw_perror(int exit_value);
 int			print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_msg);
 int			print_error(char *err_msg);
