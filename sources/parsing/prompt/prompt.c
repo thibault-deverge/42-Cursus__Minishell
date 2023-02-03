@@ -5,10 +5,9 @@
  * 		- Clear history of commands, free environment and throw an
  * 		error.
 */
-static void	exit_command_empty(t_env *env)
+static void	exit_command_empty(void)
 {
 	rl_clear_history();
-	free_env(env->var);
 	throw_error(ERROR_PROMPT, EXIT_PROMPT);
 }
 
@@ -21,12 +20,15 @@ static char	*get_prompt(t_env *env)
 {
 	char	*user_env;
 	char	*pwd_env;
+	char	pwd_buf[1024];
 	char	*custom_prompt;
 
+	if (!getcwd(pwd_buf, PATH_SIZE))
+		return (NULL);
 	user_env = ft_strjoin(get_var_content(env, "USER"), ":");
 	if (!user_env)
 		return (NULL);
-	pwd_env = ft_strjoin(get_var_content(env, "PWD"), "$ ");
+	pwd_env = ft_strjoin(pwd_buf, "$ ");
 	if (!pwd_env)
 	{
 		free(user_env);
@@ -50,13 +52,10 @@ char	*get_input(t_env *env)
 
 	prompt = get_prompt(env);
 	if (prompt == NULL)
-	{
-		free_env(env->var);
 		throw_perror(EXIT_ALLOC);
-	}
 	command = readline(prompt);
 	if (!command)
-		exit_command_empty(env);
+		exit_command_empty();
 	if (command[0])
 		add_history(command);
 	free(prompt);
