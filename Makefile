@@ -31,6 +31,7 @@ SRCS =	./main.c \
 		./sources/builtins/env/env.c \
 		./sources/builtins/unset/unset.c \
 		./sources/builtins/cd/exec_cd.c \
+		./sources/builtins/exit/exec_exit.c \
     	./sources/execution/main_execution.c \
 	  	./sources/execution/builtins.c \
 	  	./sources/execution/convert_env.c \

@@ -26,11 +26,11 @@
 # define ERROR_ENV		"env: too many arguments\n"
 # define ERROR_CD_ARG	"cd: too many arguments\n"
 # define ERROR_CD_FILE  "cd: no such file or directory\n"
+# define ERROR_CD_HOME  "cd: home directory can't be found\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
 # define EXIT_PARSE_CMD 3
-# define EXIT_CD		4
 
 # define COMMAND		0
 # define REDI			1
@@ -150,6 +150,8 @@ int			check_key_name(char *key, int len, char *built);
 int			env(t_command *command, t_env *env);		
 /*					unset						*/
 int			unset(t_command *command, t_env *env);
+/*					exit						*/
+int			exec_exit(t_command *command, t_env *env);
 
 /* *******************************************	*/
 /*					EXECUTION					*/
