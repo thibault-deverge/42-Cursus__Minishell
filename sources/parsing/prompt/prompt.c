@@ -13,29 +13,21 @@ static void	exit_command_empty(void)
 
 /*
  * @summary:
- * 		- Search in environment list for USER and PWD variable.
- * 		- Join these in a way to have a prompt : $USER:PWD >
+ * 		- Get current working directory and join it with '$'.
+ * 		- Join with team's in a way to have a prompt : DREAMTEAM:PWD$
 */
 static char	*get_prompt(void)
 {
-	char	*user_env;
 	char	*pwd_env;
 	char	pwd_buf[1024];
 	char	*custom_prompt;
 
 	if (!getcwd(pwd_buf, PATH_SIZE))
 		return (NULL);
-	user_env = ft_strjoin("DREAMTEAM", ":");
-	if (!user_env)
-		return (NULL);
 	pwd_env = ft_strjoin(pwd_buf, "$ ");
 	if (!pwd_env)
-	{
-		free(user_env);
 		return (NULL);
-	}
-	custom_prompt = ft_strjoin(user_env, pwd_env);
-	free(user_env);
+	custom_prompt = ft_strjoin("DREAMTEAM:", pwd_env);
 	free(pwd_env);
 	return (custom_prompt);
 }

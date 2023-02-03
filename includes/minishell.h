@@ -19,7 +19,7 @@
 /*                         DEFINES                     */
 /*******************************************************/
 
-# define ERROR_PROMPT	"\nExit minishell - prompt receive NULL\n"
+# define ERROR_PROMPT	"exit\n"
 # define ERROR_SYNTAX	"error: syntax error near redirection\n"
 # define ERROR_QUOTES	"error: missing terminating quote character\n"
 # define INVALID_KEY	"not a valid identifier\n"
