@@ -13,7 +13,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		cmd = get_input(&env);
 		main_parsing(&lst, cmd, &env);
-		//heredoc_manager(&lst);
+		heredoc_manager(&lst);
 		main_execution(&lst, &env);
     	free(cmd);
 	//	print_cmd(&lst);

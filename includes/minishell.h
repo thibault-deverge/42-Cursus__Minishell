@@ -155,6 +155,10 @@ t_list		*main_execution(t_list *lst, t_env *env);
 int			check_builtins(t_command *command, t_env *env);
 /*				convert_env						*/
 char		**convert_env(t_env *env);
+/*					heredoc						*/
+int		heredoc_manager(t_list *lst);
+/*				    redirections					*/
+
 
 /* *******************************************	*/
 /*					UTILS						*/
