@@ -24,6 +24,7 @@
 # define ERROR_QUOTES	"error: missing terminating quote character\n"
 # define INVALID_KEY	"not a valid identifier\n"
 # define ERROR_ENV		"env: too many arguments\n"
+# define ERROR_OPEN_FD		"No such file or directory\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
@@ -158,7 +159,7 @@ char		**convert_env(t_env *env);
 /*					heredoc						*/
 int		heredoc_manager(t_list *lst);
 /*				    redirections					*/
-
+void		redi_manager(t_command *command);
 
 /* *******************************************	*/
 /*					UTILS						*/

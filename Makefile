@@ -34,6 +34,7 @@ SRCS =	./main.c \
 	  ./sources/execution/builtins.c \
 	  ./sources/execution/convert_env.c \
 	  ./sources/execution/heredoc_manager.c \
+	  ./sources/execution/redi_manager.c \
     ./sources/utils/insert_matrix.c \
 		./sources/utils/ft_sepjoin.c \
 		./sources/helpers/display/print.c \
