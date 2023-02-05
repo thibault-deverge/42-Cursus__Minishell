@@ -2,18 +2,18 @@
 
 static void	update_dup(t_command *command, int fdin, int fdout)
 {
-	if (fdin >= 0)
-	{
-		if (command->fds[1] >= 0)
-			close(command->fds[0]);
-		command->fds[1] = fdin;
-	}
 	if (fdout >= 0)
 	{
 		if (command->fds[0] >= 0)
-			close(fdout);
+			close(command->fds[0]);
+		command->fds[0] = fdout;
+	}
+	if (fdin >= 0)
+	{
+		if (command->fds[1] >= 0)
+			close(fdin);
 		else
-			command->fds[0] = fdout;
+			command->fds[1] = fdin;
 	}
 	if (command->fds[0] >= 0)
 	{
