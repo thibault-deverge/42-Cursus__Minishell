@@ -9,31 +9,45 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <fcntl.h>
 
 /*******************************************************/
 /*                         DEFINES                     */
 /*******************************************************/
 
-# define ERROR_PROMPT	"\nExit minishell - prompt receive NULL\n"
+# define ERROR_PROMPT	"exit\n"
 # define ERROR_SYNTAX	"error: syntax error near redirection\n"
 # define ERROR_QUOTES	"error: missing terminating quote character\n"
 # define INVALID_KEY	"not a valid identifier\n"
 # define ERROR_ENV		"env: too many arguments\n"
+# define ERROR_CD_ARG	"cd: too many arguments\n"
+# define ERROR_CD_FILE  "cd: no such file or directory\n"
+# define ERROR_CD_HOME  "cd: home directory can't be found\n"
+# define ERROR_EXIT_ARG "exit:\nexit: too many arguments\n"
+# define ERROR_EXIT_NUM "exit:\nexit: numeric argument required\n"
 # define ERROR_OPEN_FD	"No such file or directory\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
 # define EXIT_PARSE_CMD 3
+# define EXIT_CMD		4
+# define EXIT_BUILTIN	5
 
 # define COMMAND		0
 # define REDI			1
 # define SPACEBAR		2
 # define PIPE			3
+
+# define FIRST_CMD		1
+# define MIDDLE_CMD		2
+
+# define PATH_SIZE		1024
 
 # define IN				1
 # define OUT			2
@@ -103,7 +117,7 @@ typedef struct s_builtins
 /*					main_parsing				*/
 t_list		*main_parsing(t_list *lst, char *cmd, t_env *env);
 /*					prompt						*/
-char		*get_input(t_env *env);
+char		*get_input(void);
 /*					environment					*/
 void		get_env(t_env *env, char **envp);
 t_env		*add_variable(t_env *envp, char *str);
@@ -136,7 +150,7 @@ int			exec_echo(t_command *command, t_env *env);
 /*					pwd							*/
 int			exec_pwd(t_command *command, t_env *env);
 /*					cd							*/
-//void		exec_cd(t_command *command, t_env *env);
+int			exec_cd(t_command *command, t_env *env);
 /*			     	export						*/
 int			export(t_command *command, t_env *env);
 int			get_key_len(char *var);
@@ -151,6 +165,8 @@ int			check_key_name(char *key, int len, char *built);
 int			env(t_command *command, t_env *env);		
 /*					unset						*/
 int			unset(t_command *command, t_env *env);
+/*					exit						*/
+int			exec_exit(t_command *command, t_env *env);
 
 /* *******************************************	*/
 /*					EXECUTION					*/
@@ -161,6 +177,20 @@ t_list		*main_execution(t_list *lst, t_env *env);
 int			check_builtins(t_command *command, t_env *env);
 /*				convert_env						*/
 char		**convert_env(t_env *env);
+/*				pipex							*/
+int			pipex(t_list *list_commands, t_env *env);
+/*				fork							*/
+int			handle_first_cmd(t_list *list_cmd, int pipes[][2], t_env *env);
+int			handle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
+/*				close							*/
+void		close_files(t_command *command);
+void		close_pipes(int pipes[][2]);
+void		close_pipe(int *pipe);
+/*				utils							*/
+int			is_last_command(t_command *command);
+int			make_dup_cmd(int pipes[][2], int idx_cmd);
+void		exit_child(t_list *list_cmd, t_env *env, int is_perror);
+char		*ft_joinpath(char const *s1, char const *s2);
 /*					heredoc						*/
 int		heredoc_manager(t_list *lst);
 /*				    redirections					*/
@@ -182,8 +212,8 @@ void		free_env(t_variable *var);
 void		free_commands(t_command *command);
 void		free_tokens(t_token *token);
 void		free_matrix(char **matrice);
+void		free_matrices(char **matrix1, char **matrix2);
 /*					errors.c					*/
-void		throw_error(char *err_msg, int exit_value);
 void		throw_perror(int exit_value);
 int			print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_msg);
 int			print_error(char *err_msg);

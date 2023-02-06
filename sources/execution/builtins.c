@@ -7,13 +7,14 @@ static const t_builtins	*get_builtins(void)
 										{"echo", exec_echo}, \
 										{"unset", unset}, \
 										{"pwd", exec_pwd}};
+
 	return (builtins);
 }
 
 int	check_builtins(t_command *command, t_env *env)
 {
 	const t_builtins	*builtins;
-	int			i;
+	int					i;
 
 	builtins = get_builtins();
 	i = 0;
@@ -28,4 +29,3 @@ int	check_builtins(t_command *command, t_env *env)
 	}
 	return (0);
 }
-

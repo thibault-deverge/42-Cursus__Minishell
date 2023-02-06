@@ -32,7 +32,7 @@ t_list	*main_execution(t_list *lst, t_env *env)
 	else
 	{
 		printf("pipe.s\n");
-		//pipex(lst->first);
+		//pipex(lst, env);
 	}
 	return (0);
 }

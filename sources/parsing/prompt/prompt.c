@@ -2,38 +2,43 @@
 
 /*
  * @summary:
+ * 		- Display error message passed as parameter on STDERR
+ * 		and exit with integer passed as 'exit value'.
+*/
+static void	throw_error(char *err_msg, int exit_value)
+{
+	ft_putstr_fd(err_msg, 2);
+	exit(exit_value);
+}
+
+/*
+ * @summary:
  * 		- Clear history of commands, free environment and throw an
  * 		error.
 */
-static void	exit_command_empty(t_env *env)
+static void	exit_command_empty(void)
 {
 	rl_clear_history();
-	free_env(env->var);
 	throw_error(ERROR_PROMPT, EXIT_PROMPT);
 }
 
 /*
  * @summary:
- * 		- Search in environment list for USER and PWD variable.
- * 		- Join these in a way to have a prompt : $USER:PWD >
+ * 		- Get current working directory and join it with '$'.
+ * 		- Join with team's in a way to have a prompt : DREAMTEAM:PWD$
 */
-static char	*get_prompt(t_env *env)
+static char	*get_prompt(void)
 {
-	char	*user_env;
 	char	*pwd_env;
+	char	pwd_buf[1024];
 	char	*custom_prompt;
 
-	user_env = ft_strjoin(get_var_content(env, "USER"), ":");
-	if (!user_env)
+	if (!getcwd(pwd_buf, PATH_SIZE))
 		return (NULL);
-	pwd_env = ft_strjoin(get_var_content(env, "PWD"), "$ ");
+	pwd_env = ft_strjoin(pwd_buf, "$ ");
 	if (!pwd_env)
-	{
-		free(user_env);
 		return (NULL);
-	}
-	custom_prompt = ft_strjoin(user_env, pwd_env);
-	free(user_env);
+	custom_prompt = ft_strjoin("DREAMTEAM:", pwd_env);
 	free(pwd_env);
 	return (custom_prompt);
 }
@@ -43,20 +48,17 @@ static char	*get_prompt(t_env *env)
  * 		- Ask user to enter a prompt and return it.
  * 		- Return NULL if user enter EOF.
 */
-char	*get_input(t_env *env)
+char	*get_input(void)
 {
 	char	*command;
 	char	*prompt;
 
-	prompt = get_prompt(env);
+	prompt = get_prompt();
 	if (prompt == NULL)
-	{
-		free_env(env->var);
 		throw_perror(EXIT_ALLOC);
-	}
 	command = readline(prompt);
 	if (!command)
-		exit_command_empty(env);
+		exit_command_empty();
 	if (command[0])
 		add_history(command);
 	free(prompt);
