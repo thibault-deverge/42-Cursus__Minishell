@@ -35,6 +35,10 @@ SRCS =	./main.c \
     	./sources/execution/main_execution.c \
 	  	./sources/execution/builtins.c \
 	  	./sources/execution/convert_env.c \
+		./sources/execution/pipex/pipex.c \
+		./sources/execution/pipex/fork_pipex.c \
+		./sources/execution/pipex/close_pipex.c \
+		./sources/execution/pipex/utils_pipex.c \
     	./sources/utils/insert_matrix.c \
 		./sources/utils/ft_sepjoin.c \
 		./sources/helpers/display/print.c \

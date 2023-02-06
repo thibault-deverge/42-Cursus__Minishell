@@ -9,6 +9,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
@@ -33,11 +34,17 @@
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
 # define EXIT_PARSE_CMD 3
+# define EXIT_CMD		4
+# define EXIT_BUILTIN	5
 
 # define COMMAND		0
 # define REDI			1
 # define SPACEBAR		2
 # define PIPE			3
+
+# define FIRST_CMD		1
+# define MIDDLE_CMD		2
+# define LAST_CMD		3
 
 # define PATH_SIZE		1024
 
@@ -164,6 +171,19 @@ t_list		*main_execution(t_list *lst, t_env *env);
 int			check_builtins(t_command *command, t_env *env);
 /*				convert_env						*/
 char		**convert_env(t_env *env);
+/*				pipex							*/
+int			pipex(t_list *list_commands, t_env *env);
+/*				fork							*/
+int			handle_first_cmd(t_list *list_cmd, int *pipe, t_env *env);
+int			handle_cmd(t_list *lst, t_command *cmd, int **pipes, t_env *env);
+/*				close							*/
+void		close_files(t_command *command);
+void		close_pipes(int **pipes);
+void		close_pipe(int *pipe);
+/*				utils							*/
+int			is_last_command(t_command *command);
+int			make_dup_cmd(int **pipes, int idx_cmd);
+void		exit_child(t_list *list_cmd, t_env *env, int is_perror);
 
 /* *******************************************	*/
 /*					UTILS						*/
