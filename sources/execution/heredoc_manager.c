@@ -3,13 +3,10 @@
 static int	store_str(t_command *command, char *str)
 {
 	if (command->fds[0] != NO_FILE)
-	{
 		close(command->fds[0]);
-		close(command->fds[1]);
-	}
 	if (!str)
 		return (0);
-	if (pipe(command->fds) < 0 || write(command->fds[1], str, ft_strlen(str) <= 0))
+	if (!pipe(command->fds) && write(command->fds[1], str, ft_strlen(str)) <= 0)
 	{
 		free(str);
 		str = NULL;
@@ -34,6 +31,9 @@ static int	set_heredoc(t_command *command, int index)
 	while (ft_strcmp(new_line, command->redi[index + 1]) != 0)
 	{
 		content = ft_strjoin_safe(content, new_line);
+		content = ft_strjoin_safe(content, "\n");
+		if (!content)
+			return (1);
 		new_line = readline("heredoc>");
 		if (!new_line)
 		{
@@ -68,9 +68,7 @@ int	heredoc_manager(t_list *lst)
 			else if (ft_strcmp(command->redi[i], "<") == 0 && command->fds[0] != NO_FILE)
 			{
 				close(command->fds[0]);
-				close(command->fds[1]);
 				command->fds[0] = NO_FILE;
-				command->fds[1] = NO_FILE;
 			}
 			i += 2;
 		}

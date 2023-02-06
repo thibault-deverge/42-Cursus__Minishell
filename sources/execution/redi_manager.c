@@ -4,7 +4,7 @@ static void	update_dup(t_command *command, int fdin, int fdout)
 {
 	if (fdout != NO_FILE)
 		command->fds[1] = fdout;
-	if (fdin >= 0)
+	if (fdin != NO_FILE)
 	{
 		if (command->fds[0] != NO_FILE)
 			close(command->fds[0]);
