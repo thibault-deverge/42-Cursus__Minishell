@@ -8,7 +8,7 @@
  * 		- Try name of the command with every path given and execute 
  * 		once the valid path was found.
 */
-static int	exec_command(char **command, char *paths, char **env)
+int	exec_command(char **command, char *paths, char **env)
 {
 	char	**paths_split;
 	char	*command_path;

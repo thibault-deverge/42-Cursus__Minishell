@@ -180,10 +180,12 @@ int			check_builtins(t_command *command, t_env *env);
 char		**convert_env(t_env *env);
 /*				pipex							*/
 int			pipex(t_list *list_commands, t_env *env);
+int			exec_command(char **command, char *paths, char **env);
 /*				fork							*/
 int			first_cmd(t_list *list_cmd, int pipes[][2], t_env *env);
 int			last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
+int			single_cmd(t_list *lst, t_command *cmd, t_env *env);
 /*				close							*/
 void		close_files(t_command *command);
 void		close_pipes(int pipes[][2]);
@@ -193,6 +195,7 @@ int			is_last_command(t_command *command);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
 void		exit_child(t_list *list_cmd, t_env *env, int is_perror);
 char		*ft_joinpath(char const *s1, char const *s2);
+int			restore_fd(t_command *command, int fdin, int fdout);
 /*					heredoc						*/
 int			heredoc_manager(t_list *lst);
 /*				    redirections					*/

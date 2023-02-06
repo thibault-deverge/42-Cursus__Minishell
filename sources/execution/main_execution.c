@@ -13,21 +13,8 @@ t_list	*main_execution(t_list *lst, t_env *env)
 		fdout = dup(1);
 		redi_manager(lst->first);
 		if (!check_builtins(lst->first, env))
-		{
-			if (dup2(fdout, 1) < 0)
-				return (NULL);
-			printf("not builtin\n");
-		}
-		if (dup2(fdin, 0) < 0)
-			return (NULL);
-		close(fdin);
-		if (dup2(fdout, 1) < 0)
-			return (NULL);
-		close(fdout);
-		if (lst->first->fds[0] >= 0)
-			close(lst->first->fds[0]);
-		if (lst->first->fds[1] >= 0)
-			close(lst->first->fds[1]);
+			single_cmd(lst, lst->first, env);
+		restore_fd(lst->first, fdin, fdout);
 	}
 	else
 		pipex(lst, env);
