@@ -30,9 +30,6 @@ t_list	*main_execution(t_list *lst, t_env *env)
 			close(lst->first->fds[1]);
 	}
 	else
-	{
-		printf("pipe.s\n");
-		//pipex(lst, env);
-	}
+		pipex(lst, env);
 	return (0);
 }

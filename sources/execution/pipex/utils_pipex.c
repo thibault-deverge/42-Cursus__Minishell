@@ -47,6 +47,7 @@ int	make_dup_cmd(int pipes[][2], int idx_cmd)
 				return (print_perror());
 		}
 	}
+	return (1);
 }
 
 /*

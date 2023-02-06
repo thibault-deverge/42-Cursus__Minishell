@@ -61,7 +61,7 @@ int	handle_first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 		if (!make_dup_cmd(pipes, FIRST_CMD))
 			exit_child(list_cmd, env, 1);
 		close_pipe(pipes[0]);
-		redi_manager(list_cmd->first->redi);
+		redi_manager(list_cmd->first);
 		close_files(list_cmd->first);
 		if (check_builtins(list_cmd->first, env) == 0)
 			exec_command(list_cmd->first->cmd, paths, convert_env(env));
@@ -94,7 +94,7 @@ int	handle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		if (!make_dup_cmd(pipes, MIDDLE_CMD))
 			exit_child(lst, env, 1);
 		close_pipes(pipes);
-		redi_manager(cmd->redi);
+		redi_manager(cmd);
 		close_files(cmd);
 		if (check_builtins(lst->first, env) == 0)
 			exec_command(lst->first->cmd, paths, convert_env(env));
