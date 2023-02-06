@@ -94,3 +94,14 @@ void	free_matrix(char **matrice)
 	}
 	free(matrice);
 }
+
+/*
+ * @summary:
+ * 		- Call free_matrix() and free both matrices passed
+ * 		as parameter.
+*/
+void	free_matrices(char **matrix1, char **matrix2)
+{
+	free_matrix(matrix1);
+	free_matrix(matrix2);
+}

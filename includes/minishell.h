@@ -14,6 +14,7 @@
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <sys/wait.h>
 # include <fcntl.h>
 
 /*******************************************************/
@@ -173,16 +174,17 @@ char		**convert_env(t_env *env);
 /*				pipex							*/
 int			pipex(t_list *list_commands, t_env *env);
 /*				fork							*/
-int			handle_first_cmd(t_list *list_cmd, int *pipe, t_env *env);
-int			handle_cmd(t_list *lst, t_command *cmd, int **pipes, t_env *env);
+int			handle_first_cmd(t_list *list_cmd, int pipes[][2], t_env *env);
+int			handle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 /*				close							*/
 void		close_files(t_command *command);
-void		close_pipes(int **pipes);
+void		close_pipes(int pipes[][2]);
 void		close_pipe(int *pipe);
 /*				utils							*/
 int			is_last_command(t_command *command);
-int			make_dup_cmd(int **pipes, int idx_cmd);
+int			make_dup_cmd(int pipes[][2], int idx_cmd);
 void		exit_child(t_list *list_cmd, t_env *env, int is_perror);
+char		*ft_joinpath(char const *s1, char const *s2);
 
 /* *******************************************	*/
 /*					UTILS						*/
@@ -200,6 +202,7 @@ void		free_env(t_variable *var);
 void		free_commands(t_command *command);
 void		free_tokens(t_token *token);
 void		free_matrix(char **matrice);
+void		free_matrices(char **matrix1, char **matrix2);
 /*					errors.c					*/
 void		throw_perror(int exit_value);
 int			print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_msg);

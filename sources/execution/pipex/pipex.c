@@ -14,7 +14,7 @@ int	pipex(t_list *list_commands, t_env *env)
 	command = list_commands->first;
 	if (pipe(pipes[0]) == -1)
 		return (print_perror());
-	if (!handle_first_cmd(list_commands, pipes[0], env))
+	if (!handle_first_cmd(list_commands, pipes, env))
 		return (0);
 	command = command->next;
 	while (command)

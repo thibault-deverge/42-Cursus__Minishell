@@ -8,7 +8,7 @@
  * 		- Try name of the command with every path given and execute 
  * 		once the valid path was found.
 */
-static int	exec_command(char **command, char *paths, t_env *env)
+static int	exec_command(char **command, char *paths, char **env)
 {
 	char	**paths_split;
 	char	*command_path;
@@ -16,6 +16,8 @@ static int	exec_command(char **command, char *paths, t_env *env)
 
 	i = 0;
 	paths_split = NULL;
+	if (!env)
+		return (print_perror());
 	if (paths)
 	{
 		paths_split = ft_split(paths, ':');
@@ -32,7 +34,8 @@ static int	exec_command(char **command, char *paths, t_env *env)
 		free(command_path);
 		i++;
 	}
-	free_matrix(paths_split);
+	free_matrices(env, paths_split);
+	return (0);
 }
 
 /*
@@ -44,7 +47,7 @@ static int	exec_command(char **command, char *paths, t_env *env)
  * 		the one used.
  * 		- Execute the command and exit the fork.
 */
-int	handle_first_cmd(t_list *list_cmd, int *pipe, t_env *env)
+int	handle_first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 {
 	char	*paths;
 	pid_t	pid;
@@ -57,11 +60,11 @@ int	handle_first_cmd(t_list *list_cmd, int *pipe, t_env *env)
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, FIRST_CMD))
 			exit_child(list_cmd, env, 1);
-		close_pipe(pipe);
+		close_pipe(pipes[0]);
 		redi_manager(list_cmd->first->redi);
 		close_files(list_cmd->first);
 		if (check_builtins(list_cmd->first, env) == 0)
-			exec_command(list_cmd->first->cmd, paths, env);
+			exec_command(list_cmd->first->cmd, paths, convert_env(env));
 		exit_child(list_cmd, env, 0);
 	}
 	close(pipes[0][1]);
@@ -77,7 +80,7 @@ int	handle_first_cmd(t_list *list_cmd, int *pipe, t_env *env)
  * 		the one used.
  * 		- Execute the command and exit the fork.
 */
-int	handle_cmd(t_list *lst, t_command *cmd, int **pipes, t_env *env)
+int	handle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 {
 	char	*paths;
 	pid_t	pid;
@@ -94,7 +97,7 @@ int	handle_cmd(t_list *lst, t_command *cmd, int **pipes, t_env *env)
 		redi_manager(cmd->redi);
 		close_files(cmd);
 		if (check_builtins(lst->first, env) == 0)
-			exec_command(lst->first->cmd, paths, env);
+			exec_command(lst->first->cmd, paths, convert_env(env));
 		exit_child(lst, env, 0);
 	}
 	close(pipes[0][0]);
