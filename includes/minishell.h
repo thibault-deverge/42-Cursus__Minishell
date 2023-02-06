@@ -44,7 +44,6 @@
 
 # define FIRST_CMD		1
 # define MIDDLE_CMD		2
-# define LAST_CMD		3
 
 # define PATH_SIZE		1024
 
