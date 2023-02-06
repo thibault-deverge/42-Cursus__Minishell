@@ -13,10 +13,10 @@ static void	print_arg(t_parse *parse)
 	}
 }
 
-
 /*
  * @summary:
- * 		- Iterate throught the string of commands, character by character, as long as it doesn't matches to a useful argument in split of parsing.
+ * 		- Iterate throught the string of commands, character by character,
+ *		as long as it doesn't matches to a useful argument in split of parsing.
  *		- Return the new linked list with only valid arguments for 2nd part of parsing.
 */
 

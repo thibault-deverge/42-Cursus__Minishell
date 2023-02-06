@@ -24,7 +24,7 @@
 # define ERROR_QUOTES	"error: missing terminating quote character\n"
 # define INVALID_KEY	"not a valid identifier\n"
 # define ERROR_ENV		"env: too many arguments\n"
-# define ERROR_OPEN_FD		"No such file or directory\n"
+# define ERROR_OPEN_FD	"No such file or directory\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
@@ -34,6 +34,11 @@
 # define REDI			1
 # define SPACEBAR		2
 # define PIPE			3
+
+# define IN				1
+# define OUT			2
+# define ADD_OUT		3
+# define NO_FILE		-1
 
 /*******************************************************/
 /*                       STRUCTURES                    */

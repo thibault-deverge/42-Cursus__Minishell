@@ -2,7 +2,7 @@
 
 static int	store_str(t_command *command, char *str)
 {
-	if (command->fds[0] >= 0)
+	if (command->fds[0] != NO_FILE)
 	{
 		close(command->fds[0]);
 		close(command->fds[1]);
@@ -15,6 +15,8 @@ static int	store_str(t_command *command, char *str)
 		str = NULL;
 		return (1);
 	}
+	close (command->fds[1]);
+	command->fds[1] = NO_FILE;
 	free(str);
 	str = NULL;
 	return (0);
@@ -54,13 +56,22 @@ int	heredoc_manager(t_list *lst)
 	while (command)
 	{
 		i = 0;
-		command->fds[0] = -1;
-		command->fds[1] = -1;
+		command->fds[0] = NO_FILE;
+		command->fds[1] = NO_FILE;
 		while (command->redi && command->redi[i])
 		{
 			if (ft_strcmp(command->redi[i], "<<") == 0)
+			{
 				if (set_heredoc(command, i) == 1)
 					return (-1);
+			}
+			else if (ft_strcmp(command->redi[i], "<") == 0 && command->fds[0] != NO_FILE)
+			{
+				close(command->fds[0]);
+				close(command->fds[1]);
+				command->fds[0] = NO_FILE;
+				command->fds[1] = NO_FILE;
+			}
 			i += 2;
 		}
 		command = command->next;
