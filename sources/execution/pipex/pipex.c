@@ -21,14 +21,14 @@ int	pipex(t_list *list_commands, t_env *env)
 	{
 		if (pipe(pipes[1]) == -1)
 			return (print_perror());
-		pid = middle_cmd(list_commands, command, pipes, env);
-		if (pid == 0)
+		if (!middle_cmd(list_commands, command, pipes, env))
 			return (0);
 		pipes[0][0] = pipes[1][0];
 		pipes[0][1] = pipes[1][1];
 		command = command->next;
 	}
-	if (!last_cmd(list_commands, command, pipes, env))
+	pid = last_cmd(list_commands, command, pipes, env);
+	if (!pid)
 		return (0);
 	waitpid(pid, NULL, 0);
 	return (1);

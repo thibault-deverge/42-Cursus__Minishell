@@ -36,15 +36,18 @@ int	make_dup_cmd(int pipes[][2], int idx_cmd)
 	{
 		if (dup2(pipes[0][1], STDOUT_FILENO) == -1)
 			return (print_perror());
+		close(pipes[0][1]);
 	}
 	else
 	{
 		if (dup2(pipes[0][0], STDIN_FILENO) == -1)
 			return (print_perror());
+		close(pipes[0][0]);
 		if (idx_cmd == MIDDLE_CMD)
 		{
 			if (dup2(pipes[1][1], STDOUT_FILENO) == -1)
 				return (print_perror());
+			close(pipes[1][1]);
 		}
 	}
 	return (1);
