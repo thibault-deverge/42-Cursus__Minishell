@@ -153,7 +153,7 @@ int			exec_pwd(t_command *command, t_env *env);
 /*					cd							*/
 int			exec_cd(t_command *command, t_env *env);
 /*			     	export						*/
-int			export(t_command *command, t_env *env);
+int			exec_export(t_command *command, t_env *env);
 int			get_key_len(char *var);
 t_variable	*manage_key(char *new_var, int key_len, t_env *env);
 char		*set_new_content(t_variable *var, char *value);
@@ -163,9 +163,9 @@ void		manage_variable(char *new_var, t_env *env);
 t_variable	*get_last_var(t_env *env);
 int			check_key_name(char *key, int len, char *built);
 /*					env							*/
-int			env(t_command *command, t_env *env);		
+int			exec_env(t_command *command, t_env *env);		
 /*					unset						*/
-int			unset(t_command *command, t_env *env);
+int			exec_unset(t_command *command, t_env *env);
 /*					exit						*/
 int			exec_exit(t_command *command, t_env *env);
 

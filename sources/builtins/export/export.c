@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	export(t_command *command, t_env *env)
+int	exec_export(t_command *command, t_env *env)
 {
 	int	i;
 

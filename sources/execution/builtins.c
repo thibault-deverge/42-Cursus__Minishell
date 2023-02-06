@@ -2,11 +2,13 @@
 
 static const t_builtins	*get_builtins(void)
 {
-	static const t_builtins	builtins[5] = {{"export", export}, \
-										{"env", env}, \
+	static const t_builtins	builtins[7] = {{"export", exec_export}, \
+										{"env", exec_env}, \
 										{"echo", exec_echo}, \
-										{"unset", unset}, \
-										{"pwd", exec_pwd}};
+										{"unset", exec_unset}, \
+										{"pwd", exec_pwd}, \
+										{"cd", exec_cd}, \
+										{"exit", exec_exit}};
 
 	return (builtins);
 }
@@ -18,7 +20,7 @@ int	check_builtins(t_command *command, t_env *env)
 
 	builtins = get_builtins();
 	i = 0;
-	while (i < 5)
+	while (i < 7)
 	{
 		if (command->cmd && ft_strcmp(command->cmd[0], builtins[i].name) == 0)
 		{

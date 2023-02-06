@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int env(t_command *command, t_env *env)
+int exec_env(t_command *command, t_env *env)
 {
 	if (command->cmd[1])
 		print_error(ERROR_ENV);

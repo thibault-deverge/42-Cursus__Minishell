@@ -35,7 +35,7 @@ static void	delete_var(int index, t_env *env)
 	}
 }
 
-int	unset(t_command *command, t_env *env)
+int	exec_unset(t_command *command, t_env *env)
 {
 	int		i;
 	int		len_cmd;
