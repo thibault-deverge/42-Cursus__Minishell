@@ -33,7 +33,7 @@ int	exec_command(char **command, char *paths, char **env)
 		i++;
 	}
 	free_matrices(env, paths_split);
-	return (print_error(ERROR_CMD_LOST));
+	return (print_perror());
 }
 
 /*
