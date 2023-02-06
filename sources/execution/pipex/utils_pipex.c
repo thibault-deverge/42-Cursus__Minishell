@@ -21,8 +21,8 @@ void	exit_child(t_list *list_cmd, t_env *env, int is_perror)
 	if (is_perror)
 		print_perror();
 	free_env(env->var);
-	free_commands(list_commands->first);
-	exit(ERROR_BUILTIN);
+	free_commands(list_cmd->first);
+	exit(EXIT_BUILTIN);
 }
 
 /*

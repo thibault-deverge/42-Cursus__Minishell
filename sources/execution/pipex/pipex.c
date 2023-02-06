@@ -19,7 +19,7 @@ int	pipex(t_list *list_commands, t_env *env)
 	command = command->next;
 	while (command)
 	{
-		if (pipe(pipes[1] == -1))
+		if (pipe(pipes[1]) == -1)
 			return (print_perror());
 		pid = handle_cmd(list_commands, command, pipes, env);
 		if (pid == 0)
