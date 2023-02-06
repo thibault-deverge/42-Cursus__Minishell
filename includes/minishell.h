@@ -29,9 +29,10 @@
 # define ERROR_CD_ARG	"cd: too many arguments\n"
 # define ERROR_CD_FILE  "cd: no such file or directory\n"
 # define ERROR_CD_HOME  "cd: home directory can't be found\n"
-# define ERROR_EXIT_ARG "exit:\nexit: too many arguments\n"
-# define ERROR_EXIT_NUM "exit:\nexit: numeric argument required\n"
+# define ERROR_EXIT_ARG "exit\nexit: too many arguments\n"
+# define ERROR_EXIT_NUM "exit\nexit: numeric argument required\n"
 # define ERROR_OPEN_FD	"No such file or directory\n"
+# define ERROR_CMD_LOST "error: No such file or directory\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2

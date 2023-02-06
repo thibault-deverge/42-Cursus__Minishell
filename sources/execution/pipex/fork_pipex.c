@@ -16,8 +16,6 @@ int	exec_command(char **command, char *paths, char **env)
 
 	i = 0;
 	paths_split = NULL;
-	if (!env)
-		return (print_perror());
 	if (paths)
 	{
 		paths_split = ft_split(paths, ':');
@@ -35,7 +33,7 @@ int	exec_command(char **command, char *paths, char **env)
 		i++;
 	}
 	free_matrices(env, paths_split);
-	return (0);
+	return (print_error(ERROR_CMD_LOST));
 }
 
 /*
@@ -49,6 +47,7 @@ int	exec_command(char **command, char *paths, char **env)
 */
 int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 {
+	char	**envp;
 	char	*paths;
 	pid_t	pid;
 
@@ -58,12 +57,15 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 	if (pid == 0)
 	{
 		paths = get_var_content(env, "PATH");
+		envp = convert_env(env);
+		if (!envp)
+			return (print_perror());
 		if (!make_dup_cmd(pipes, FIRST_CMD))
 			exit_child(list_cmd, env, 1);
 		redi_manager(list_cmd->first);
 		close_files(list_cmd->first);
 		if (check_builtins(list_cmd->first, env) == 0)
-			exec_command(list_cmd->first->cmd, paths, convert_env(env));
+			exec_command(list_cmd->first->cmd, paths, envp);
 		exit_child(list_cmd, env, 0);
 	}
 	close(pipes[0][1]);
@@ -72,6 +74,7 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 
 int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 {
+	char	**envp;
 	char	*paths;
 	pid_t	pid;
 
@@ -81,12 +84,15 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 	if (pid == 0)
 	{
 		paths = get_var_content(env, "PATH");
+		envp = convert_env(env);
+		if (!envp)
+			return (print_perror());
 		if (!make_dup_cmd(pipes, LAST_CMD))
 			exit_child(lst, env, 1);
 		redi_manager(cmd);
 		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
-			exec_command(cmd->cmd, paths, convert_env(env));
+			exec_command(cmd->cmd, paths, envp);
 		exit_child(lst, env, 0);
 	}
 	close(pipes[0][0]);
@@ -95,6 +101,7 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 
 int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 {
+	char	**envp;
 	char	*paths;
 	pid_t	pid;
 
@@ -104,6 +111,9 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 	if (pid == 0)
 	{
 		paths = get_var_content(env, "PATH");
+		envp = convert_env(env);
+		if (!envp)
+			return (print_perror());
 		if (!make_dup_cmd(pipes, MIDDLE_CMD))
 			exit_child(lst, env, 1);
 		redi_manager(cmd);
