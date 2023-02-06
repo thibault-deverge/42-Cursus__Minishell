@@ -47,7 +47,7 @@ static int	exec_command(char **command, char *paths, char **env)
  * 		the one used.
  * 		- Execute the command and exit the fork.
 */
-int	handle_first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
+int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 {
 	char	*paths;
 	pid_t	pid;
@@ -68,19 +68,34 @@ int	handle_first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 		exit_child(list_cmd, env, 0);
 	}
 	close(pipes[0][1]);
-	return (0);
+	return (1);
 }
 
-/*
- * @summary:
- * 		- Make a fork and get path in the environment.
- * 		- Dup fds of pipes passed as parameter for stdin/stdout and close
- * 		them all unless the standards ones.
- * 		- Check if it's necessary to redirect into files and close
- * 		the one used.
- * 		- Execute the command and exit the fork.
-*/
-int	handle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
+int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
+{
+	char	*paths;
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == -1)
+		return (print_perror());
+	if (pid == 0)
+	{
+		paths = get_var_content(env, "PATH");
+		if (!make_dup_cmd(pipes, LAST_CMD))
+			exit_child(lst, env, 1);
+		close_pipes(pipes);
+		redi_manager(cmd);
+		close_files(cmd);
+		if (check_builtins(cmd, env) == 0)
+			exec_command(cmd->cmd, paths, convert_env(env));
+		exit_child(lst, env, 0);
+	}
+	close(pipes[0][0]);
+	return (pid);
+}
+
+int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 {
 	char	*paths;
 	pid_t	pid;
@@ -96,12 +111,11 @@ int	handle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		close_pipes(pipes);
 		redi_manager(cmd);
 		close_files(cmd);
-		if (check_builtins(lst->first, env) == 0)
-			exec_command(lst->first->cmd, paths, convert_env(env));
+		if (check_builtins(cmd, env) == 0)
+			exec_command(cmd->cmd, paths, convert_env(env));
 		exit_child(lst, env, 0);
 	}
 	close(pipes[0][0]);
-	if (!is_last_command(cmd))
-		close(pipes[1][1]);
+	close(pipes[1][1]);
 	return (pid);
 }

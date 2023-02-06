@@ -46,6 +46,7 @@
 
 # define FIRST_CMD		1
 # define MIDDLE_CMD		2
+# define LAST_CMD		3
 
 # define PATH_SIZE		1024
 
@@ -180,8 +181,9 @@ char		**convert_env(t_env *env);
 /*				pipex							*/
 int			pipex(t_list *list_commands, t_env *env);
 /*				fork							*/
-int			handle_first_cmd(t_list *list_cmd, int pipes[][2], t_env *env);
-int			handle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
+int			first_cmd(t_list *list_cmd, int pipes[][2], t_env *env);
+int			last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
+int			middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 /*				close							*/
 void		close_files(t_command *command);
 void		close_pipes(int pipes[][2]);
@@ -192,7 +194,7 @@ int			make_dup_cmd(int pipes[][2], int idx_cmd);
 void		exit_child(t_list *list_cmd, t_env *env, int is_perror);
 char		*ft_joinpath(char const *s1, char const *s2);
 /*					heredoc						*/
-int		heredoc_manager(t_list *lst);
+int			heredoc_manager(t_list *lst);
 /*				    redirections					*/
 void		redi_manager(t_command *command);
 
