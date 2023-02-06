@@ -39,7 +39,7 @@ void	get_env(t_env *env, char **envp)
 
 	i = 0;
 	env->var = NULL;
-	while (envp[i])
+	while (envp && envp[i])
 	{
 		env = insert_var_node(env, envp[i]);
 		if (!env)

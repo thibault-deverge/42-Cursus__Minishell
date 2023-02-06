@@ -41,6 +41,7 @@ SRCS =	./sources/conversion/ft_atoi.c \
 		./sources/string/ft_strchr.c \
 		./sources/string/ft_strdup.c \
 		./sources/string/ft_strjoin.c \
+		./sources/string/ft_strjoin_safe.c \
 		./sources/string/ft_strlcat.c \
 		./sources/string/ft_strlcpy.c \
 		./sources/string/ft_strlen.c \

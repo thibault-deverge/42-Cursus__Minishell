@@ -31,6 +31,7 @@
 # define ERROR_CD_HOME  "cd: home directory can't be found\n"
 # define ERROR_EXIT_ARG "exit:\nexit: too many arguments\n"
 # define ERROR_EXIT_NUM "exit:\nexit: numeric argument required\n"
+# define ERROR_OPEN_FD	"No such file or directory\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
@@ -47,6 +48,11 @@
 # define MIDDLE_CMD		2
 
 # define PATH_SIZE		1024
+
+# define IN				1
+# define OUT			2
+# define ADD_OUT		3
+# define NO_FILE		-1
 
 /*******************************************************/
 /*                       STRUCTURES                    */
@@ -185,6 +191,10 @@ int			is_last_command(t_command *command);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
 void		exit_child(t_list *list_cmd, t_env *env, int is_perror);
 char		*ft_joinpath(char const *s1, char const *s2);
+/*					heredoc						*/
+int		heredoc_manager(t_list *lst);
+/*				    redirections					*/
+void		redi_manager(t_command *command);
 
 /* *******************************************	*/
 /*					UTILS						*/
