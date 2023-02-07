@@ -192,7 +192,6 @@ int			middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			single_cmd(t_list *lst, t_command *cmd, t_env *env);
 /*				close							*/
 void		close_files(t_command *command);
-void		close_pipes(int pipes[][2]);
 void		close_pipe(int *pipe);
 /*				utils							*/
 void		free_matrices(char **matrix1, char **matrix2);
