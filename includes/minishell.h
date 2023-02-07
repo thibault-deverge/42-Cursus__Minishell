@@ -180,34 +180,28 @@ int			exec_exit(t_command *command, t_env *env);
 /* *******************************************	*/
 /*					EXECUTION					*/
 /* *******************************************	*/
-/*					main_execution				*/
 t_list		*main_execution(t_list *lst, t_env *env);
 /*					builtins					*/
 int			check_builtins(t_command *command, t_env *env);
-/*				convert_env						*/
-char		**convert_env(t_env *env);
-/*				pipex							*/
+/*				    redirections				*/
+void		redi_manager(t_command *command);
+int			heredoc_manager(t_list *lst);
+/*					pipex						*/
 int			pipex(t_list *list_commands, t_env *env);
 int			exec_command(char **command, char *paths, char **env);
-/*				fork							*/
 int			first_cmd(t_list *list_cmd, int pipes[][2], t_env *env);
 int			last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			single_cmd(t_list *lst, t_command *cmd, t_env *env);
-/*				close							*/
 void		close_files(t_command *command);
 void		close_pipe(int *pipe);
-/*				utils							*/
+/*					utils						*/
 void		free_matrices(char **matrix1, char **matrix2);
+void		exit_child(t_list *list_cmd, t_env *env, int is_perror);
 int			is_last_command(t_command *command);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
-void		exit_child(t_list *list_cmd, t_env *env, int is_perror);
-char		*ft_joinpath(char const *s1, char const *s2);
 int			restore_fd(t_command *command, int fdin, int fdout);
-/*					heredoc						*/
-int			heredoc_manager(t_list *lst);
-/*				    redirections					*/
-void		redi_manager(t_command *command);
+char		*ft_joinpath(char const *s1, char const *s2);
 
 /* *******************************************	*/
 /*					UTILS						*/
@@ -215,6 +209,7 @@ void		redi_manager(t_command *command);
 /*					insert_matrice.c			*/
 char		**insert_matrix(char **matrice, char *str);
 char		*ft_sepjoin(const char *s1, const char *s2, char c);
+char		**convert_env(t_env *env);
 
 /* *******************************************	*/
 /*					HELPERS						*/
