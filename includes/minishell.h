@@ -227,10 +227,5 @@ void		throw_perror(int exit_value);
 int			print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_msg);
 int			print_error(char *err_msg);
 int			print_perror(void);
-/*					display.c					*/
-void		print_env(t_env *env);
-void		print_export(t_env *env);
-/*					test.c						*/
-void		print_cmd(t_list *list_commands);
 
 #endif

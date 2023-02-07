@@ -44,10 +44,8 @@ SRCS =	./main.c \
 		./sources/execution/pipex/utils_pipex.c \
     	./sources/utils/insert_matrix.c \
 		./sources/utils/ft_sepjoin.c \
-		./sources/helpers/display/print.c \
-		./sources/helpers/error/errors.c \
-		./sources/helpers/error/free.c \
-		./sources/helpers/test/print_cmd.c \
+		./sources/helpers/errors.c \
+		./sources/helpers/free.c \
 
 OBJS	= $(SRCS:.c=.o)
 
