@@ -27,7 +27,7 @@ int	single_cmd(t_list *lst, t_command *cmd, t_env *env)
 	{
 		paths = get_var_content(env, "PATH");
 		exec_command(cmd->cmd, paths, convert_env(env));
-		exit_child(lst, env, 0);
+		exit_child(lst, env, NULL, 0);
 	}
 	waitpid(pid, NULL, 0);
 	return (0);

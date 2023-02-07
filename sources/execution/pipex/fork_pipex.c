@@ -32,7 +32,7 @@ int	exec_command(char **command, char *paths, char **env)
 		free(command_path);
 		i++;
 	}
-	free_matrices(env, paths_split);
+	free_matrix(paths_split);
 	return (print_error(ERROR_TEST));
 }
 
@@ -58,14 +58,14 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 		paths = get_var_content(env, "PATH");
 		envp = convert_env(env);
 		if (!envp)
-			return (print_perror());
+			exit_child(list_cmd, env, NULL, 1);
 		if (!make_dup_cmd(pipes, FIRST_CMD))
-			exit_child(list_cmd, env, 1);
+			exit_child(list_cmd, env, envp, 1);
 		redi_manager(list_cmd->first);
 		close_files(list_cmd->first);
 		if (check_builtins(list_cmd->first, env) == 0)
 			exec_command(list_cmd->first->cmd, paths, envp);
-		exit_child(list_cmd, env, 0);
+		exit_child(list_cmd, env, envp, 0);
 	}
 	close(pipes[0][1]);
 	return (RETURN_SUCCESS);
@@ -84,14 +84,14 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		paths = get_var_content(env, "PATH");
 		envp = convert_env(env);
 		if (!envp)
-			return (print_perror());
+			exit_child(lst, env, NULL, 1);
 		if (!make_dup_cmd(pipes, LAST_CMD))
-			exit_child(lst, env, 1);
+			exit_child(lst, env, envp, 1);
 		redi_manager(cmd);
 		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
 			exec_command(cmd->cmd, paths, envp);
-		exit_child(lst, env, 0);
+		exit_child(lst, env, envp, 0);
 	}
 	close(pipes[0][0]);
 	return (lst->pid[cmd->index]);
@@ -110,14 +110,14 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		paths = get_var_content(env, "PATH");
 		envp = convert_env(env);
 		if (!envp)
-			return (print_perror());
+			exit_child(lst, env, NULL, 1);
 		if (!make_dup_cmd(pipes, MIDDLE_CMD))
-			exit_child(lst, env, 1);
+			exit_child(lst, env, envp, 1);
 		redi_manager(cmd);
 		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
 			exec_command(cmd->cmd, paths, convert_env(env));
-		exit_child(lst, env, 0);
+		exit_child(lst, env, envp, 0);
 	}
 	close(pipes[0][0]);
 	close(pipes[1][1]);

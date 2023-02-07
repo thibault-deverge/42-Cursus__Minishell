@@ -26,11 +26,12 @@ int	is_last_command(t_command *command)
  * 		- Print errno if parameter 'is_perror' is truthy.
  * 		- Free list of commands and envirornment then exit program.
 */
-void	exit_child(t_list *list_cmd, t_env *env, int is_perror)
+void	exit_child(t_list *list_cmd, t_env *env, char **envp, int is_perror)
 {
 	if (is_perror)
 		print_perror();
 	free_env(env->var);
+	free_matrix(envp);
 	free(list_cmd->pid);
 	free_commands(list_cmd->first);
 	exit(EXIT_BUILTIN);

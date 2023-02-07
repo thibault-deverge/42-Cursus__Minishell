@@ -126,6 +126,7 @@ typedef struct s_builtins
 	int		(*f)(t_command *command, t_env *env);
 }			t_builtins;
 
+
 /* *******************************************	*/
 /*					PARSING						*/
 /* *******************************************	*/
@@ -204,7 +205,7 @@ void		close_files(t_command *command);
 void		close_pipe(int *pipe);
 /*					utils						*/
 void		free_matrices(char **matrix1, char **matrix2);
-void		exit_child(t_list *list_cmd, t_env *env, int is_perror);
+void		exit_child(t_list *list_cmd, t_env *env, char **envp, int perror);
 int			is_last_command(t_command *command);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
 int			restore_fd(t_command *command, int fdin, int fdout);
