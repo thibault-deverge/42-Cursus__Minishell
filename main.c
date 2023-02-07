@@ -17,12 +17,9 @@ int	main(int argc, char **argv, char **envp)
 		if (!heredoc_manager(&lst))
 			continue ;
 		main_execution(&lst, &env);
-    	free(cmd);
+		free(cmd);
 		free_commands(lst.first);
-		//print_cmd(&lst);
 	}
-	// print_env(&env);
-	// print_export(&env);
 	free_env(env.var);
 	rl_clear_history();
 	return (0);

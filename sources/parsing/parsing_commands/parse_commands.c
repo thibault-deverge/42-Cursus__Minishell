@@ -12,8 +12,6 @@ static t_token	*traverse_next_token(t_token *token, int next_token)
 
 	i = 0;
 	tmp_token = token;
-	if (!next_token)
-		return (RETURN_FAILURE);
 	while (i < next_token)
 	{
 		tmp_token = tmp_token->next;
@@ -63,12 +61,12 @@ t_list	*parse_commands(t_list *list_commands, t_parse *list_tokens)
 			if (!is_empty_command(command))
 				return (RETURN_FAILURE);
 			command->next = initialize_command();
-			if (!command->next)
-				return (RETURN_FAILURE);
 			command = command->next;
 		}
 		else
 			next_token = manage_commands(command, token);
+		if (!next_token)
+			return (RETURN_FAILURE);
 		token = traverse_next_token(token, next_token);
 	}
 	return (list_commands);
