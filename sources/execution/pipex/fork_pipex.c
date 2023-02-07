@@ -65,6 +65,7 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 		close_files(list_cmd->first);
 		if (check_builtins(list_cmd->first, env) == 0)
 			exec_command(list_cmd->first->cmd, paths, envp);
+		free(list_cmd->pid);
 		exit_child(list_cmd, env, envp, 0);
 	}
 	close(pipes[0][1]);
@@ -91,6 +92,7 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
 			exec_command(cmd->cmd, paths, envp);
+		free(lst->pid);
 		exit_child(lst, env, envp, 0);
 	}
 	close(pipes[0][0]);
@@ -117,6 +119,7 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
 			exec_command(cmd->cmd, paths, convert_env(env));
+		free(lst->pid);
 		exit_child(lst, env, envp, 0);
 	}
 	close(pipes[0][0]);
