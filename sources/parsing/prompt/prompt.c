@@ -2,21 +2,21 @@
 
 /*
  * @summary:
- * 		- Display error message passed as parameter on STDERR
- * 		and exit with integer passed as 'exit value'.
+ * 		- Display error message passed via errno variable
+ * 		and exit.
 */
 static void	throw_perror_prompt(t_env *env)
 {
 	perror("error");
 	free_env(env->var);
-	rl_clear_history();	
+	rl_clear_history();
 	exit(1);
 }
 
 /*
  * @summary:
- * 		- Display error message passed as parameter on STDERR
- * 		and exit with integer passed as 'exit value'.
+ * 		- Display error message passed as parameter on STDERR,
+ * 		free environment and prompt, clear history and exit.
 */
 static void	throw_error_prompt(char *err_msg, char *prompt, t_env *env)
 {
