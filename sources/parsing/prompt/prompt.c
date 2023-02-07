@@ -39,10 +39,10 @@ static char	*get_prompt(void)
 	char	*custom_prompt;
 
 	if (!getcwd(pwd_buf, PATH_SIZE))
-		return (NULL);
+		return (RETURN_FAILURE);
 	pwd_env = ft_strjoin(pwd_buf, "$ ");
 	if (!pwd_env)
-		return (NULL);
+		return (RETURN_FAILURE);
 	custom_prompt = ft_strjoin("DREAMTEAM:", pwd_env);
 	free(pwd_env);
 	return (custom_prompt);
@@ -59,7 +59,7 @@ char	*get_input(t_env *env)
 	char	*prompt;
 
 	prompt = get_prompt();
-	if (prompt == NULL)
+	if (prompt == RETURN_FAILURE)
 		throw_perror_prompt(env);
 	command = readline(prompt);
 	if (!command)

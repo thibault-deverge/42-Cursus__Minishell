@@ -36,6 +36,9 @@
 # define ERROR_CMD_LOST "error: No such file or directory\n"
 # define ERROR_TEST		"error: command not found\n"
 
+# define RETURN_FAILURE 0
+# define RETURN_SUCCESS 1
+
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
 # define EXIT_PARSE_CMD 3
