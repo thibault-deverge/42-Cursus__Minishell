@@ -44,23 +44,20 @@ int	make_dup_cmd(int pipes[][2], int idx_cmd)
 {
 	if (idx_cmd == FIRST_CMD)
 	{
-		close(pipes[0][0]);
 		if (dup2(pipes[0][1], STDOUT_FILENO) == -1)
 			return (print_perror());
-		close(pipes[0][1]);
+		close_pipe(pipes[0]);
 	}
 	else
 	{
-		close(pipes[0][1]);
 		if (dup2(pipes[0][0], STDIN_FILENO) == -1)
 			return (print_perror());
-		close(pipes[0][0]);
+		close_pipe(pipes[0]);
 		if (idx_cmd == MIDDLE_CMD)
 		{
-			close(pipes[1][0]);
 			if (dup2(pipes[1][1], STDOUT_FILENO) == -1)
 				return (print_perror());
-			close(pipes[1][1]);
+			close_pipe(pipes[1]);
 		}
 	}
 	return (1);
