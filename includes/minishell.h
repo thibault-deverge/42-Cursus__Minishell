@@ -69,6 +69,8 @@
 /*                       STRUCTURES                    */
 /*******************************************************/
 
+extern int	g_value;
+
 /*linked list that contains the env                    */
 /*the index corresponds to the ascii order             */
 typedef struct s_variable
@@ -123,8 +125,6 @@ typedef struct s_builtins
 	char	*name;
 	int		(*f)(t_command *command, t_env *env);
 }			t_builtins;
-
-int	g_value;
 
 /* *******************************************	*/
 /*					PARSING						*/
