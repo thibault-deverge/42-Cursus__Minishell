@@ -7,6 +7,15 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 
 	i = 1;
 	add_content = NULL;
+	if (arg[i] == '?' && (ft_is_whitespace(arg[i + 1]) || !arg[i + 1]))
+	{
+		add_content = ft_itoa(g_value);
+		parse = add_new_token(add_content, 0, ft_strlen(add_content), parse);
+		if (!parse)
+			return (print_perror() - 1);
+		return (i);
+
+	}
 	while (arg[i] && check_arg(arg[i]) == 0)
 		i++;
 	if (i > 1)
@@ -17,7 +26,7 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 		parse = add_new_token(arg, 0, 1, parse);
 	else if (!ft_isalpha(arg[1]))
 		parse = add_new_token(arg, 2, i, parse);
-	if (!parse)
+	if (!parse && i != 2)
 		return (print_perror() - 1);
 	return (i - 1);
 }
@@ -46,7 +55,7 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env)
 			i++;
 	}
 	if (!arg[i])
-		return (-1);
+		return (-2);
 	add_new_token(arg, start, i, parse);
 	define_rule_arg(parse, COMMAND);
 	return (i);
@@ -60,7 +69,7 @@ static int	manage_simple_quotes(char *arg, t_parse *parse)
 	while (arg[i] && arg[i] != '\'')
 		i++;
 	if (!arg[i])
-		return (-1);
+		return (-2);
 	add_new_token(arg, 1, i, parse);
 	define_rule_arg(parse, COMMAND);
 	return (i);
@@ -109,7 +118,7 @@ int	manage_arg(char *cmd, t_parse *parse, int len, t_env *env)
 		len += manage_redi(&cmd[len], parse);
 	else if (cmd[len] == '|')
 		add_new_token("|", 0, 1, parse);
-	if (len < 0)
+	if (len == -2)
 		print_error(ERROR_QUOTES);
 	return (len + 1);
 }

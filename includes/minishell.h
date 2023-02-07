@@ -124,6 +124,8 @@ typedef struct s_builtins
 	int		(*f)(t_command *command, t_env *env);
 }			t_builtins;
 
+int	g_value;
+
 /* *******************************************	*/
 /*					PARSING						*/
 /* *******************************************	*/

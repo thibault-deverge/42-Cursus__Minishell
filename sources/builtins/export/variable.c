@@ -44,7 +44,10 @@ int	manage_variable(char *new_var, t_env *env)
 
 	key_len = get_key_len(new_var);
 	if (!key_len)
-		manage_key(new_var, ft_strlen(new_var), env);
+	{
+		if (!manage_key(new_var, ft_strlen(new_var), env))
+			return (RETURN_FAILURE);
+	}
 	else if (new_var[key_len - 1] == '+')
 	{
 		var_env = manage_key(new_var, key_len - 1, env);
@@ -54,9 +57,8 @@ int	manage_variable(char *new_var, t_env *env)
 	else
 	{
 		var_env = manage_key(new_var, key_len, env);
-		if (var_env)
-			if (!set_new_content(var_env, &new_var[key_len + 1]))
-				return (print_perror());
+		if (var_env && !set_new_content(var_env, &new_var[key_len + 1]))
+			return (print_perror());
 	}
 	return (RETURN_SUCCESS);
 }
