@@ -161,6 +161,7 @@ int			exec_pwd(t_command *command, t_env *env);
 int			exec_cd(t_command *command, t_env *env);
 /*			     	export						*/
 int			exec_export(t_command *command, t_env *env);
+int			export_error(char *src, char *sub, int len, char *err_msg);
 int			get_key_len(char *var);
 t_variable	*manage_key(char *new_var, int key_len, t_env *env);
 char		*set_new_content(t_variable *var, char *value);
@@ -225,7 +226,6 @@ void		free_tokens(t_token *token);
 void		free_matrix(char **matrice);
 /*					errors.c					*/
 void		throw_perror(int exit_value);
-int			print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_msg);
 int			print_error(char *err_msg);
 int			print_perror(void);
 
