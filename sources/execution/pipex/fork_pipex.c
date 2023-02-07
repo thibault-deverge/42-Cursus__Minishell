@@ -50,12 +50,11 @@ int	exec_command(char **command, char *paths, char **env)
 int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 {
 	char	*paths;
-	pid_t	pid;
 
-	pid = fork();
-	if (pid == -1)
+	list_cmd->pid[0] = fork();
+	if (list_cmd->pid[0] == -1)
 		return (print_perror());
-	if (pid == 0)
+	if (list_cmd->pid[0] == 0)
 	{
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, FIRST_CMD))
@@ -73,12 +72,11 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 {
 	char	*paths;
-	pid_t	pid;
 
-	pid = fork();
-	if (pid == -1)
+	lst->pid[cmd->index] = fork();
+	if (lst->pid[cmd->index] == -1)
 		return (print_perror());
-	if (pid == 0)
+	if (lst->pid[cmd->index] == 0)
 	{
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, LAST_CMD))
@@ -90,18 +88,17 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		exit_child(lst, env, 0);
 	}
 	close(pipes[0][0]);
-	return (pid);
+	return (lst->pid[cmd->index]);
 }
 
 int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 {
 	char	*paths;
-	pid_t	pid;
 
-	pid = fork();
-	if (pid == -1)
+	lst->pid[cmd->index] = fork();
+	if (lst->pid[cmd->index] == -1)
 		return (print_perror());
-	if (pid == 0)
+	if (lst->pid[cmd->index] == 0)
 	{
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, MIDDLE_CMD))
@@ -114,5 +111,5 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 	}
 	close(pipes[0][0]);
 	close(pipes[1][1]);
-	return (pid);
+	return (lst->pid[cmd->index]);
 }

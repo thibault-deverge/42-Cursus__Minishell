@@ -1,5 +1,17 @@
 #include "minishell.h"
 
+static void	ft_waitpid(t_list *list_commands)
+{
+	int	i;
+
+	i = 0;
+	while (list_commands->pid[i])
+	{
+		waitpid(list_commands->pid[i], NULL, 0);
+		i++;
+	}
+}
+
 /*
  * @summary:
  * 		- Run only when there are multiples commands and will handle
@@ -9,7 +21,6 @@ int	pipex(t_list *list_commands, t_env *env)
 {
 	t_command	*command;
 	int			pipes[2][2];
-	pid_t		pid;
 
 	command = list_commands->first;
 	if (pipe(pipes[0]) == -1)
@@ -27,9 +38,8 @@ int	pipex(t_list *list_commands, t_env *env)
 		pipes[0][1] = pipes[1][1];
 		command = command->next;
 	}
-	pid = last_cmd(list_commands, command, pipes, env);
-	if (!pid)
+	if (!last_cmd(list_commands, command, pipes, env))
 		return (0);
-	waitpid(pid, NULL, 0);
+	ft_waitpid(list_commands);
 	return (1);
 }

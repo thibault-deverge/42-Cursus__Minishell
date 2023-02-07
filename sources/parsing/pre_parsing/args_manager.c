@@ -7,7 +7,7 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 
 	i = 1;
 	add_content = NULL;
-	while (arg[i] && arg[i] != ' ' && arg[i] != '"' && arg[i] != '\'')
+	while (arg[i] && check_arg(arg[i]) == 0)
 		i++;
 	if (i > 1)
 		add_content = get_value_of_key(&arg[1], i - 1, env);

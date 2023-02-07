@@ -80,12 +80,13 @@ typedef struct s_command
 	char				**cmd;
 	char				**redi;
 	int					fds[2];
+	int					index;
 	struct s_command	*next;
 }			t_command;
 
 typedef struct s_list
 {
-	size_t		nb_cmd;
+	pid_t		*pid;
 	t_command	*first;
 }				t_list;
 
