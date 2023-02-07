@@ -8,12 +8,13 @@ int	exec_export(t_command *command, t_env *env)
 	if (!command->cmd[i])
 	{
 		print_export(env);
-		return (0);
+		return (RETURN_SUCCESS);
 	}
 	while (command->cmd[i])
 	{
-		manage_variable(command->cmd[i], env);
+		if (!manage_variable(command->cmd[i], env))
+			return (RETURN_FAILURE);
 		i++;
 	}
-	return (0);
+	return (RETURN_SUCCESS);
 }

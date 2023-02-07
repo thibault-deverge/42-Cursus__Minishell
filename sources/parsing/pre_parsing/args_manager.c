@@ -12,11 +12,13 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 	if (i > 1)
 		add_content = get_value_of_key(&arg[1], i - 1, env);
 	if (add_content)
-		add_new_token(add_content, 0, ft_strlen(add_content), parse);
+		parse = add_new_token(add_content, 0, ft_strlen(add_content), parse);
 	else if (i == 1)
-		add_new_token(arg, 0, 1, parse);
+		parse = add_new_token(arg, 0, 1, parse);
 	else if (!ft_isalpha(arg[1]))
-		add_new_token(arg, 2, i, parse);
+		parse = add_new_token(arg, 2, i, parse);
+	if (!parse)
+		return (print_perror() - 1);
 	return (i - 1);
 }
 
@@ -78,7 +80,8 @@ static int	manage_redi(char *cmd, t_parse *parse)
 			i++;
 		if (cmd[i] == '$')
 		{
-			add_new_token(cmd, i, i + 1, parse);
+			if (!add_new_token(cmd, i, i + 1, parse))
+				return (print_perror() - 1);
 			return (i);
 		}
 	}

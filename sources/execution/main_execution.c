@@ -16,7 +16,7 @@ static int	init_table_pid(t_list *lst)
 	lst->pid = malloc(sizeof(int) * nb_cmd);
 	if (!lst->pid)
 		return (print_perror());
-	return (0);
+	return (RETURN_SUCCESS);
 }
 
 t_list	*main_execution(t_list *lst, t_env *env)
@@ -41,5 +41,5 @@ t_list	*main_execution(t_list *lst, t_env *env)
 		pipex(lst, env);
 		free(lst->pid);
 	}
-	return (0);
+	return (lst);
 }

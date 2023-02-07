@@ -167,7 +167,7 @@ t_variable	*manage_key(char *new_var, int key_len, t_env *env);
 char		*set_new_content(t_variable *var, char *value);
 int			add_new_content(t_variable *var, char *value);
 t_variable	*add_new_variable(char *var, int len, t_env *env);
-void		manage_variable(char *new_var, t_env *env);
+int			manage_variable(char *new_var, t_env *env);
 t_variable	*get_last_var(t_env *env);
 int			check_key_name(char *key, int len, char *built);
 /*					env							*/

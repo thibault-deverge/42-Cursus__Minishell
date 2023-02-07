@@ -30,12 +30,14 @@ t_variable	*add_new_variable(char *var, int len, t_env *env)
 		tmp->next = new;
 	}
 	new->name = ft_substr(var, 0, len);
+	if (!new->name)
+		return (NULL);
 	new->content = NULL;
 	init_ascii_index(env);
 	return (new);
 }
 
-void	manage_variable(char *new_var, t_env *env)
+int	manage_variable(char *new_var, t_env *env)
 {
 	int			key_len;
 	t_variable	*var_env;
@@ -46,14 +48,16 @@ void	manage_variable(char *new_var, t_env *env)
 	else if (new_var[key_len - 1] == '+')
 	{
 		var_env = manage_key(new_var, key_len - 1, env);
-		if (var_env)
-			add_new_content(var_env, &new_var[key_len + 1]);
+		if (var_env && !add_new_content(var_env, &new_var[key_len + 1]))
+			return (RETURN_FAILURE);
 	}
 	else
 	{
 		var_env = manage_key(new_var, key_len, env);
 		if (var_env)
-			set_new_content(var_env, &new_var[key_len + 1]);
+			if (!set_new_content(var_env, &new_var[key_len + 1]))
+				return (print_perror());
 	}
+	return (RETURN_SUCCESS);
 }
 
