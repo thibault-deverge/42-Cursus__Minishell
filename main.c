@@ -1,6 +1,7 @@
 #include "minishell.h"
 
-int 	g_value = 0;
+int	g_value = 0;
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_env	env;
