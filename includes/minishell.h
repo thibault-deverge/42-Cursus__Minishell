@@ -15,6 +15,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <errno.h>
 # include <fcntl.h>
 
 /*******************************************************/
@@ -33,6 +34,7 @@
 # define ERROR_EXIT_NUM "exit\nexit: numeric argument required\n"
 # define ERROR_OPEN_FD	"No such file or directory\n"
 # define ERROR_CMD_LOST "error: No such file or directory\n"
+# define ERROR_TEST		"error: command not found\n"
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2

@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+
+int	choose_error(void)
+{
+	if (errno == 2)
+		print_error("Command not found\n");
+	else
+		print_error("No such file or directory\n");
+	return (1);
+}
+
+
 /*
  * @summary:
  * 		- Split the paths as parameter to have a matrix of paths.
@@ -33,7 +44,7 @@ int	exec_command(char **command, char *paths, char **env)
 		i++;
 	}
 	free_matrices(env, paths_split);
-	return (print_perror());
+	return (print_error(ERROR_TEST));
 }
 
 /*
