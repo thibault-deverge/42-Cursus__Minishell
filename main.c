@@ -12,9 +12,10 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		cmd = get_input(&env);
-		if(!main_parsing(&lst, cmd, &env))
+		if (!main_parsing(&lst, cmd, &env))
 			continue ;
-		heredoc_manager(&lst);
+		if (!heredoc_manager(&lst))
+			continue ;
 		main_execution(&lst, &env);
     	free(cmd);
 		free_commands(lst.first);

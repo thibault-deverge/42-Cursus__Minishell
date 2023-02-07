@@ -97,6 +97,7 @@ typedef struct s_command
 typedef struct s_list
 {
 	pid_t		*pid;
+	int			nb_cmd;
 	t_command	*first;
 }				t_list;
 

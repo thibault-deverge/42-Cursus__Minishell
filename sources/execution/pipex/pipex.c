@@ -10,7 +10,7 @@ static void	ft_waitpid(t_list *list_commands)
 	int	i;
 
 	i = 0;
-	while (list_commands->pid[i])
+	while (i < list_commands->nb_cmd)
 	{
 		waitpid(list_commands->pid[i], NULL, 0);
 		i++;

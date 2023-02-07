@@ -3,17 +3,16 @@
 static int	init_table_pid(t_list *lst)
 {
 	t_command	*tmp;
-	int			nb_cmd;
 
 	tmp = lst->first;
-	nb_cmd = 0;
+	lst->nb_cmd = 0;
 	while (tmp)
 	{
-		tmp->index = nb_cmd;
-		nb_cmd++;
+		tmp->index = lst->nb_cmd;
+		lst->nb_cmd++;
 		tmp = tmp->next;
 	}
-	lst->pid = malloc(sizeof(int) * nb_cmd);
+	lst->pid = malloc(sizeof(int) * (lst->nb_cmd + 1));
 	if (!lst->pid)
 		return (print_perror());
 	return (RETURN_SUCCESS);
