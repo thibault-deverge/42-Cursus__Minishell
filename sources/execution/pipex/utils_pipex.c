@@ -2,6 +2,16 @@
 
 /*
  * @summary:
+ * 		- Free both matrices passed as parameter.
+*/
+void	free_matrices(char **matrix1, char **matrix2)
+{
+	free_matrix(matrix1);
+	free_matrix(matrix2);
+}
+
+/*
+ * @summary:
  * 		- Check if the command we are handling is the last one.
 */
 int	is_last_command(t_command *command)

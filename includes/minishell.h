@@ -195,6 +195,7 @@ void		close_files(t_command *command);
 void		close_pipes(int pipes[][2]);
 void		close_pipe(int *pipe);
 /*				utils							*/
+void		free_matrices(char **matrix1, char **matrix2);
 int			is_last_command(t_command *command);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
 void		exit_child(t_list *list_cmd, t_env *env, int is_perror);
@@ -221,7 +222,6 @@ void		free_env(t_variable *var);
 void		free_commands(t_command *command);
 void		free_tokens(t_token *token);
 void		free_matrix(char **matrice);
-void		free_matrices(char **matrix1, char **matrix2);
 /*					errors.c					*/
 void		throw_perror(int exit_value);
 int			print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_msg);
