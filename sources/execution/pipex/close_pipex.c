@@ -14,16 +14,6 @@ void	close_files(t_command *command)
 
 /*
  * @summary:
- * 		- Close both pipes at read and write exit.
-*/
-void	close_pipes(int pipes[][2])
-{
-	close_pipe(pipes[0]);
-	close_pipe(pipes[1]);
-}
-
-/*
- * @summary:
  * 		- Close pipe passed as parameter.
 */
 void	close_pipe(int *pipe)

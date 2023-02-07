@@ -14,7 +14,8 @@ t_list	*main_parsing(t_list *lst, char *cmd, t_env *env)
 	if (!parse_commands(lst, &parse))
 	{
 		free(cmd);
-		free_all(NULL, lst->first, (&parse)->token);
+		free_commands(lst->first);
+		free_tokens((&parse)->token);
 		return (RETURN_FAILURE);
 	}
 	free_tokens((&parse)->token);

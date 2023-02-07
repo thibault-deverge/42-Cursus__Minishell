@@ -13,18 +13,18 @@ static int	modify_var_content(t_env *env, char *name, char *content)
 
 	tmp_var = env->var;
 	if (!content)
-		return (-1);
+		return (RETURN_FAILURE);
 	while (tmp_var)
 	{
 		if (!ft_strcmp(tmp_var->name, name))
 		{
 			tmp_var->content = content;
-			return (0);
+			return (RETURN_SUCCESS);
 		}
 		tmp_var = tmp_var->next;
 	}
 	free(content);
-	return (0);
+	return (RETURN_SUCCESS);
 }
 
 /*
@@ -45,9 +45,9 @@ static int	cd_to_home(t_env *env)
 		return (print_error(ERROR_CD_FILE));
 	if (!getcwd(pwd, 1024))
 		return (print_perror());
-	if (modify_var_content(env, "PWD", ft_strdup(pwd)) == -1)
+	if (!modify_var_content(env, "PWD", ft_strdup(pwd)))
 		return (print_perror());
-	return (1);
+	return (RETURN_SUCCESS);
 }
 
 /*
