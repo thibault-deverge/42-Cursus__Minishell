@@ -217,7 +217,6 @@ char		*ft_sepjoin(const char *s1, const char *s2, char c);
 /*					HELPERS						*/
 /* *******************************************	*/
 /*					free.c						*/
-void		free_all(t_variable *var, t_command *cmd, t_token *tok);
 void		free_env(t_variable *var);
 void		free_commands(t_command *command);
 void		free_tokens(t_token *token);
