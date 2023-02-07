@@ -27,31 +27,6 @@ static void	throw_error_prompt(char *err_msg, char *prompt, t_env *env)
 	exit(EXIT_PROMPT);
 }
 
-int	is_whitespace(char c)
-{
-	if (c == ' ')
-		return (1);
-	if (c > 8 && c < 13)
-		return (1);
-	return (0);
-}
-
-static int	is_blank_prompt(char *command)
-{
-	int	i;
-
-	i = 0;
-	if (!command[i])
-		return (1);
-	while (command && command[i])
-	{
-		if (is_whitespace(command[i]))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 /*
  * @summary:
  * 		- Get current working directory and join it with '$'.
@@ -89,12 +64,6 @@ char	*get_input(t_env *env)
 	command = readline(prompt);
 	if (!command)
 		throw_error_prompt(ERROR_PROMPT, prompt, env);
-	while (is_blank_prompt(command))
-	{
-		command = readline(prompt);
-		if (!command)
-			throw_error_prompt(ERROR_PROMPT, prompt, env);
-	}
 	if (command[0])
 		add_history(command);
 	free(prompt);

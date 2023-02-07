@@ -12,6 +12,8 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		cmd = get_input(&env);
+		if (!cmd[0] || ft_is_whitespace(cmd[0]))
+			continue ;
 		if (!main_parsing(&lst, cmd, &env))
 			continue ;
 		if (!heredoc_manager(&lst))
