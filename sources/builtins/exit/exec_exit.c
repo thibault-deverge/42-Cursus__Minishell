@@ -38,7 +38,6 @@ static int	is_number(char *arg)
  * 		- If more than two arguments, print error and return 0 without freeing.
  * 		- If argument is valid, modulo argument by 256 and and exit 
  * 		with this status.
- *
 */
 int	exec_exit(t_command *command, t_env *env)
 {
@@ -60,11 +59,11 @@ int	exec_exit(t_command *command, t_env *env)
 		if (command->cmd[2])
 		{
 			print_error(ERROR_EXIT_ARG);
-			return (0);
+			return (RETURN_FAILURE);
 		}
 		exit_status = ft_atoi(command->cmd[1]);
 		free_exit(command, env);
 		exit(exit_status % 256);
 	}
-	return (0);
+	return (RETURN_FAILURE);
 }

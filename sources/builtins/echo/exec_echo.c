@@ -55,5 +55,5 @@ int	exec_echo(t_command *command, t_env *env)
 	}
 	if (!is_option)
 		ft_putchar_fd('\n', 1);
-	return (0);
+	return (RETURN_SUCCESS);
 }

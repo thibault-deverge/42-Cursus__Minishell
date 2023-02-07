@@ -2,21 +2,21 @@
 
 /*
  * @summary:
- * 		- Display error message passed as parameter on STDERR
- * 		and exit with integer passed as 'exit value'.
+ * 		- Display error message passed via errno variable
+ * 		and exit.
 */
 static void	throw_perror_prompt(t_env *env)
 {
 	perror("error");
 	free_env(env->var);
-	rl_clear_history();	
-	exit(1);
+	rl_clear_history();
+	exit(EXIT_PROMPT);
 }
 
 /*
  * @summary:
- * 		- Display error message passed as parameter on STDERR
- * 		and exit with integer passed as 'exit value'.
+ * 		- Display error message passed as parameter on STDERR,
+ * 		free environment and prompt, clear history and exit.
 */
 static void	throw_error_prompt(char *err_msg, char *prompt, t_env *env)
 {
@@ -24,7 +24,7 @@ static void	throw_error_prompt(char *err_msg, char *prompt, t_env *env)
 	free_env(env->var);
 	free(prompt);
 	rl_clear_history();
-	exit(1);
+	exit(EXIT_PROMPT);
 }
 
 /*
@@ -39,10 +39,10 @@ static char	*get_prompt(void)
 	char	*custom_prompt;
 
 	if (!getcwd(pwd_buf, PATH_SIZE))
-		return (NULL);
+		return (RETURN_FAILURE);
 	pwd_env = ft_strjoin(pwd_buf, "$ ");
 	if (!pwd_env)
-		return (NULL);
+		return (RETURN_FAILURE);
 	custom_prompt = ft_strjoin("DREAMTEAM:", pwd_env);
 	free(pwd_env);
 	return (custom_prompt);
@@ -59,7 +59,7 @@ char	*get_input(t_env *env)
 	char	*prompt;
 
 	prompt = get_prompt();
-	if (prompt == NULL)
+	if (prompt == RETURN_FAILURE)
 		throw_perror_prompt(env);
 	command = readline(prompt);
 	if (!command)

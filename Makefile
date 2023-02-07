@@ -33,21 +33,19 @@ SRCS =	./main.c \
 		./sources/builtins/cd/exec_cd.c \
 		./sources/builtins/exit/exec_exit.c \
 	    ./sources/execution/main_execution.c \
-		./sources/execution/builtins.c \
-		./sources/execution/convert_env.c \
+		./sources/execution/builtins/builtins.c \
+		./sources/execution/redirections/heredoc_manager.c \
+		./sources/execution/redirections/redi_manager.c \
 		./sources/execution/pipex/pipex.c \
-		./sources/execution/heredoc_manager.c \
-		./sources/execution/redi_manager.c \
-		./sources/execution/single_cmd.c \
+		./sources/execution/pipex/single_cmd.c \
 		./sources/execution/pipex/fork_pipex.c \
 		./sources/execution/pipex/close_pipex.c \
 		./sources/execution/pipex/utils_pipex.c \
     	./sources/utils/insert_matrix.c \
 		./sources/utils/ft_sepjoin.c \
-		./sources/helpers/display/print.c \
-		./sources/helpers/error/errors.c \
-		./sources/helpers/error/free.c \
-		./sources/helpers/test/print_cmd.c \
+		./sources/utils/convert_env.c \
+		./sources/helpers/errors.c \
+		./sources/helpers/free.c \
 
 OBJS	= $(SRCS:.c=.o)
 

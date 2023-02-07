@@ -1,16 +1,5 @@
 #include "minishell.h"
 
-
-int	choose_error(void)
-{
-	if (errno == 2)
-		print_error("Command not found\n");
-	else
-		print_error("No such file or directory\n");
-	return (1);
-}
-
-
 /*
  * @summary:
  * 		- Split the paths as parameter to have a matrix of paths.
@@ -79,7 +68,7 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 		exit_child(list_cmd, env, 0);
 	}
 	close(pipes[0][1]);
-	return (1);
+	return (RETURN_SUCCESS);
 }
 
 int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)

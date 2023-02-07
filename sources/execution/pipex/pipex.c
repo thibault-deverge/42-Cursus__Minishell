@@ -1,5 +1,10 @@
 #include "minishell.h"
 
+/*
+ * @summary:
+ * 		- Loop over the pid in the structure 'command' and
+ * 		wait for them to finish.
+*/
 static void	ft_waitpid(t_list *list_commands)
 {
 	int	i;
@@ -26,20 +31,20 @@ int	pipex(t_list *list_commands, t_env *env)
 	if (pipe(pipes[0]) == -1)
 		return (print_perror());
 	if (!first_cmd(list_commands, pipes, env))
-		return (0);
+		return (RETURN_FAILURE);
 	command = command->next;
 	while (command->next)
 	{
 		if (pipe(pipes[1]) == -1)
 			return (print_perror());
 		if (!middle_cmd(list_commands, command, pipes, env))
-			return (0);
+			return (RETURN_FAILURE);
 		pipes[0][0] = pipes[1][0];
 		pipes[0][1] = pipes[1][1];
 		command = command->next;
 	}
 	if (!last_cmd(list_commands, command, pipes, env))
-		return (0);
+		return (RETURN_FAILURE);
 	ft_waitpid(list_commands);
-	return (1);
+	return (RETURN_SUCCESS);
 }

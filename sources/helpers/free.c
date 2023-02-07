@@ -2,18 +2,6 @@
 
 /*
  * @summary:
- * 		- Free all linked lists by calling their respectives functions.
- * 		- Parameters needed are the head node of the list.
-*/
-void	free_all(t_variable *var, t_command *cmd, t_token *tok)
-{
-	free_env(var);
-	free_commands(cmd);
-	free_tokens(tok);
-}
-
-/*
- * @summary:
  * 		- Loop through the environment and free every variable with its content.
 */
 void	free_env(t_variable *var)
@@ -95,15 +83,4 @@ void	free_matrix(char **matrice)
 		i++;
 	}
 	free(matrice);
-}
-
-/*
- * @summary:
- * 		- Call free_matrix() and free both matrices passed
- * 		as parameter.
-*/
-void	free_matrices(char **matrix1, char **matrix2)
-{
-	free_matrix(matrix1);
-	free_matrix(matrix2);
 }
