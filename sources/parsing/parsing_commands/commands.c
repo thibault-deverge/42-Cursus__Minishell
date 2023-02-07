@@ -11,7 +11,10 @@ t_command	*initialize_command(void)
 
 	command = malloc(sizeof(t_command) * 1);
 	if (!command)
-		return (0);
+	{
+		perror("error");
+		return (NULL);
+	}
 	command->cmd = NULL;
 	command->redi = NULL;
 	command->next = NULL;
