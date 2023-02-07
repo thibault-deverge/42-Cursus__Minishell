@@ -47,7 +47,7 @@ int	exec_unset(t_command *command, t_env *env)
 	{
 		len_cmd = ft_strlen(command->cmd[i]);
 		if (!check_key_name(command->cmd[i], len_cmd, "unset"))
-			return (1);
+			return (RETURN_FAILURE);
 		var = get_variable(env, command->cmd[i], len_cmd);
 		if (var)
 		{
@@ -57,5 +57,5 @@ int	exec_unset(t_command *command, t_env *env)
 		}
 		i++;
 	}
-	return (0);
+	return (RETURN_SUCCESS);
 }
