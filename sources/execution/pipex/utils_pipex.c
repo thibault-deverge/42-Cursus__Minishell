@@ -60,7 +60,7 @@ int	make_dup_cmd(int pipes[][2], int idx_cmd)
 			close_pipe(pipes[1]);
 		}
 	}
-	return (1);
+	return (RETURN_SUCCESS);
 }
 
 /*
