@@ -35,6 +35,10 @@
 # define ERROR_OPEN_FD	"No such file or directory\n"
 # define ERROR_CMD_LOST "error: No such file or directory\n"
 # define ERROR_TEST		"error: command not found\n"
+# define ERROR_HEREDOC	" warning: here-document dilimited by end-of-file"
+
+# define RETURN_FAILURE	0
+# define RETURN_SUCCESS	1
 
 # define EXIT_PROMPT	1
 # define EXIT_ALLOC		2
@@ -225,6 +229,7 @@ void		free_matrices(char **matrix1, char **matrix2);
 /*					errors.c					*/
 void		throw_perror(int exit_value);
 int			print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_msg);
+int			print_perso_error(char *err_sub, char *err_msg);
 int			print_error(char *err_msg);
 int			print_perror(void);
 /*					display.c					*/

@@ -33,6 +33,14 @@ int	print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_ms
 	return (0);
 }
 
+int	print_perso_error(char *err_src, char *err_msg)
+{
+	ft_putstr_fd(err_src, 2);
+	ft_putstr_fd(": ", 2);
+	ft_putstr_fd(err_msg, 2);
+	return (RETURN_FAILURE);
+}
+
 /*
  * @summary:
  * 		- Use perror() system call to display and error with ERRNO'
