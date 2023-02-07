@@ -8,7 +8,7 @@
 int	print_error(char *err_msg)
 {
 	ft_putstr_fd(err_msg, 2);
-	return (0);
+	return (RETURN_FAILURE);
 }
 
 /*
@@ -30,7 +30,7 @@ int	print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_ms
 	}
 	ft_putstr_fd("\': ", 2);
 	ft_putstr_fd(err_msg, 2);
-	return (0);
+	return (RETURN_FAILURE);
 }
 
 /*
@@ -41,7 +41,7 @@ int	print_complete_error(char *err_src, char *err_sub, int len_sub, char *err_ms
 int	print_perror(void)
 {
 	perror("error");
-	return (0);
+	return (RETURN_FAILURE);
 }
 
 /*
