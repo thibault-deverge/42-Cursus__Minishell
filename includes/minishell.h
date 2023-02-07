@@ -122,7 +122,7 @@ typedef struct s_builtins
 /*					main_parsing				*/
 t_list		*main_parsing(t_list *lst, char *cmd, t_env *env);
 /*					prompt						*/
-char		*get_input(void);
+char		*get_input(t_env *env);
 /*					environment					*/
 void		get_env(t_env *env, char **envp);
 t_env		*add_variable(t_env *envp, char *str);

@@ -71,6 +71,8 @@ void	free_tokens(t_token *token)
 	{
 		token = token->next;
 		free(tmp->arg);
+		free(tmp);
+		tmp = NULL;
 		tmp = token;
 	}
 }

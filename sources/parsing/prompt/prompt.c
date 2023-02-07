@@ -5,21 +5,26 @@
  * 		- Display error message passed as parameter on STDERR
  * 		and exit with integer passed as 'exit value'.
 */
-static void	throw_error(char *err_msg, int exit_value)
+static void	throw_perror_prompt(t_env *env)
 {
-	ft_putstr_fd(err_msg, 2);
-	exit(exit_value);
+	perror("error");
+	free_env(env->var);
+	rl_clear_history();	
+	exit(1);
 }
 
 /*
  * @summary:
- * 		- Clear history of commands, free environment and throw an
- * 		error.
+ * 		- Display error message passed as parameter on STDERR
+ * 		and exit with integer passed as 'exit value'.
 */
-static void	exit_command_empty(void)
+static void	throw_error_prompt(char *err_msg, char *prompt, t_env *env)
 {
+	ft_putstr_fd(err_msg, 2);
+	free_env(env->var);
+	free(prompt);
 	rl_clear_history();
-	throw_error(ERROR_PROMPT, EXIT_PROMPT);
+	exit(1);
 }
 
 /*
@@ -48,17 +53,17 @@ static char	*get_prompt(void)
  * 		- Ask user to enter a prompt and return it.
  * 		- Return NULL if user enter EOF.
 */
-char	*get_input(void)
+char	*get_input(t_env *env)
 {
 	char	*command;
 	char	*prompt;
 
 	prompt = get_prompt();
 	if (prompt == NULL)
-		throw_perror(EXIT_ALLOC);
+		throw_perror_prompt(env);
 	command = readline(prompt);
 	if (!command)
-		exit_command_empty();
+		throw_error_prompt(ERROR_PROMPT, prompt, env);
 	if (command[0])
 		add_history(command);
 	free(prompt);
