@@ -15,13 +15,13 @@ int	print_perso_error(char *err_src, char *err_msg)
 {
 	ft_putstr_fd(err_src, 2);
 	ft_putstr_fd(": ", 2);
-	if (errno == ENOTDIR)
+	if (errno == EISDIR)
 	{
-		ft_putstr_fd("is a directory", 2);
-		return (127);
+		ft_putstr_fd("is a directory\n", 2);
+		return (126);
 	}
 	ft_putstr_fd(err_msg, 2);
-	return (126);
+	return (127);
 }
 
 /*

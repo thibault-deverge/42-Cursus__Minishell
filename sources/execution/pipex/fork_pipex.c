@@ -48,7 +48,9 @@ int	exec_command(char **command, char *paths, char **env)
 int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 {
 	char	*paths;
+	int		exit_value;
 
+	exit_value = 0;
 	list_cmd->pid[0] = fork();
 	if (list_cmd->pid[0] == -1)
 		return (print_perror());
@@ -56,13 +58,13 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 	{
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, FIRST_CMD))
-			exit_child(list_cmd, env, 1);
+			exit_child(list_cmd, env, 1, 1);
 		redi_manager(list_cmd->first);
 		close_files(list_cmd->first);
 		if (check_builtins(list_cmd->first, env) == 0)
-			exec_command(list_cmd->first->cmd, paths, env->envp);
+			exit_value = exec_command(list_cmd->first->cmd, paths, env->envp);
 		free(list_cmd->pid);
-		exit_child(list_cmd, env, 0);
+		exit_child(list_cmd, env, 0, exit_value);
 	}
 	close(pipes[0][1]);
 	return (RETURN_SUCCESS);
@@ -71,23 +73,25 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 {
 	char	*paths;
+	int		exit_value;
 
+	exit_value = 0;
 	lst->pid[cmd->index] = fork();
 	if (lst->pid[cmd->index] == -1)
 		return (print_perror());
 	if (lst->pid[cmd->index] == 0)
 	{
 		if (!cmd->cmd)
-			exit_child(lst, env, 0);
+			exit_child(lst, env, 0, 1);
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, LAST_CMD))
-			exit_child(lst, env, 1);
+			exit_child(lst, env, 1, 1);
 		redi_manager(cmd);
 		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
-			exec_command(cmd->cmd, paths, env->envp);
+			exit_value = exec_command(cmd->cmd, paths, env->envp);
 		free(lst->pid);
-		exit_child(lst, env, 0);
+		exit_child(lst, env, 0, exit_value);
 	}
 	close(pipes[0][0]);
 	return (lst->pid[cmd->index]);
@@ -96,7 +100,9 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 {
 	char	*paths;
+	int		exit_value;
 
+	exit_value = 0;
 	lst->pid[cmd->index] = fork();
 	if (lst->pid[cmd->index] == -1)
 		return (print_perror());
@@ -104,13 +110,13 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 	{
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, MIDDLE_CMD))
-			exit_child(lst, env, 1);
+			exit_child(lst, env, 1, 1);
 		redi_manager(cmd);
 		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
-			exec_command(cmd->cmd, paths, convert_env(env));
+			exit_value = exec_command(cmd->cmd, paths, convert_env(env));
 		free(lst->pid);
-		exit_child(lst, env, 0);
+		exit_child(lst, env, 0, exit_value);
 	}
 	close(pipes[0][0]);
 	close(pipes[1][1]);
