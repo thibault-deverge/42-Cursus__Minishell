@@ -18,13 +18,13 @@ static int	init_table_pid(t_list *lst)
 	return (RETURN_SUCCESS);
 }
 
-t_list	*main_execution(t_list *lst, t_env *env)
+int	main_execution(t_list *lst, t_env *env)
 {
 	int		fdin;
 	int		fdout;
 
 	if (!lst || !lst->first)
-		return (NULL);
+		return (RETURN_FAILURE);
 	else if (!lst->first->next)
 	{
 		fdin = dup(0);
@@ -36,9 +36,11 @@ t_list	*main_execution(t_list *lst, t_env *env)
 	}
 	else
 	{
-		init_table_pid(lst);
+		env->envp = convert_env(env);
+		if (!env->envp || !init_table_pid(lst))
+			return (print_perror());
 		pipex(lst, env);
 		free(lst->pid);
 	}
-	return (lst);
+	return (RETURN_SUCCESS);
 }

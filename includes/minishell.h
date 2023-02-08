@@ -84,6 +84,7 @@ typedef struct s_variable
 typedef struct s_env
 {
 	t_variable	*var;
+	char		**envp;
 }				t_env;
 
 /*linked list that contains the commands               */
@@ -188,7 +189,7 @@ int			exec_exit(t_command *command, t_env *env);
 /* *******************************************	*/
 /*					EXECUTION					*/
 /* *******************************************	*/
-t_list		*main_execution(t_list *lst, t_env *env);
+int			main_execution(t_list *lst, t_env *env);
 /*					builtins					*/
 int			check_builtins(t_command *command, t_env *env);
 /*				    redirections				*/
@@ -205,7 +206,7 @@ void		close_files(t_command *command);
 void		close_pipe(int *pipe);
 /*					utils						*/
 void		free_matrices(char **matrix1, char **matrix2);
-void		exit_child(t_list *list_cmd, t_env *env, char **envp, int perror);
+void		exit_child(t_list *list_cmd, t_env *env, int perror);
 int			is_last_command(t_command *command);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
 int			restore_fd(t_command *command, int fdin, int fdout);
@@ -214,7 +215,7 @@ char		*ft_joinpath(char const *s1, char const *s2);
 /* *******************************************	*/
 /*					EXECUTION					*/
 /* *******************************************	*/
-void	status_code(int status);
+void		status_code(int status);
 
 /* *******************************************	*/
 /*					UTILS						*/
