@@ -33,7 +33,7 @@ int	exec_command(char **command, char *paths, char **env)
 		i++;
 	}
 	free_matrix(paths_split);
-	exit (print_perso_error(command[0], ERROR_TEST));
+	return (print_perso_error(command[0], ERROR_TEST));
 }
 
 /*
@@ -47,7 +47,6 @@ int	exec_command(char **command, char *paths, char **env)
 */
 int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 {
-	char	**envp;
 	char	*paths;
 
 	list_cmd->pid[0] = fork();
@@ -56,17 +55,14 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 	if (list_cmd->pid[0] == 0)
 	{
 		paths = get_var_content(env, "PATH");
-		envp = convert_env(env);
-		if (!envp)
-			exit_child(list_cmd, env, NULL, 1);
 		if (!make_dup_cmd(pipes, FIRST_CMD))
-			exit_child(list_cmd, env, envp, 1);
+			exit_child(list_cmd, env, 1);
 		redi_manager(list_cmd->first);
 		close_files(list_cmd->first);
 		if (check_builtins(list_cmd->first, env) == 0)
-			exec_command(list_cmd->first->cmd, paths, envp);
+			exec_command(list_cmd->first->cmd, paths, env->envp);
 		free(list_cmd->pid);
-		exit_child(list_cmd, env, envp, 0);
+		exit_child(list_cmd, env, 0);
 	}
 	close(pipes[0][1]);
 	return (RETURN_SUCCESS);
@@ -74,7 +70,6 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 
 int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 {
-	char	**envp;
 	char	*paths;
 
 	lst->pid[cmd->index] = fork();
@@ -83,19 +78,16 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 	if (lst->pid[cmd->index] == 0)
 	{
 		if (!cmd->cmd)
-			exit_child(lst, env, NULL, 0);
+			exit_child(lst, env, 0);
 		paths = get_var_content(env, "PATH");
-		envp = convert_env(env);
-		if (!envp)
-			exit_child(lst, env, NULL, 1);
 		if (!make_dup_cmd(pipes, LAST_CMD))
-			exit_child(lst, env, envp, 1);
+			exit_child(lst, env, 1);
 		redi_manager(cmd);
 		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
-			exec_command(cmd->cmd, paths, envp);
+			exec_command(cmd->cmd, paths, env->envp);
 		free(lst->pid);
-		exit_child(lst, env, envp, 0);
+		exit_child(lst, env, 0);
 	}
 	close(pipes[0][0]);
 	return (lst->pid[cmd->index]);
@@ -103,7 +95,6 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 
 int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 {
-	char	**envp;
 	char	*paths;
 
 	lst->pid[cmd->index] = fork();
@@ -112,17 +103,14 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 	if (lst->pid[cmd->index] == 0)
 	{
 		paths = get_var_content(env, "PATH");
-		envp = convert_env(env);
-		if (!envp)
-			exit_child(lst, env, NULL, 1);
 		if (!make_dup_cmd(pipes, MIDDLE_CMD))
-			exit_child(lst, env, envp, 1);
+			exit_child(lst, env, 1);
 		redi_manager(cmd);
 		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
 			exec_command(cmd->cmd, paths, convert_env(env));
 		free(lst->pid);
-		exit_child(lst, env, envp, 0);
+		exit_child(lst, env, 0);
 	}
 	close(pipes[0][0]);
 	close(pipes[1][1]);

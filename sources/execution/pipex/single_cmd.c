@@ -17,7 +17,6 @@ int	restore_fd(t_command *command, int fdin, int fdout)
 
 int	single_cmd(t_list *lst, t_command *cmd, t_env *env)
 {
-	char		**envp;
 	char		*paths;
 	pid_t		pid;
 	int			status;
@@ -29,12 +28,12 @@ int	single_cmd(t_list *lst, t_command *cmd, t_env *env)
 		return (print_perror());
 	if (pid == 0)
 	{
-		envp = convert_env(env);
-		if (!envp)
-			exit_child(lst, env, NULL, 1);
+		env->envp = convert_env(env);
+		if (!env->envp)
+			exit_child(lst, env, 1);
 		paths = get_var_content(env, "PATH");
-		exec_command(cmd->cmd, paths, envp);
-		exit_child(lst, env, envp, 0);
+		exec_command(cmd->cmd, paths, env->envp);
+		exit_child(lst, env, 0);
 	}
 	waitpid(pid, &status, 0);
 	status_code(status);
