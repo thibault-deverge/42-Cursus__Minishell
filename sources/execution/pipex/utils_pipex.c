@@ -33,7 +33,7 @@ void	exit_child(t_list *list_cmd, t_env *env, char **envp, int is_perror)
 	free_env(env->var);
 	free_matrix(envp);
 	free_commands(list_cmd->first);
-	exit(EXIT_BUILTIN);
+	exit(0);
 }
 
 /*

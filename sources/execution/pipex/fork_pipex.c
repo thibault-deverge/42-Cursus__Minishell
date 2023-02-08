@@ -22,19 +22,18 @@ int	exec_command(char **command, char *paths, char **env)
 		if (!paths_split)
 			return (print_perror());
 	}
-	if (!access(command[0], F_OK))
+	if (!access(command[0], F_OK | X_OK))
 		execve(command[0], command, env);
 	while (paths_split && paths_split[i])
 	{
 		command_path = ft_joinpath(paths_split[i], command[0]);
-		if (!access(command_path, F_OK))
+		if (!access(command_path, F_OK | X_OK))
 			execve(command_path, command, env);
 		free(command_path);
 		i++;
 	}
 	free_matrix(paths_split);
-	print_perso_error(command[0], ERROR_TEST);
-	exit (127);
+	exit (print_perso_error(command[0], ERROR_TEST));
 }
 
 /*
@@ -83,6 +82,8 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		return (print_perror());
 	if (lst->pid[cmd->index] == 0)
 	{
+		if (!cmd->cmd)
+			exit_child(lst, env, NULL, 0);
 		paths = get_var_content(env, "PATH");
 		envp = convert_env(env);
 		if (!envp)

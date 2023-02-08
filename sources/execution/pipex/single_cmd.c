@@ -22,6 +22,8 @@ int	single_cmd(t_list *lst, t_command *cmd, t_env *env)
 	pid_t		pid;
 	int 	status;
 
+	if (!lst->first->cmd)
+		return (0);
 	pid = fork();
 	if (pid == -1)
 		return (print_perror());

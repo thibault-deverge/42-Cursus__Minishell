@@ -12,7 +12,7 @@ int	add_new_content(t_variable *var, char *value)
 {
 	if (!var->content)
 	{
-		if (set_new_content(var, value))
+		if (!set_new_content(var, value))
 			return (print_perror());
 	}
 	else
