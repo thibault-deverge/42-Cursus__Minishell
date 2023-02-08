@@ -46,7 +46,7 @@ int	exec_exit(t_command *command, t_env *env)
 	if (!command->cmd[1])
 	{
 		free_exit(command, env);
-		exit(1);
+		exit(g_value);
 	}
 	else
 	{

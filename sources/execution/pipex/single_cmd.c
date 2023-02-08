@@ -20,7 +20,7 @@ int	single_cmd(t_list *lst, t_command *cmd, t_env *env)
 	char		**envp;
 	char		*paths;
 	pid_t		pid;
-	int 	status;
+	int			status;
 
 	if (!lst->first->cmd)
 		return (0);

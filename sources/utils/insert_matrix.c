@@ -44,6 +44,5 @@ char	**insert_matrix(char **matrice, char *str)
 	new_matrice[i] = 0;
 	if (matrice)
 		free(matrice);
-	matrice = new_matrice;
 	return (new_matrice);
 }

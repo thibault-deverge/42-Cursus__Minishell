@@ -1,5 +1,31 @@
 #include "minishell.h"
 
+int	is_invalid_file(int rule)
+{
+	if (rule == REDI || rule == SPACEBAR || rule == PIPE)
+		return (1);
+	return (0);
+}
+
+static char	*assemble_files(t_token *token, int *next_token)
+{
+	char	*redi_join;
+
+	redi_join = NULL;
+	while (token && !is_invalid_file(token->rule))
+	{
+		redi_join = ft_strjoin_safe(redi_join, token->arg);
+		if (!redi_join)
+		{
+			print_perror();
+			return (NULL);
+		}
+		*next_token += 1;
+		token = token->next;
+	}
+	return (redi_join);
+}
+
 /*
  * @summary:
  * 		- Search the next file which follow the redirection found earlier
@@ -10,19 +36,22 @@
 */
 static int	insert_file_to_redi(t_command *command, t_token *token)
 {
-	int	next_token;
+	char	*redi_join;
+	int		next_token;
 
 	next_token = 1;
+	redi_join = NULL;
 	while (token)
 	{
-		if (token->rule == REDI)
+		if (token->rule == REDI || token->rule == PIPE)
 			return (0);
 		if (token->rule == SPACEBAR)
 			next_token++;
 		else
 		{
-			next_token++;
-			command->redi = insert_matrix(command->redi, token->arg);
+			redi_join = assemble_files(token, &next_token);
+			command->redi = insert_matrix(command->redi, redi_join);
+			free(redi_join);
 			return (next_token);
 		}
 		token = token->next;
