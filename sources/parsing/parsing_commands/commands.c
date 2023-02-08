@@ -31,23 +31,19 @@ t_command	*initialize_command(void)
 int	handle_command(t_command *command, t_token *token)
 {
 	t_token	*token_tmp;
-	char	*command_tmp;
 	char	*command_join;
 	int		i;
 
 	i = 1;
 	token_tmp = token->next;
-	if (token->rule == SPACEBAR)
+	if (token->rule == SPACEBAR || token->rule == PIPE)
 		return (1);
-	command_tmp = ft_strdup(token->arg);
-	command_join = command_tmp;
+	command_join = ft_strdup(token->arg);
+	if (!command_join)
+		return (print_perror());
 	while (is_command(token_tmp))
 	{
-		if (!command_tmp || !command_join)
-			return (print_perror());
-		command_join = ft_strjoin(command_tmp, token_tmp->arg);
-		free(command_tmp);
-		command_tmp = command_join;
+		command_join = ft_strjoin_safe(command_join, token_tmp->arg);
 		token_tmp = token_tmp->next;
 		i++;
 	}
