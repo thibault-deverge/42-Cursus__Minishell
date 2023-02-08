@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	g_value = 0;
+unsigned char	g_value = 0;
 
 int	main(int argc, char **argv, char **envp)
 {

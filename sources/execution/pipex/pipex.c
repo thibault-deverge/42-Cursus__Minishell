@@ -8,13 +8,15 @@
 static void	ft_waitpid(t_list *list_commands)
 {
 	int	i;
+	int	status;
 
 	i = 0;
 	while (i < list_commands->nb_cmd)
 	{
-		waitpid(list_commands->pid[i], NULL, 0);
+		waitpid(list_commands->pid[i], &status, 0);
 		i++;
 	}
+	status_code(status);
 }
 
 /*

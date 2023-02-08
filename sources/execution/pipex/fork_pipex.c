@@ -33,7 +33,8 @@ int	exec_command(char **command, char *paths, char **env)
 		i++;
 	}
 	free_matrix(paths_split);
-	return (print_error(ERROR_TEST));
+	print_perso_error(command[0], ERROR_TEST);
+	exit (127);
 }
 
 /*

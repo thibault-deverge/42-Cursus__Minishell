@@ -13,18 +13,20 @@ static int	store_str(t_command *command, char *str)
 {
 	if (command->fds[0] != NO_FILE)
 		close(command->fds[0]);
-	if (!str)
-		return (1);
-	if (!pipe(command->fds) && write(command->fds[1], str, ft_strlen(str)) <= 0)
+	if (pipe(command->fds))
+	{
+		if (str)
+			free(str);
+		return (RETURN_FAILURE);
+	}
+	if (str && write(command->fds[1], str, ft_strlen(str)) <= 0)
 	{
 		free(str);
-		str = NULL;
 		return (RETURN_FAILURE);
 	}
 	close (command->fds[1]);
 	command->fds[1] = NO_FILE;
 	free(str);
-	str = NULL;
 	return (RETURN_SUCCESS);
 }
 
@@ -69,8 +71,11 @@ int	heredoc_manager(t_list *lst)
 		command->fds[1] = NO_FILE;
 		while (command->redi && command->redi[i])
 		{
-			if (ft_strcmp(command->redi[i], "<<") == 0 && !set_heredoc(command, i))
-				return (RETURN_FAILURE);
+			if (ft_strcmp(command->redi[i], "<<") == 0)
+			{
+				if (!set_heredoc(command, i))
+					return (RETURN_FAILURE);
+			}
 			else if (ft_strcmp(command->redi[i], "<") == 0 && command->fds[0] != NO_FILE)
 			{
 				close(command->fds[0]);

@@ -34,7 +34,7 @@
 # define ERROR_EXIT_NUM "exit\nexit: numeric argument required\n"
 # define ERROR_OPEN_FD	"No such file or directory\n"
 # define ERROR_CMD_LOST "error: No such file or directory\n"
-# define ERROR_TEST		"error: command not found\n"
+# define ERROR_TEST		"command not found\n"
 # define ERROR_HEREDOC	" warning: here-document dilimited by end-of-file"
 
 # define RETURN_FAILURE	0
@@ -69,7 +69,7 @@
 /*                       STRUCTURES                    */
 /*******************************************************/
 
-extern int	g_value;
+extern unsigned char	g_value;
 
 /*linked list that contains the env                    */
 /*the index corresponds to the ascii order             */
@@ -210,6 +210,11 @@ int			is_last_command(t_command *command);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
 int			restore_fd(t_command *command, int fdin, int fdout);
 char		*ft_joinpath(char const *s1, char const *s2);
+
+/* *******************************************	*/
+/*					EXECUTION					*/
+/* *******************************************	*/
+void	status_code(int status);
 
 /* *******************************************	*/
 /*					UTILS						*/

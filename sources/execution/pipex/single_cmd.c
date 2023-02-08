@@ -17,9 +17,10 @@ int	restore_fd(t_command *command, int fdin, int fdout)
 
 int	single_cmd(t_list *lst, t_command *cmd, t_env *env)
 {
-	char	**envp;
-	char	*paths;
-	pid_t	pid;
+	char		**envp;
+	char		*paths;
+	pid_t		pid;
+	int 	status;
 
 	pid = fork();
 	if (pid == -1)
@@ -33,6 +34,7 @@ int	single_cmd(t_list *lst, t_command *cmd, t_env *env)
 		exec_command(cmd->cmd, paths, envp);
 		exit_child(lst, env, envp, 0);
 	}
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status, 0);
+	status_code(status);
 	return (0);
 }

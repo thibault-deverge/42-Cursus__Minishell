@@ -32,7 +32,7 @@ t_parse	*pre_parse(t_parse *parse, char *cmd, t_env *env)
 		if (check_arg(cmd[len]) != 0)
 		{
 			len = manage_arg(&cmd[start], parse, len - start, env);
-			if (!len)
+			if (len < 0)
 				return (NULL);
 			len += start;
 			start = len;
