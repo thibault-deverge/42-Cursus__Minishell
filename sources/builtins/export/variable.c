@@ -51,13 +51,15 @@ int	manage_variable(char *new_var, t_env *env)
 	else if (new_var[key_len - 1] == '+')
 	{
 		var_env = manage_key(new_var, key_len - 1, env);
-		if (var_env && !add_new_content(var_env, &new_var[key_len + 1]))
+		if (!var_env || !add_new_content(var_env, &new_var[key_len + 1]))
 			return (RETURN_FAILURE);
 	}
 	else
 	{
 		var_env = manage_key(new_var, key_len, env);
-		if (var_env && !set_new_content(var_env, &new_var[key_len + 1]))
+		if (!var_env)
+			return (RETURN_FAILURE);
+		else if (!set_new_content(var_env, &new_var[key_len + 1]))
 			return (print_perror());
 	}
 	return (RETURN_SUCCESS);

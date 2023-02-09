@@ -20,7 +20,7 @@ static size_t	is_whitespace(char c)
 
 int	ft_atoi(const char *nptr)
 {
-	long int		sum;
+	int		sum;
 	size_t			is_neg;
 	size_t			i;
 

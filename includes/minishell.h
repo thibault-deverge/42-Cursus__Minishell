@@ -28,10 +28,11 @@
 # define INVALID_KEY	"not a valid identifier\n"
 # define ERROR_ENV		"env: too many arguments\n"
 # define ERROR_CD_ARG	"cd: too many arguments\n"
-# define ERROR_CD_FILE  "cd: no such file or directory\n"
+# define ERROR_CD_FILE  "cd: No such file or directory\n"
 # define ERROR_CD_HOME  "cd: home directory can't be found\n"
-# define ERROR_EXIT_ARG "exit\nexit: too many arguments\n"
-# define ERROR_EXIT_NUM "exit\nexit: numeric argument required\n"
+# define ERROR_EXIT	"exit\nexit: "
+# define ERROR_EXIT_ARG " too many arguments\n"
+# define ERROR_EXIT_NUM " numeric argument required\n"
 # define ERROR_OPEN_FD	"No such file or directory\n"
 # define ERROR_CMD_LOST "error: No such file or directory\n"
 # define ERROR_TEST		"command not found\n"
@@ -206,6 +207,7 @@ int			single_cmd(t_list *lst, t_command *cmd, t_env *env);
 void		close_files(t_command *command);
 void		close_pipe(int *pipe);
 /*					utils						*/
+long long	ft_atoll(const char *nptr, int *limits);
 void		free_matrices(char **matrix1, char **matrix2);
 void		exit_child(t_list *list_cmd, t_env *env, int perror, int exit_value);
 int			is_last_command(t_command *command);

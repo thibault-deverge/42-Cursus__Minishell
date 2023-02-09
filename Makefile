@@ -45,6 +45,7 @@ SRCS =	./main.c \
     	./sources/utils/insert_matrix.c \
 		./sources/utils/ft_sepjoin.c \
 		./sources/utils/convert_env.c \
+		./sources/utils/ft_atoll.c \
 		./sources/helpers/errors.c \
 		./sources/helpers/free.c \
 

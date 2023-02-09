@@ -25,7 +25,10 @@ int	check_builtins(t_command *command, t_env *env)
 		if (command->cmd && ft_strcmp(command->cmd[0], builtins[i].name) == 0)
 		{
 			if (!builtins[i].f(command, env))
+			{
+				g_value = 1;
 				return (-1);
+			}
 			g_value = 0;
 			return (1);
 		}
