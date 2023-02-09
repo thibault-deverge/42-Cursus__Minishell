@@ -34,6 +34,7 @@ int	print_perso_error(char *err_src, char *err_msg)
 int	print_perror(void)
 {
 	perror("error");
+	g_value = 1;
 	return (RETURN_FAILURE);
 }
 
