@@ -11,6 +11,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argc;
 	(void)argv;
 	get_env(&env, envp);
+	env.envp = NULL;
 	while (1)
 	{
 		cmd = get_input(&env);
