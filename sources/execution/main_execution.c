@@ -41,6 +41,7 @@ int	main_execution(t_list *lst, t_env *env)
 			return (print_perror());
 		pipex(lst, env);
 		free(lst->pid);
+		free_matrix(env->envp);
 	}
 	return (RETURN_SUCCESS);
 }
