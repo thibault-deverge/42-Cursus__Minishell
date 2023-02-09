@@ -135,6 +135,7 @@ typedef struct s_builtins
 t_list		*main_parsing(t_list *lst, char *cmd, t_env *env);
 /*					prompt						*/
 char		*get_input(t_env *env);
+int			is_empty_cmd(char *cmd);
 /*					environment					*/
 t_variable	*set_var_content(t_variable *var, char *str);
 t_variable	*get_variable(t_env *env, char *var_name, int len);

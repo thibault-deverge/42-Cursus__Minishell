@@ -1,5 +1,17 @@
 #include "minishell.h"
 
+int	is_empty_cmd(char *cmd)
+{
+	size_t	i;
+
+	i = 0;
+	while (cmd && cmd[i] && ft_is_whitespace(cmd[i]))
+		i++;
+	if (ft_strlen(cmd) == i)
+		return (1);
+	return (0);
+}
+
 /*
  * @summary:
  * 		- Display error message passed via errno variable

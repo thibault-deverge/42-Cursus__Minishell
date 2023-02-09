@@ -13,9 +13,11 @@ int	print_error(char *err_msg)
 
 int	print_perso_error(char *err_src, char *err_msg)
 {
+	struct stat	buf;
+
 	ft_putstr_fd(err_src, 2);
 	ft_putstr_fd(": ", 2);
-	if (errno == EISDIR)
+	if (!lstat(err_src, &buf))
 	{
 		ft_putstr_fd("is a directory\n", 2);
 		return (126);

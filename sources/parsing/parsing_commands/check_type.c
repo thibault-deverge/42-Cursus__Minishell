@@ -10,6 +10,7 @@ int	is_empty_command(t_command *command)
 	if (!command->cmd && !command->redi)
 	{
 		print_error(ERROR_SYNTAX);
+		g_value = 2;
 		return (0);
 	}
 	return (1);

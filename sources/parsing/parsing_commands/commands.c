@@ -13,6 +13,7 @@ t_command	*initialize_command(void)
 	if (!command)
 	{
 		perror("error");
+		g_value = 1;
 		return (NULL);
 	}
 	command->cmd = NULL;

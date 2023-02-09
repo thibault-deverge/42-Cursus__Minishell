@@ -110,7 +110,10 @@ int	handle_redirection(t_command *command, t_token *token)
 	if (token->arg[i] == '<' || token->arg[i] == '>')
 		i++;
 	if (is_redirection_invalid(token->arg[i]))
+	{
+		g_value = 2;
 		return (print_error(ERROR_SYNTAX));
+	}
 	nb_redi_inserted = insert_redirection(command, token, i);
 	if (!nb_redi_inserted)
 		return (0);
@@ -118,6 +121,9 @@ int	handle_redirection(t_command *command, t_token *token)
 		return (1);
 	nb_next_token = insert_file_to_redi(command, token->next);
 	if (!nb_next_token)
+	{
+		g_value = 2;
 		return (print_error(ERROR_SYNTAX));
+	}
 	return (nb_next_token);
 }
