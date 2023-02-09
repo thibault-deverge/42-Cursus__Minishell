@@ -32,7 +32,7 @@ static void	throw_perror_prompt(t_env *env)
 */
 static void	throw_error_prompt(char *err_msg, char *prompt, t_env *env)
 {
-	ft_putstr_fd(err_msg, 2);
+	ft_putstr_fd(err_msg, 1);
 	free_env(env->var);
 	free(prompt);
 	rl_clear_history();

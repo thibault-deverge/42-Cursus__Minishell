@@ -33,3 +33,19 @@ int	check_builtins(t_command *command, t_env *env)
 	}
 	return (0);
 }
+
+int	is_builtin(t_command *command)
+{
+	const t_builtins	*builtins;
+	int					i;
+
+	builtins = get_builtins();
+	i = 0;
+	while (i < 7)
+	{
+		if (command->cmd && ft_strcmp(command->cmd[0], builtins[i].name) == 0)
+			return (1);
+		i++;
+	}
+	return (0);
+}

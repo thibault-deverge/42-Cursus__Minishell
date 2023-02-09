@@ -127,7 +127,6 @@ typedef struct s_builtins
 	int		(*f)(t_command *command, t_env *env);
 }			t_builtins;
 
-
 /* *******************************************	*/
 /*					PARSING						*/
 /* *******************************************	*/
@@ -193,6 +192,7 @@ int			exec_exit(t_command *command, t_env *env);
 int			main_execution(t_list *lst, t_env *env);
 /*					builtins					*/
 int			check_builtins(t_command *command, t_env *env);
+int			is_builtin(t_command *command);
 /*				    redirections				*/
 void		redi_manager(t_command *command);
 int			heredoc_manager(t_list *lst);
@@ -210,7 +210,6 @@ void		free_matrices(char **matrix1, char **matrix2);
 void		exit_child(t_list *list_cmd, t_env *env, int perror, int exit_value);
 int			is_last_command(t_command *command);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
-int			restore_fd(t_command *command, int fdin, int fdout);
 char		*ft_joinpath(char const *s1, char const *s2);
 
 /* *******************************************	*/
