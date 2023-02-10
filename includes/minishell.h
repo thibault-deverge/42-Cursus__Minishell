@@ -12,6 +12,8 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
+# include <termios.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
@@ -215,9 +217,10 @@ int			make_dup_cmd(int pipes[][2], int idx_cmd);
 char		*ft_joinpath(char const *s1, char const *s2);
 
 /* *******************************************	*/
-/*					EXECUTION					*/
+/*					SIGNAL						*/
 /* *******************************************	*/
 void		status_code(int status);
+void		sig_handler(int sig_id);
 
 /* *******************************************	*/
 /*					UTILS						*/

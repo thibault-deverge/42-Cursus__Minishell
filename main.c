@@ -10,6 +10,8 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
+	signal(SIGINT, &sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 	get_env(&env, envp);
 	env.envp = NULL;
 	while (1)
