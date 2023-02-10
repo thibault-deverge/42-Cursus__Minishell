@@ -37,6 +37,7 @@
 # define ERROR_TEST		"command not found\n"
 # define ERROR_HEREDOC	" warning: here-document dilimited by end-of-file"
 # define ERROR_DIR		"Is a directory\n"
+# define ERROR_PERM		"Permission denied\n"
 
 # define RETURN_FAILURE	0
 # define RETURN_SUCCESS	1

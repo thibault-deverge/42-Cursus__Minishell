@@ -42,7 +42,7 @@ int	handle_command(t_command *command, t_token *token)
 	command_join = ft_strdup(token->arg);
 	if (!command_join)
 		return (print_perror());
-	while (is_command(token_tmp))
+	while (token_tmp && token_tmp->rule == COMMAND)
 	{
 		command_join = ft_strjoin_safe(command_join, token_tmp->arg);
 		token_tmp = token_tmp->next;

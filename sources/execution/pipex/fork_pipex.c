@@ -1,5 +1,19 @@
 #include "minishell.h"
 
+static int	is_absolute_path(char **command, char **env, char **paths_split)
+{
+	if (!access(command[0], F_OK | X_OK))
+	{
+		if (execve(command[0], command, env))
+		{
+			free_matrix(paths_split);
+			return (RETURN_FAILURE);
+		}
+		return (RETURN_SUCCESS);
+	}
+	return (RETURN_SUCCESS);
+}
+
 /*
  * @summary:
  * 		- Split the paths as parameter to have a matrix of paths.
@@ -22,8 +36,8 @@ int	exec_command(char **command, char *paths, char **env)
 		if (!paths_split)
 			return (print_perror());
 	}
-	if (!access(command[0], F_OK | X_OK))
-		execve(command[0], command, env);
+	if (!is_absolute_path(command, env, paths_split))
+		return (print_perso_error(command[0], ERROR_TEST));
 	while (paths_split && paths_split[i])
 	{
 		command_path = ft_joinpath(paths_split[i], command[0]);

@@ -14,7 +14,6 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 		if (!parse)
 			return (print_perror() - 1);
 		return (i);
-
 	}
 	while (arg[i] && check_arg(arg[i]) == 0)
 		i++;

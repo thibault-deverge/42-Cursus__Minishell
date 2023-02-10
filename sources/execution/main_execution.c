@@ -50,7 +50,7 @@ int	main_execution(t_list *lst, t_env *env)
 	{
 		fdout = -1;
 		fdin = -1;
-		if (is_builtin(lst->first))
+		if (is_builtin(lst->first) && lst->first->redi)
 		{
 			fdout = dup(1);
 			fdin = dup(0);

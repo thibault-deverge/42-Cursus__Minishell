@@ -7,7 +7,7 @@ static void	print_redi_error(char *err_src, char *err_msg)
 	ft_putstr_fd(err_src, 2);
 	ft_putstr_fd(": ", 2);
 	if (!lstat(err_src, &buf))
-		ft_putstr_fd("Permission denied\n", 2);
+		ft_putstr_fd(ERROR_PERM, 2);
 	else
 		ft_putstr_fd(err_msg, 2);
 }
