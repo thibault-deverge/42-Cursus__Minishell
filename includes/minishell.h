@@ -12,6 +12,8 @@
 # include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <signal.h>
+# include <termios.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
@@ -55,6 +57,10 @@
 # define REDI			1
 # define SPACEBAR		2
 # define PIPE			3
+
+# define PROMPT_SIGNAL	0
+# define CMD_SIGNAL		1
+# define FORK_SIGNAL	2
 
 # define FIRST_CMD		1
 # define MIDDLE_CMD		2
@@ -216,9 +222,10 @@ int			make_dup_cmd(int pipes[][2], int idx_cmd);
 char		*ft_joinpath(char const *s1, char const *s2);
 
 /* *******************************************	*/
-/*					EXECUTION					*/
+/*					SIGNAL						*/
 /* *******************************************	*/
 void		status_code(int status);
+void		modify_signals(int behavior);
 
 /* *******************************************	*/
 /*					UTILS						*/

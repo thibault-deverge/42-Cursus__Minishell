@@ -70,6 +70,7 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 		return (print_perror());
 	if (list_cmd->pid[0] == 0)
 	{
+		modify_signals(FORK_SIGNAL);
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, FIRST_CMD))
 			exit_child(list_cmd, env, 1, 1);
@@ -96,6 +97,7 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		return (print_perror());
 	if (lst->pid[cmd->index] == 0)
 	{
+		modify_signals(FORK_SIGNAL);
 		if (!cmd->cmd)
 			exit_child(lst, env, 0, 1);
 		paths = get_var_content(env, "PATH");
@@ -124,6 +126,7 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		return (print_perror());
 	if (lst->pid[cmd->index] == 0)
 	{
+		modify_signals(FORK_SIGNAL);
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, MIDDLE_CMD))
 			exit_child(lst, env, 1, 1);
