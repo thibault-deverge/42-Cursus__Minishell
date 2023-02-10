@@ -22,13 +22,13 @@ static int	restore_fd(t_command *command, int fdout, int fdin)
 {
 	if (fdout > 0)
 	{
-		if	(!dup2(fdout, 1))
+		if (!dup2(fdout, 1))
 			return (1);
 		close(fdout);
 	}
 	if (fdin > 0)
 	{
-		if	(!dup2(fdin, 0))
+		if (!dup2(fdin, 0))
 			return (1);
 		close(fdin);
 	}
@@ -44,6 +44,7 @@ int	main_execution(t_list *lst, t_env *env)
 	int	fdout;
 	int	fdin;
 
+	modify_signals(CMD_SIGNAL);
 	if (!lst || !lst->first)
 		return (RETURN_FAILURE);
 	else if (!lst->first->next)
