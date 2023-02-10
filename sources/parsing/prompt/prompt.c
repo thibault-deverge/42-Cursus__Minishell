@@ -22,7 +22,8 @@ static void	throw_perror_prompt(t_env *env)
 	perror("error");
 	free_env(env->var);
 	rl_clear_history();
-	exit(EXIT_PROMPT);
+	g_value = 1;
+	exit(g_value);
 }
 
 /*
@@ -36,7 +37,7 @@ static void	throw_error_prompt(char *err_msg, char *prompt, t_env *env)
 	free_env(env->var);
 	free(prompt);
 	rl_clear_history();
-	exit(EXIT_PROMPT);
+	exit(g_value);
 }
 
 /*

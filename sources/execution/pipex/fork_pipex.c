@@ -59,7 +59,8 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, FIRST_CMD))
 			exit_child(list_cmd, env, 1, 1);
-		redi_manager(list_cmd->first);
+		if (!redi_manager(list_cmd->first))
+			exit_child(list_cmd, env, 0, 1);
 		close_files(list_cmd->first);
 		if (check_builtins(list_cmd->first, env) == 0)
 			exit_value = exec_command(list_cmd->first->cmd, paths, env->envp);
@@ -86,7 +87,8 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, LAST_CMD))
 			exit_child(lst, env, 1, 1);
-		redi_manager(cmd);
+		if (!redi_manager(cmd))
+			exit_child(lst, env, 0, 1);
 		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
 			exit_value = exec_command(cmd->cmd, paths, env->envp);
@@ -111,7 +113,8 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 		paths = get_var_content(env, "PATH");
 		if (!make_dup_cmd(pipes, MIDDLE_CMD))
 			exit_child(lst, env, 1, 1);
-		redi_manager(cmd);
+		if (!redi_manager(cmd))
+			exit_child(lst, env, 0, 1);
 		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
 			exit_value = exec_command(cmd->cmd, paths, convert_env(env));

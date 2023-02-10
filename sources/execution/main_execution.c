@@ -18,13 +18,19 @@ static int	init_table_pid(t_list *lst)
 	return (RETURN_SUCCESS);
 }
 
-static int	restore_fd(t_command *command, int fdout)
+static int	restore_fd(t_command *command, int fdout, int fdin)
 {
 	if (fdout > 0)
 	{
 		if	(!dup2(fdout, 1))
 			return (1);
 		close(fdout);
+	}
+	if (fdin > 0)
+	{
+		if	(!dup2(fdin, 0))
+			return (1);
+		close(fdin);
 	}
 	if (command->fds[0] != NO_FILE)
 		close(command->fds[0]);
@@ -36,18 +42,24 @@ static int	restore_fd(t_command *command, int fdout)
 int	main_execution(t_list *lst, t_env *env)
 {
 	int	fdout;
+	int	fdin;
 
 	if (!lst || !lst->first)
 		return (RETURN_FAILURE);
 	else if (!lst->first->next)
 	{
 		fdout = -1;
+		fdin = -1;
 		if (is_builtin(lst->first))
+		{
 			fdout = dup(1);
-		redi_manager(lst->first);
+			fdin = dup(0);
+			if (!redi_manager(lst->first))
+				return (RETURN_FAILURE);
+		}
 		if (!check_builtins(lst->first, env))
 			single_cmd(lst, lst->first, env);
-		restore_fd(lst->first, fdout);
+		restore_fd(lst->first, fdout, fdin);
 	}
 	else
 	{

@@ -30,13 +30,13 @@
 # define ERROR_CD_ARG	"cd: too many arguments\n"
 # define ERROR_CD_FILE  "cd: No such file or directory\n"
 # define ERROR_CD_HOME  "cd: home directory can't be found\n"
-# define ERROR_EXIT	"exit\nexit: "
 # define ERROR_EXIT_ARG " too many arguments\n"
 # define ERROR_EXIT_NUM " numeric argument required\n"
 # define ERROR_OPEN_FD	"No such file or directory\n"
 # define ERROR_CMD_LOST "error: No such file or directory\n"
 # define ERROR_TEST		"command not found\n"
 # define ERROR_HEREDOC	" warning: here-document dilimited by end-of-file"
+# define ERROR_DIR		"Is a directory\n"
 
 # define RETURN_FAILURE	0
 # define RETURN_SUCCESS	1
@@ -195,7 +195,7 @@ int			main_execution(t_list *lst, t_env *env);
 int			check_builtins(t_command *command, t_env *env);
 int			is_builtin(t_command *command);
 /*				    redirections				*/
-void		redi_manager(t_command *command);
+int			redi_manager(t_command *command);
 int			heredoc_manager(t_list *lst);
 /*					pipex						*/
 int			pipex(t_list *list_commands, t_env *env);

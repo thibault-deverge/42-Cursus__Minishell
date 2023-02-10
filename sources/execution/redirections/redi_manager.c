@@ -1,5 +1,17 @@
 #include "minishell.h"
 
+static void	print_redi_error(char *err_src, char *err_msg)
+{
+	struct stat	buf;
+
+	ft_putstr_fd(err_src, 2);
+	ft_putstr_fd(": ", 2);
+	if (!lstat(err_src, &buf))
+		ft_putstr_fd("Permission denied\n", 2);
+	else
+		ft_putstr_fd(err_msg, 2);
+}
+
 static void	update_dup(t_command *command, int fdin, int fdout)
 {
 	if (fdout != NO_FILE)
@@ -38,11 +50,14 @@ static int	open_file(char *file, int old_fd, int status)
 	else if (status == ADD_OUT)
 		new_fd = open(file, O_WRONLY | O_APPEND | O_CREAT, 0644);
 	if (new_fd < 0)
-		print_error(ERROR_OPEN_FD);
+	{
+		print_redi_error(file, ERROR_OPEN_FD);
+		return (-2);
+	}
 	return (new_fd);
 }
 
-void	redi_manager(t_command *command)
+int	redi_manager(t_command *command)
 {
 	int	i;
 	int	fdin;
@@ -59,7 +74,13 @@ void	redi_manager(t_command *command)
 			fdout = open_file(command->redi[i + 1], fdout, OUT);
 		else if (ft_strcmp(command->redi[i], ">>") == 0)
 			fdout = open_file(command->redi[i + 1], fdout, ADD_OUT);
+		if (fdin == -2 || fdout == -2)
+		{
+			g_value = 1;
+			return (RETURN_FAILURE);
+		}
 		i += 2;
 	}
 	update_dup(command, fdin, fdout);
+	return (RETURN_SUCCESS);
 }

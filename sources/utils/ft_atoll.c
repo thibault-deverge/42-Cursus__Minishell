@@ -8,18 +8,18 @@ static size_t	is_whitespace(char c)
 	return (0);
 }
 
-static int	add_safe(int a, int b, int *limits)
+/*static int	add_safe(int a, int b, int *limits)
 {
-	if (a > INT_MAX - b)
+	if (a > LLONG_MAX - b)
 		*limits = 1;
 	return (a + b);
-}
+}*/
 
 long long	ft_atoll(const char *nptr, int *limits)
 {
-	long long		sum;
-	size_t			is_neg;
-	size_t			i;
+	unsigned long long		sum;
+	size_t					is_neg;
+	size_t					i;
 
 	i = 0;
 	sum = 0;
@@ -34,11 +34,13 @@ long long	ft_atoll(const char *nptr, int *limits)
 	}
 	while (ft_isdigit(nptr[i]))
 	{
-		sum = add_safe((sum * 10), (nptr[i] - '0'), limits);
-		if (*limits)
-			return (0);
+		sum = (sum * 10) + (nptr[i] - '0');
+		//if (*limits)
+		//	return (0);
 		i++;
 	}
+	if ((is_neg && sum > 9223372036854775808ULL) || (!is_neg && sum > LLONG_MAX))
+		*limits = 1;
 	if (is_neg)
 		return ((sum * -1) % 256);
 	return (sum % 256);
