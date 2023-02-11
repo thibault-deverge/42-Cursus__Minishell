@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int	print_heredoc_error(char *error, int stdin_dup)
+static int	print_heredoc_error(char *error, t_command *command, int stdin_dup)
 {
 	int	check_stdin;
 
@@ -17,7 +17,9 @@ static int	print_heredoc_error(char *error, int stdin_dup)
 		ft_putstr_fd(" (wanted \'", 2);
 		ft_putstr_fd(error, 2);
 		ft_putstr_fd("\')\n", 2);
+
 	}
+	free_commands(command);
 	return (RETURN_FAILURE);
 }
 
@@ -50,7 +52,7 @@ static int	set_heredoc(t_command *command, int index, int stdin_dup)
 	content = NULL;
 	new_line = readline("heredoc>");
 	if (!new_line)
-		return (print_heredoc_error(command->redi[index + 1], stdin_dup));
+		return (print_heredoc_error(command->redi[index + 1], command, stdin_dup));
 	while (ft_strcmp(new_line, command->redi[index + 1]) != 0)
 	{
 		content = ft_strjoin_safe(content, new_line);
@@ -62,7 +64,7 @@ static int	set_heredoc(t_command *command, int index, int stdin_dup)
 		{
 			free(content);
 			content = NULL;
-			return (print_heredoc_error(command->redi[index + 1], stdin_dup));
+			return (print_heredoc_error(command->redi[index + 1], command, stdin_dup));
 		}
 	}
 	if (!store_str(command, content))
