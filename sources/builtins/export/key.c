@@ -38,7 +38,7 @@ t_variable	*manage_key(char *new_var, int key_len, t_env *env)
 {
 	t_variable	*var_env;
 
-	var_env = get_variable(env, new_var, key_len - 1);
+	var_env = get_variable(env, new_var, key_len);
 	if (var_env && ft_strcmp(var_env->name, "_") == 0)
 	{
 		g_value = 0;

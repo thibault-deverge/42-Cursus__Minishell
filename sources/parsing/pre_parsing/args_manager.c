@@ -15,7 +15,7 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 			return (print_perror() - 1);
 		return (i);
 	}
-	while (arg[i] && check_arg(arg[i]) == 0)
+	while (arg[i] && ft_isalnum(arg[i]))
 		i++;
 	if (i > 1)
 		add_content = get_value_of_key(&arg[1], i - 1, env);
@@ -34,7 +34,7 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
  * @summary:
  *		- 
 */
-static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env)
+static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env, int len)
 {
 	int	i;
 	int	start;
@@ -54,14 +54,15 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env)
 			i++;
 	}
 	if (!arg[i])
-		return (-2);
+		return (-2 - len);
+	else if (i == 1)
+		add_new_token("\0", 0, 1, parse);
 	add_new_token(arg, start, i, parse);
-	if (i != start)
-		define_rule_arg(parse, COMMAND);
+	define_rule_arg(parse, COMMAND);
 	return (i);
 }
 
-static int	manage_simple_quotes(char *arg, t_parse *parse)
+static int	manage_simple_quotes(char *arg, t_parse *parse, int len)
 {
 	int	i;
 
@@ -69,10 +70,11 @@ static int	manage_simple_quotes(char *arg, t_parse *parse)
 	while (arg[i] && arg[i] != '\'')
 		i++;
 	if (!arg[i])
-		return (-2);
+		return (-2 - len);
 	add_new_token(arg, 1, i, parse);
-	if (i != 1)
-		define_rule_arg(parse, COMMAND);
+	if (i == 1)
+		add_new_token("\0", 0, 1, parse);
+	define_rule_arg(parse, COMMAND);
 	return (i);
 }
 
@@ -102,9 +104,9 @@ int	manage_arg(char *cmd, t_parse *parse, int len, t_env *env)
 {
 	add_new_token(cmd, 0, len, parse);
 	if (cmd[len] == '\'')
-		len += manage_simple_quotes(&cmd[len], parse);
+		len += manage_simple_quotes(&cmd[len], parse, len);
 	else if (cmd[len] == '"')
-		len += manage_double_quotes(&cmd[len], parse, env);
+		len += manage_double_quotes(&cmd[len], parse, env, len);
 	else if (ft_is_whitespace(cmd[len]))
 	{
 		add_new_token(" ", 0, 1, parse);

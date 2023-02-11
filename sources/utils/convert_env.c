@@ -28,11 +28,14 @@ char	**convert_env(t_env	*env)
 	tmp = env->var;
 	while (tmp)
 	{
-		envp[i] = ft_sepjoin(tmp->name, tmp->content, '=');
-		if (!envp[i])
+		if (tmp->content)
 		{
-			free_matrix(envp);
-			return (NULL);
+			envp[i] = ft_sepjoin(tmp->name, tmp->content, '=');
+			if (!envp[i])
+			{
+				free_matrix(envp);
+				return (NULL);
+			}
 		}
 		tmp = tmp->next;
 		i++;
