@@ -35,6 +35,7 @@ SRCS =	./main.c \
 	    ./sources/execution/main_execution.c \
 		./sources/execution/builtins/builtins.c \
 		./sources/execution/redirections/heredoc_manager.c \
+		./sources/execution/redirections/heredoc_signal.c \
 		./sources/execution/redirections/redi_manager.c \
 		./sources/execution/pipex/pipex.c \
 		./sources/execution/pipex/single_cmd.c \
@@ -42,6 +43,7 @@ SRCS =	./main.c \
 		./sources/execution/pipex/close_pipex.c \
 		./sources/execution/pipex/utils_pipex.c \
 		./sources/signal/signal.c \
+		./sources/signal/status.c \
     	./sources/utils/insert_matrix.c \
 		./sources/utils/ft_sepjoin.c \
 		./sources/utils/convert_env.c \

@@ -61,6 +61,7 @@
 # define PROMPT_SIGNAL	0
 # define CMD_SIGNAL		1
 # define FORK_SIGNAL	2
+# define HEREDOC_SIGNAL 3
 
 # define FIRST_CMD		1
 # define MIDDLE_CMD		2
@@ -204,6 +205,7 @@ int			is_builtin(t_command *command);
 /*				    redirections				*/
 int			redi_manager(t_command *command);
 int			heredoc_manager(t_list *lst);
+int			set_signal_heredoc(void);
 /*					pipex						*/
 int			pipex(t_list *list_commands, t_env *env);
 int			exec_command(char **command, char *paths, char **env);

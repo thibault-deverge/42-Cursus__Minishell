@@ -1,5 +1,9 @@
 #include "minishell.h"
 
+/*
+ * @summary:
+ * 		- Handle SIGINT by sending a new prompt to the user.
+*/
 static void	sigint_handler_prompt(int sig_id)
 {
 	(void)sig_id;
@@ -8,19 +12,47 @@ static void	sigint_handler_prompt(int sig_id)
 	rl_redisplay();
 }
 
+/*
+ * summary:
+ * 		- Handle SIGINT by sending a new prompt in a blocking command
+ * 		like 'cat'.
+*/
 static void	sigint_handler_cmd(int sig_id)
 {
 	(void)sig_id;
 	ft_putchar_fd('\n', 1);
-	return ;
 }
 
+/*
+ * @summary:
+ * 		- Handle SIGINT in heredoc by closing stdin and redisplay a new
+ * 		prompt.
+*/
+static void	sigint_handler_heredoc(int sig_id)
+{
+	(void)sig_id;
+	close(0);
+	ft_putchar_fd('\n', 1);
+	rl_redisplay();
+}
+
+/*
+ * @summary:
+ *		- Handle SIGKILL by sending a message and displaying a new prompt
+ *		in a blocking command like 'cat'.
+*/
 static void	sigkill_handler_cmd(int sig_id)
 {
 	(void)sig_id;
 	ft_putstr_fd("Quit (core dumped)\n", 1);
 }
 
+/*
+ * @summary:
+ * 		- Main function to handle signals. It will change
+ * 		the behavior of SIGINT and SIGQUIT depend where signal 
+ * 		is received in the program.
+*/
 void	modify_signals(int behavior)
 {
 	if (behavior == PROMPT_SIGNAL)
@@ -36,14 +68,12 @@ void	modify_signals(int behavior)
 	else if (behavior == FORK_SIGNAL)
 	{
 		signal(SIGINT, SIG_DFL);
-		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
+	}
+	else if (behavior == HEREDOC_SIGNAL)
+	{
+		signal(SIGINT, &sigint_handler_heredoc);
+		signal(SIGQUIT, SIG_IGN);
 	}
 }
 
-void	status_code(int status)
-{
-	if (WIFEXITED(status))
-		g_value = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-		g_value = WTERMSIG(status);
-}
