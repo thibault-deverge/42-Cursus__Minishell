@@ -16,7 +16,7 @@ int	main(int argc, char **argv, char **envp)
 	{
 		modify_signals(PROMPT_SIGNAL);
 		cmd = get_input(&env);
-		if (is_empty_cmd(cmd))
+		if (is_empty_input(cmd))
 			continue ;
 		if (!main_parsing(&lst, cmd, &env))
 			continue ;

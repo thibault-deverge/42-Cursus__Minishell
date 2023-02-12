@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 19:41:08 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/12 19:57:40 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,11 @@
 # define PROTOTYPE_MINISHELL_H
 
 /* ********************************************	*/
-/*					ENVIRONMENT					*/
-/* ********************************************	*/
-/*			main								*/
-void		get_environment(t_env *env, char **envp);
-t_env		*add_variable(t_env *envp, char *str);
-
-/* ********************************************	*/
 /*					PROMPT & SIGNALS			*/
 /* ********************************************	*/
 /*			prompt								*/
 char		*get_input(t_env *env);
-int			is_empty_cmd(char *cmd);
+int			is_empty_input(char *cmd);
 /*			signals								*/
 void		status_code(int status);
 void		modify_signals(int behavior);
@@ -35,6 +28,9 @@ void		modify_signals(int behavior);
 /* ********************************************	*/
 /*			main parsing function				*/
 t_list		*main_parsing(t_list *lst, char *cmd, t_env *env);
+/*			get environment						*/
+void		get_environment(t_env *env, char **envp);
+t_env		*add_variable(t_env *envp, char *str);
 /*			pre_parsing (tokens)				*/
 t_parse		*pre_parse(t_parse *parse, char *cmd, t_env *env);
 t_parse		*add_new_token(char *arg, int start, int len, t_parse *parse);

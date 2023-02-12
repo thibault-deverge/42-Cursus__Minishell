@@ -53,7 +53,7 @@ static char	*get_prompt(void)
  * @summary:
  * 		- Check if command is empty or only contains whitespaces.
 */
-int	is_empty_cmd(char *cmd)
+int	is_empty_input(char *cmd)
 {
 	size_t	i;
 
