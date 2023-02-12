@@ -1,5 +1,58 @@
 #include "minishell.h"
 
+/*
+ * @summary:
+ * 		- Display error message passed via errno variable, free environment, clear
+ * 		history and exit with the value of global variable.
+*/
+static void	throw_perror_prompt(t_env *env)
+{
+	perror("error");
+	free_env(env->var);
+	rl_clear_history();
+	g_value = 1;
+	exit(g_value);
+}
+
+/*
+ * @summary:
+ * 		- Display error message passed as parameter, free prompt and clear
+ * 		history then exit with the value of global variable.
+*/
+static void	throw_error_prompt(char *err_msg, char *prompt, t_env *env)
+{
+	ft_putstr_fd(err_msg, 1);
+	free_env(env->var);
+	free(prompt);
+	rl_clear_history();
+	exit(g_value);
+}
+
+/*
+ * @summary:
+ * 		- Join name of our team with the working directory and use it
+ * 		as a prompt.
+*/
+static char	*get_prompt(void)
+{
+	char	*pwd;
+	char	pwd_buf[1024];
+	char	*custom_prompt;
+
+	if (!getcwd(pwd_buf, PATH_SIZE))
+		return (RETURN_FAILURE);
+	pwd = ft_strjoin(pwd_buf, "$ ");
+	if (!pwd)
+		return (RETURN_FAILURE);
+	custom_prompt = ft_strjoin("DREAMTEAM:", pwd);
+	free(pwd);
+	return (custom_prompt);
+}
+
+/*
+ * @summary:
+ * 		- Check if command is empty or only contains whitespaces.
+*/
 int	is_empty_cmd(char *cmd)
 {
 	size_t	i;
@@ -14,57 +67,8 @@ int	is_empty_cmd(char *cmd)
 
 /*
  * @summary:
- * 		- Display error message passed via errno variable
- * 		and exit.
-*/
-static void	throw_perror_prompt(t_env *env)
-{
-	perror("error");
-	free_env(env->var);
-	rl_clear_history();
-	g_value = 1;
-	exit(g_value);
-}
-
-/*
- * @summary:
- * 		- Display error message passed as parameter on STDERR,
- * 		free environment and prompt, clear history and exit.
-*/
-static void	throw_error_prompt(char *err_msg, char *prompt, t_env *env)
-{
-	ft_putstr_fd(err_msg, 1);
-	free_env(env->var);
-	free(prompt);
-	rl_clear_history();
-	exit(g_value);
-}
-
-/*
- * @summary:
- * 		- Get current working directory and join it with '$'.
- * 		- Join with team's in a way to have a prompt : DREAMTEAM:PWD$
-*/
-static char	*get_prompt(void)
-{
-	char	*pwd_env;
-	char	pwd_buf[1024];
-	char	*custom_prompt;
-
-	if (!getcwd(pwd_buf, PATH_SIZE))
-		return (RETURN_FAILURE);
-	pwd_env = ft_strjoin(pwd_buf, "$ ");
-	if (!pwd_env)
-		return (RETURN_FAILURE);
-	custom_prompt = ft_strjoin("DREAMTEAM:", pwd_env);
-	free(pwd_env);
-	return (custom_prompt);
-}
-
-/*
- * @summary:
- * 		- Ask user to enter a prompt and return it.
- * 		- Return NULL if user enter EOF.
+ * 		- Display prompt to user and ask for an input. Check for empty
+ * 		input and add to history if command exists.
 */
 char	*get_input(t_env *env)
 {
