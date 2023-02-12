@@ -33,7 +33,7 @@ t_variable	*add_new_variable(char *var, int len, t_env *env)
 	if (!new->name)
 		return (NULL);
 	new->content = NULL;
-	init_ascii_index(env);
+	set_ascii_index(env);
 	return (new);
 }
 

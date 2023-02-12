@@ -48,7 +48,7 @@ int	exec_unset(t_command *command, t_env *env)
 		len_cmd = ft_strlen(command->cmd[i]);
 		if (!check_key_name(command->cmd[i], len_cmd, "unset"))
 			return (RETURN_FAILURE);
-		var = get_variable(env, command->cmd[i], len_cmd);
+		var = get_environment_node(env, command->cmd[i], len_cmd);
 		if (var)
 		{
 			index = var->index;

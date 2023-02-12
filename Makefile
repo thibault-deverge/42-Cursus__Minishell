@@ -13,8 +13,7 @@ INCDIR	= includes
 SRCS =	./main.c \
 		./sources/parsing/main_parsing.c \
 		./sources/parsing/prompt/prompt.c \
-		./sources/parsing/environment/init_env.c \
-		./sources/parsing/environment/environment.c \
+		./sources/parsing/environment/get_environment.c \
 		./sources/parsing/pre_parsing/pre_parsing.c \
 		./sources/parsing/pre_parsing/args_manager.c \
 		./sources/parsing/pre_parsing/pre_parsing_utils.c \
@@ -46,7 +45,9 @@ SRCS =	./main.c \
 		./sources/signal/status.c \
     	./sources/utils/insert_matrix.c \
 		./sources/utils/ft_sepjoin.c \
-		./sources/utils/convert_env.c \
+		./sources/utils/environment/convert_environment.c \
+		./sources/utils/environment/ascii.c \
+		./sources/utils/environment/getter.c \
 		./sources/utils/ft_atoll.c \
 		./sources/helpers/errors.c \
 		./sources/helpers/free.c \

@@ -10,7 +10,7 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	get_env(&env, envp);
+	get_environment(&env, envp);
 	env.envp = NULL;
 	while (1)
 	{

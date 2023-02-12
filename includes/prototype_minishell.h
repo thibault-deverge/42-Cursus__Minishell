@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 18:52:15 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/12 19:41:08 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,8 @@
 /*					ENVIRONMENT					*/
 /* ********************************************	*/
 /*			main								*/
-void		get_env(t_env *env, char **envp);
-/*			data-manipulation					*/
-t_variable	*set_var_content(t_variable *var, char *str);
-t_variable	*get_variable(t_env *env, char *var_name, int len);
+void		get_environment(t_env *env, char **envp);
 t_env		*add_variable(t_env *envp, char *str);
-t_env		*insert_var_node(t_env *env, char *str);
-char		*get_var_content(t_env *env, char *var_name);
-/*			utils								*/
-void		init_ascii_index(t_env *envp);
 
 /* ********************************************	*/
 /*					PROMPT & SIGNALS			*/
@@ -112,9 +105,14 @@ void		close_pipe(int *pipe);
 /* ********************************************	*/
 /*					UTILS						*/
 /* ********************************************	*/
+/*			environment							*/
+void		set_ascii_index(t_env *env);
+char		**convert_env(t_env *env);
+char		*get_environment_content(t_env *env, char *var_name);
+t_variable	*get_environment_node(t_env *env, char *var_name, int len);
+/*			general								*/
 char		**insert_matrix(char **matrice, char *str);
 char		*ft_sepjoin(const char *s1, const char *s2, char c);
-char		**convert_env(t_env *env);
 
 /* ********************************************	*/
 /*					HELPERS						*/

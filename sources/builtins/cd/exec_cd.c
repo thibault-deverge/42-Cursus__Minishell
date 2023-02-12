@@ -38,7 +38,7 @@ static int	cd_to_home(t_env *env)
 	char	pwd[1024];
 	char	*home;
 
-	home = get_var_content(env, "HOME");
+	home = get_environment_content(env, "HOME");
 	if (!home)
 		return (print_error(ERROR_CD_HOME));
 	if (chdir(home) == -1)

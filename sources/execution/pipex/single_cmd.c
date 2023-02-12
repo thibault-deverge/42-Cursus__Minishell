@@ -19,7 +19,7 @@ int	single_cmd(t_list *lst, t_command *cmd, t_env *env)
 		env->envp = convert_env(env);
 		if (!env->envp)
 			exit_child(lst, env, 1, 1);
-		paths = get_var_content(env, "PATH");
+		paths = get_environment_content(env, "PATH");
 		exit_value = exec_command(cmd->cmd, paths, env->envp);
 		exit_child(lst, env, 0, exit_value);
 	}
