@@ -20,16 +20,14 @@ SRCS =	./main.c \
 		./sources/parsing/parsing_commands/parse_commands.c \
 		./sources/parsing/parsing_commands/redirections.c \
 		./sources/parsing/parsing_commands/utils.c \
-		./sources/builtins/echo/exec_echo.c \
-		./sources/builtins/pwd/exec_pwd.c \
-		./sources/builtins/export/export.c \
-		./sources/builtins/export/variable.c \
-		./sources/builtins/export/key.c \
-		./sources/builtins/export/value.c \
+		./sources/builtins/echo/echo.c \
+		./sources/builtins/pwd/pwd.c \
 		./sources/builtins/env/env.c \
 		./sources/builtins/unset/unset.c \
-		./sources/builtins/cd/exec_cd.c \
-		./sources/builtins/exit/exec_exit.c \
+		./sources/builtins/cd/cd.c \
+		./sources/builtins/exit/exit.c \
+		./sources/builtins/export/export.c \
+		./sources/builtins/export/key.c \
 	    ./sources/execution/main_execution.c \
 		./sources/execution/builtins/builtins.c \
 		./sources/execution/redirections/heredoc_manager.c \
@@ -45,6 +43,8 @@ SRCS =	./main.c \
     	./sources/utils/insert_matrix.c \
 		./sources/utils/ft_sepjoin.c \
 		./sources/utils/environment/convert_environment.c \
+		./sources/utils/environment/add_variable.c \
+		./sources/utils/environment/modify_content.c \
 		./sources/utils/environment/ascii.c \
 		./sources/utils/environment/getter.c \
 		./sources/utils/command/initialize_command.c \

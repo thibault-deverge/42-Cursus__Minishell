@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exec_echo.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 21:42:59 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/12 21:43:01 by tdeverge         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*
@@ -6,7 +18,7 @@
  * 		- Also valid with x number of 'n' after the '-' while
  * 		there is no other characters than these ones.
 */
-int	check_option_echo(char *flag)
+static int	check_option_echo(char *flag)
 {
 	int	i;
 
@@ -24,7 +36,6 @@ int	check_option_echo(char *flag)
 
 /*
  * @summary:
- * 		- Reproduce behavior of command 'echo' and its flag '-n'
  * 		- Loop through first args to check if the option '-n' was passed
  * 		and don't print if it a valid flag.
  * 		- Print the other args with a space characher in between.

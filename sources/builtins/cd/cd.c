@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cd.c                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 21:43:10 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/12 23:48:52 by tdeverge         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*
@@ -7,7 +19,7 @@
  *		- Check if content exists because it is allocated dynamically
  *		with ft_strdup() when the function is called.
 */
-static int	modify_var_content(t_env *env, char *name, char *content)
+static int	modify_environment_node(t_env *env, char *name, char *content)
 {
 	t_variable	*tmp_var;
 
@@ -45,7 +57,7 @@ static int	cd_to_home(t_env *env)
 		return (print_error(ERROR_CD_FILE));
 	if (!getcwd(pwd, 1024))
 		return (print_perror());
-	if (!modify_var_content(env, "PWD", ft_strdup(pwd)))
+	if (!modify_environment_node(env, "PWD", ft_strdup(pwd)))
 		return (print_perror());
 	return (RETURN_SUCCESS);
 }
@@ -65,7 +77,7 @@ int	exec_cd(t_command *command, t_env *env)
 
 	if (!getcwd(old_pwd, 1024))
 		return (print_perror());
-	if (modify_var_content(env, "OLDPWD", ft_strdup(old_pwd)) == -1)
+	if (modify_environment_node(env, "OLDPWD", ft_strdup(old_pwd)) == -1)
 		return (print_perror());
 	if (!command->cmd[1])
 		return (cd_to_home(env));
@@ -77,7 +89,7 @@ int	exec_cd(t_command *command, t_env *env)
 			return (print_error(ERROR_CD_FILE));
 		if (!getcwd(pwd, 1024))
 			return (print_perror());
-		if (modify_var_content(env, "PWD", ft_strdup(pwd)) == -1)
+		if (modify_environment_node(env, "PWD", ft_strdup(pwd)) == -1)
 			return (print_perror());
 	}
 	return (1);

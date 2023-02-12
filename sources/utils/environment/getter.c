@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:38:47 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 19:38:55 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/12 23:35:32 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,20 @@ t_variable	*get_environment_node(t_env *env, char *var_name, int len)
 		tmp = tmp->next;
 	}
 	return (NULL);
+}
+
+/*
+ * @summary:
+ * 		- Loop throught environment linked list and return the last node.
+*/
+t_variable	*get_last_var(t_env *env)
+{
+	t_variable	*tmp;
+
+	if (!env->var)
+		return (NULL);
+	tmp = env->var;
+	while (tmp && tmp->next)
+		tmp = tmp->next;
+	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 21:35:36 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 00:28:01 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,7 @@ int			exec_exit(t_command *command, t_env *env);
 int			exec_pwd(t_command *command, t_env *env);
 int			exec_unset(t_command *command, t_env *env);
 /*			utils								*/
-t_variable	*manage_key(char *new_var, int key_len, t_env *env);
-t_variable	*add_new_variable(char *var, int len, t_env *env);
-t_variable	*get_last_var(t_env *env);
-char		*set_new_content(t_variable *var, char *value);
 int			export_error(char *src, char *sub, int len, char *err_msg);
-int			get_key_len(char *var);
-int			add_new_content(t_variable *var, char *value);
 int			manage_variable(char *new_var, t_env *env);
 int			check_key_name(char *key, int len, char *built);
 
@@ -100,10 +94,14 @@ void		close_pipe(int *pipe);
 /*					UTILS						*/
 /* ********************************************	*/
 /*			environment							*/
-void		set_ascii_index(t_env *env);
-char		**convert_env(t_env *env);
-char		*get_environment_content(t_env *env, char *var_name);
+t_variable	*add_new_variable(char *name, int len, t_env *env);
 t_variable	*get_environment_node(t_env *env, char *var_name, int len);
+t_variable	*get_last_var(t_env *env);
+char		*get_environment_content(t_env *env, char *var_name);
+char		**convert_env(t_env *env);
+char		*set_new_content(t_variable *var, char *value);
+void		set_ascii_index(t_env *env);
+int			add_new_content(t_variable *var, char *value);
 /*			command								*/
 t_command	*initialize_command(void);
 int			is_empty_command(t_command *command);
@@ -115,6 +113,7 @@ char		*ft_sepjoin(const char *s1, const char *s2, char c);
 /*					HELPERS						*/
 /* ********************************************	*/
 /*			free structures						*/
+void		free_main_lists(t_command *command, t_env *env);
 void		free_env(t_variable *var);
 void		free_commands(t_command *command);
 void		free_tokens(t_token *token);

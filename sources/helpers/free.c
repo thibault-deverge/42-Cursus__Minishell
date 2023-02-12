@@ -2,6 +2,17 @@
 
 /*
  * @summary:
+ * 		- Free linked list which contains environment and linked list
+ * 		which contains commands and redirections.
+*/
+void	free_main_lists(t_command *command, t_env *env)
+{	
+	free_env(env->var);
+	free_commands(command);
+}
+
+/*
+ * @summary:
  * 		- Loop through the environment and free every variable with its content.
 */
 void	free_env(t_variable *var)

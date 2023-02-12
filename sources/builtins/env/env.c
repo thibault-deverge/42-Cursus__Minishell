@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 21:53:34 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/12 21:53:36 by tdeverge         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*
@@ -25,7 +37,7 @@ static void	print_env(t_env *env)
 int	exec_env(t_command *command, t_env *env)
 {
 	if (command->cmd[1])
-		return(print_error(ERROR_ENV));
+		return (print_error(ERROR_ENV));
 	else
 		print_env(env);
 	return (RETURN_SUCCESS);
