@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_commands.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 21:29:37 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/12 21:29:39 by tdeverge         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 /*
@@ -18,6 +30,37 @@ static t_token	*traverse_next_token(t_token *token, int next_token)
 		i++;
 	}
 	return (tmp_token);
+}
+
+/*
+ * @summary:
+ * 		- Iterate through the linked list 'token' and assemble all the
+ * 		consecutive commands in one string then return it.
+ * 		- Use to check if multiple commands are consecutives and need to
+ * 		be concatenated in one string.
+*/
+static int	handle_command(t_command *command, t_token *token)
+{
+	t_token	*token_tmp;
+	char	*command_join;
+	int		i;
+
+	i = 1;
+	token_tmp = token->next;
+	if (token->rule == SPACEBAR || token->rule == PIPE)
+		return (1);
+	command_join = ft_strdup(token->arg);
+	if (!command_join)
+		return (print_perror());
+	while (token_tmp && token_tmp->rule == COMMAND)
+	{
+		command_join = ft_strjoin_safe(command_join, token_tmp->arg);
+		token_tmp = token_tmp->next;
+		i++;
+	}
+	command->cmd = insert_matrix(command->cmd, command_join);
+	free(command_join);
+	return (i);
 }
 
 /*

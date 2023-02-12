@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 20:52:40 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:35:36 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,8 @@ int			manage_argument(char *cmd, t_parse *parse, int len, t_env *env);
 int			check_argument(char c);
 /*			parse_command						*/
 t_list		*parse_commands(t_list *list_commands, t_parse *list_tokens);
-t_command	*initialize_command(void);
 int			handle_redirection(t_command *command, t_token *token);
-int			handle_command(t_command *command, t_token *token);
-int			is_empty_command(t_command *command);
+int			is_invalid_file(int rule);
 int			is_redirection_invalid(char c);
 int			is_command(t_token *token);
 
@@ -106,6 +104,9 @@ void		set_ascii_index(t_env *env);
 char		**convert_env(t_env *env);
 char		*get_environment_content(t_env *env, char *var_name);
 t_variable	*get_environment_node(t_env *env, char *var_name, int len);
+/*			command								*/
+t_command	*initialize_command(void);
+int			is_empty_command(t_command *command);
 /*			general								*/
 char		**insert_matrix(char **matrice, char *str);
 char		*ft_sepjoin(const char *s1, const char *s2, char c);

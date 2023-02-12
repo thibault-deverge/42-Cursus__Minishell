@@ -1,12 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirections.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 21:12:42 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/12 21:29:07 by tdeverge         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int	is_invalid_file(int rule)
-{
-	if (rule == REDI || rule == SPACEBAR || rule == PIPE)
-		return (1);
-	return (0);
-}
-
+/*
+ * @summary:
+ * 		- Loop throught token and join them together while file is valid.
+*/
 static char	*assemble_files(t_token *token, int *next_token)
 {
 	char	*redi_join;

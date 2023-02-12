@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:49:39 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 20:57:48 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/12 21:34:09 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 {
 	int		i;
-	char	*add_content;
+	char	*content;
 
 	i = 1;
-	add_content = NULL;
+	content = NULL;
 	if (arg[i] == '?')
 	{
-		add_content = ft_itoa(g_value);
-		parse = add_new_token(add_content, 0, ft_strlen(add_content), parse);
+		parse = add_new_token(ft_itoa(g_value), 0, ft_strlen(content), parse);
 		if (!parse)
 			return (print_perror() - 1);
 		return (i);
@@ -30,9 +29,9 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 	while (arg[i] && ft_isalnum(arg[i]))
 		i++;
 	if (i > 1)
-		add_content = get_value_of_key(&arg[1], i - 1, env);
-	if (add_content)
-		parse = add_new_token(add_content, 0, ft_strlen(add_content), parse);
+		content = get_value_of_key(&arg[1], i - 1, env);
+	if (content)
+		parse = add_new_token(content, 0, ft_strlen(content), parse);
 	else if (i == 1)
 		parse = add_new_token(arg, 0, 1, parse);
 	else if (!ft_isalpha(arg[1]))

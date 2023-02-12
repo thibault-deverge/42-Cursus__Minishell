@@ -16,11 +16,10 @@ SRCS =	./main.c \
 		./sources/parsing/environment/get_environment.c \
 		./sources/parsing/pre_parsing/pre_parsing.c \
 		./sources/parsing/pre_parsing/argument_manager.c \
-		./sources/parsing/pre_parsing/token_utils.c \
+		./sources/parsing/pre_parsing/utils.c \
 		./sources/parsing/parsing_commands/parse_commands.c \
-		./sources/parsing/parsing_commands/check_type.c \
-		./sources/parsing/parsing_commands/commands.c \
 		./sources/parsing/parsing_commands/redirections.c \
+		./sources/parsing/parsing_commands/utils.c \
 		./sources/builtins/echo/exec_echo.c \
 		./sources/builtins/pwd/exec_pwd.c \
 		./sources/builtins/export/export.c \
@@ -48,6 +47,7 @@ SRCS =	./main.c \
 		./sources/utils/environment/convert_environment.c \
 		./sources/utils/environment/ascii.c \
 		./sources/utils/environment/getter.c \
+		./sources/utils/command/initialize_command.c \
 		./sources/utils/ft_atoll.c \
 		./sources/helpers/errors.c \
 		./sources/helpers/free.c \
