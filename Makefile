@@ -15,8 +15,8 @@ SRCS =	./main.c \
 		./sources/parsing/prompt/prompt.c \
 		./sources/parsing/environment/get_environment.c \
 		./sources/parsing/pre_parsing/pre_parsing.c \
-		./sources/parsing/pre_parsing/args_manager.c \
-		./sources/parsing/pre_parsing/pre_parsing_utils.c \
+		./sources/parsing/pre_parsing/argument_manager.c \
+		./sources/parsing/pre_parsing/token_utils.c \
 		./sources/parsing/parsing_commands/parse_commands.c \
 		./sources/parsing/parsing_commands/check_type.c \
 		./sources/parsing/parsing_commands/commands.c \

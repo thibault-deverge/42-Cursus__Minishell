@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 19:57:40 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/12 20:52:40 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@ t_list		*main_parsing(t_list *lst, char *cmd, t_env *env);
 void		get_environment(t_env *env, char **envp);
 t_env		*add_variable(t_env *envp, char *str);
 /*			pre_parsing (tokens)				*/
-t_parse		*pre_parse(t_parse *parse, char *cmd, t_env *env);
+t_parse		*pre_parsing(t_parse *parse, char *cmd, t_env *env);
 t_parse		*add_new_token(char *arg, int start, int len, t_parse *parse);
 char		*get_value_of_key(char *key, int len, t_env *env);
-void		define_rule_arg(t_parse *parse, int rule);
-int			manage_arg(char *cmd, t_parse *parse, int len, t_env *env);
-int			check_arg(char c);
+void		define_rule_token(t_parse *parse, int rule);
+int			manage_argument(char *cmd, t_parse *parse, int len, t_env *env);
+int			check_argument(char c);
 /*			parse_command						*/
 t_list		*parse_commands(t_list *list_commands, t_parse *list_tokens);
 t_command	*initialize_command(void);
