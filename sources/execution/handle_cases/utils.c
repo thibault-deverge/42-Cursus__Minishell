@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:56:16 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 03:21:45 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:16:49 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void	exit_child(t_list *lst, t_env *env, int is_perror, int exit_value)
 	free_env(env->var);
 	free_matrix(env->envp);
 	free_commands(lst->first);
+	if (g_value == 131)
+		exit(g_value);
 	exit(exit_value);
 }
 
