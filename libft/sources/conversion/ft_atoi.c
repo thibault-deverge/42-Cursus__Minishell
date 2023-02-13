@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/30 18:41:08 by tdeverge          #+#    #+#             */
-/*   Updated: 2022/11/13 17:17:15 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:26:00 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../includes/libft.h"
@@ -20,7 +20,7 @@ static size_t	is_whitespace(char c)
 
 int	ft_atoi(const char *nptr)
 {
-	int		sum;
+	int				sum;
 	size_t			is_neg;
 	size_t			i;
 

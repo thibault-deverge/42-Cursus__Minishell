@@ -6,7 +6,7 @@
 /*   By: tdeverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 14:33:42 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/01/24 17:02:59 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 13:25:25 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #  define BUFFER_SIZE 1
 # endif
 
-int	ft_atoi(const char *nptr);
+int		t_atoi(const char *nptr);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 int		ft_is_whitespace(char c);
