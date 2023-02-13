@@ -1,5 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/13 02:52:16 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/13 02:53:36 by tdeverge         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
+/*
+ * @summary:
+ * 		- Check if it's an absolute path or not. Send in execve() syscall
+ * 		if it is.
+*/
 static int	is_absolute_path(char **command, char **env, char **paths_split)
 {
 	if (!access(command[0], F_OK | X_OK))

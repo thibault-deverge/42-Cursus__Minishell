@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 01:13:23 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 02:51:40 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,28 +66,24 @@ int			check_key_name(char *key, int len, char *built);
 /* ********************************************	*/
 /*			main execution function				*/
 int			main_execution(t_list *lst, t_env *env);
-/*					builtins					*/
+/*			builtins & redirections				*/
 int			check_builtins(t_command *command, t_env *env);
 int			is_builtin(t_command *command);
-/*				    redirections				*/
 int			redi_manager(t_command *command);
 int			heredoc_manager(t_list *lst);
 int			set_signal_heredoc(void);
-/*					pipex						*/
+/*			single & multiples commands			*/
 int			pipex(t_list *list_commands, t_env *env);
 int			exec_command(char **command, char *paths, char **env);
 int			first_cmd(t_list *list_cmd, int pipes[][2], t_env *env);
 int			last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			single_cmd(t_list *lst, t_command *cmd, t_env *env);
-/*					utils						*/
-void		free_matrices(char **matrix1, char **matrix2);
+/*			utils								*/
 void		exit_child(t_list *list_cmd, t_env *env, int perror, int exit_value);
-int			is_last_command(t_command *command);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
-char		*ft_joinpath(char const *s1, char const *s2);
-void		close_files(t_command *command);
-void		close_pipe(int *pipe);
+int			heredoc_err(char *error, t_command *comman, int stdin_dup);
+void		print_redi_error(char *err_src, char *err_msg);
 
 /* ********************************************	*/
 /*					UTILS						*/
@@ -103,25 +99,29 @@ void		set_ascii_index(t_env *env);
 int			add_new_content(t_variable *var, char *value);
 /*			command								*/
 t_command	*initialize_command(void);
+int			initialize_pid(t_list *lst);
 int			is_empty_command(t_command *command);
+int			is_last_command(t_command *command);
+void		wait_allpid(t_list *list_commands);
 /*			general								*/
 long long	ft_atoll(const char *nptr, int *limits);
 char		**ft_insert_matrix(char **matrice, char *str);
 char		*ft_sepjoin(const char *s1, const char *s2, char c);
+char		*ft_joinpath(char const *s1, char const *s2);
+/*			Input/Output						*/
+void		close_files(t_command *command);
+void		close_pipe(int *pipe);
 /*			free memory							*/
 void		free_main_lists(t_command *command, t_env *env);
 void		free_env(t_variable *var);
 void		free_commands(t_command *command);
 void		free_tokens(t_token *token);
 void		free_matrix(char **matrice);
+void		free_matrices(char **matrix1, char **matrix2);
 /*			errors handler						*/
 void		throw_perror(int exit_value);
 int			print_perso_error(char *err_sub, char *err_msg);
 int			print_error(char *err_msg);
 int			print_perror(void);
-
-/* ********************************************	*/
-/*					HELPERS						*/
-/* ********************************************	*/
 
 #endif

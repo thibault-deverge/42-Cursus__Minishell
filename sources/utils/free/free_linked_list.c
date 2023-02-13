@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free.c                                             :+:      :+:    :+:   */
+/*   free_linked_list.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 00:55:56 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 00:55:58 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 02:51:14 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,24 +86,4 @@ void	free_tokens(t_token *token)
 		tmp = NULL;
 		tmp = token;
 	}
-}
-
-/*
- * @summary:
- * 		- Iterate throught the matrice and free every strings it contains.
- * 		- Free the matrice itself.
-*/
-void	free_matrix(char **matrice)
-{
-	int	i;
-
-	i = 0;
-	if (!matrice)
-		return ;
-	while (matrice[i])
-	{
-		free(matrice[i]);
-		i++;
-	}
-	free(matrice);
 }

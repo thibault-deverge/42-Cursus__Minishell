@@ -1,17 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redi_manager.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/13 01:44:51 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/13 01:56:35 by tdeverge         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-static void	print_redi_error(char *err_src, char *err_msg)
-{
-	struct stat	buf;
-
-	ft_putstr_fd(err_src, 2);
-	ft_putstr_fd(": ", 2);
-	if (!lstat(err_src, &buf))
-		ft_putstr_fd(ERROR_PERM, 2);
-	else
-		ft_putstr_fd(err_msg, 2);
-}
-
+/*
+ * @summary:
+ * 		- Update the fd of the command depend the redirections it contains.
+*/
 static void	update_dup(t_command *command, int fdin, int fdout)
 {
 	if (fdout != NO_FILE)
@@ -36,6 +40,12 @@ static void	update_dup(t_command *command, int fdin, int fdout)
 	}
 }
 
+/*
+ * @summary
+ * 		- Open files with the valid flag depend which redirections
+ * 		is passed as paramater.
+ * 		- Print a special error if the syscall fail.
+*/
 static int	open_file(char *file, int old_fd, int status)
 {
 	int	new_fd;
@@ -57,6 +67,12 @@ static int	open_file(char *file, int old_fd, int status)
 	return (new_fd);
 }
 
+/*
+ * @summary:
+ * 		- Loop through redirections and open file to the valid fd
+ * 		depend which one is it.
+ * 		- Update global variable and the stdin and out of the program.
+*/
 int	redi_manager(t_command *command)
 {
 	int	i;
