@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:29:37 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 21:29:39 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 01:14:04 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	handle_command(t_command *command, t_token *token)
 		token_tmp = token_tmp->next;
 		i++;
 	}
-	command->cmd = insert_matrix(command->cmd, command_join);
+	command->cmd = ft_insert_matrix(command->cmd, command_join);
 	free(command_join);
 	return (i);
 }

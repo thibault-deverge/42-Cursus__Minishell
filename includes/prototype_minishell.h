@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 00:57:21 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 01:13:23 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int			last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			single_cmd(t_list *lst, t_command *cmd, t_env *env);
 /*					utils						*/
-long long	ft_atoll(const char *nptr, int *limits);
 void		free_matrices(char **matrix1, char **matrix2);
 void		exit_child(t_list *list_cmd, t_env *env, int perror, int exit_value);
 int			is_last_command(t_command *command);
@@ -106,7 +105,8 @@ int			add_new_content(t_variable *var, char *value);
 t_command	*initialize_command(void);
 int			is_empty_command(t_command *command);
 /*			general								*/
-char		**insert_matrix(char **matrice, char *str);
+long long	ft_atoll(const char *nptr, int *limits);
+char		**ft_insert_matrix(char **matrice, char *str);
 char		*ft_sepjoin(const char *s1, const char *s2, char c);
 /*			free memory							*/
 void		free_main_lists(t_command *command, t_env *env);

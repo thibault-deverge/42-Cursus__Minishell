@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:00:01 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 01:00:03 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 01:12:40 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	count_word_matrice(char **matrice)
  * 		- Passed by reference all internal strings from old matrice and 
  * 		duplicate 'str' passed by parameter.
 */
-char	**insert_matrix(char **matrice, char *str)
+char	**ft_insert_matrix(char **matrice, char *str)
 {
 	char	**new_matrice;
 	int		matrice_len;
