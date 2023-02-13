@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:49:39 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 21:34:09 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 09:19:59 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 	content = NULL;
 	if (arg[i] == '?')
 	{
-		parse = add_new_token(ft_itoa(g_value), 0, ft_strlen(content), parse);
+		parse = get_exit_value(parse);
 		if (!parse)
 			return (print_perror() - 1);
 		return (i);

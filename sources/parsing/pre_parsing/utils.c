@@ -6,11 +6,20 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:50:04 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 20:52:56 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 09:21:20 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_parse	*get_exit_value(t_parse *parse)
+{
+	char	*content;
+
+	content = ft_itoa(g_value);
+	parse = add_new_token(content, 0, ft_strlen(content), parse);
+	return (parse);
+}
 
 /*
  * @summary:

@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:37:30 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 02:57:49 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 11:58:24 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,22 @@
 */
 static int	restore_fd(t_command *command, int fdout, int fdin)
 {
+	if (command->fds[0] != NO_FILE)
+		close(command->fds[0]);
+	if (command->fds[1] != NO_FILE)
+		close(command->fds[1]);
 	if (fdout > 0)
 	{
-		if (!dup2(fdout, 1))
+		if (dup2(fdout, 1) < 0)
 			return (1);
 		close(fdout);
 	}
 	if (fdin > 0)
 	{
-		if (!dup2(fdin, 0))
+		if (dup2(fdin, 0) < 0)
 			return (1);
 		close(fdin);
 	}
-	if (command->fds[0] != NO_FILE)
-		close(command->fds[0]);
-	if (command->fds[1] != NO_FILE)
-		close(command->fds[1]);
 	return (0);
 }
 
@@ -69,8 +69,8 @@ static int	handle_single_command(t_list *lst, t_env *env)
 	stdout_save = -1;
 	if (is_builtin(lst->first) && lst->first->redi)
 	{
-		stdin_save = dup(1);
-		stdout_save = dup(0);
+		stdin_save = dup(0);
+		stdout_save = dup(1);
 		if (!redi_manager(lst->first))
 			return (RETURN_FAILURE);
 	}

@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 00:04:01 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 00:36:38 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 09:33:40 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 */
 static int	print_error_exit(char *value, char *err_msg)
 {
+	g_value = 2;
 	ft_putstr_fd("exit: ", 2);
 	ft_putstr_fd(value, 2);
 	ft_putchar_fd(':', 2);
@@ -61,7 +62,6 @@ static int	handle_arg(t_command *command, t_env *env, long long *status)
 	{
 		print_error_exit(command->cmd[1], ERROR_EXIT_NUM);
 		free_main_lists(command, env);
-		g_value = 2;
 		exit(g_value);
 	}
 	if (command->cmd[2])
@@ -72,11 +72,10 @@ static int	handle_arg(t_command *command, t_env *env, long long *status)
 	}
 	limits = 0;
 	*status = ft_atoll(command->cmd[1], &limits);
-	free_main_lists(command, env);
 	if (limits)
 	{
-		g_value = 2;
 		print_error_exit(command->cmd[1], ERROR_EXIT_NUM);
+		free_main_lists(command, env);
 		exit(g_value);
 	}
 	return (RETURN_SUCCESS);
