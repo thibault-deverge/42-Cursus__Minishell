@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:49:39 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 17:22:03 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:09:58 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,10 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 	i = 1;
 	content = NULL;
 	if (arg[i] == '?')
-	{
-		parse = get_exit_value(parse);
-		if (!parse)
-			return (print_perror() - 1);
-		return (i);
-	}
-	while (arg[i] && ft_isalnum(arg[i]))
+		return (get_exit_value(parse, i));
+	if (arg[i] && !ft_isalpha(arg[i]))
+		i++;
+	while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
 		i++;
 	if (i > 1)
 		content = get_value_of_key(&arg[1], i - 1, env);

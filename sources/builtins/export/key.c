@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 23:50:28 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 16:18:37 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:10:53 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ int	check_key_name(char *key, int len, char *built)
 		}
 		i++;
 	}
+	if (ft_strncmp(key, "_", len) == 0)
+		return (RETURN_FAILURE);
 	return (RETURN_SUCCESS);
 }
 
