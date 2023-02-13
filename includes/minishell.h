@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   header_minishell.h                                 :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 17:57:08 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 18:52:44 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:30:40 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HEADER_MINISHELL_H
-# define HEADER_MINISHELL_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 /*		Libft				*/
 # include "../libft/includes/libft.h"
