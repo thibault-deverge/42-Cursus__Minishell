@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 23:57:13 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 16:18:03 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:52:15 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,7 @@ int	exec_export(t_command *command, t_env *env)
 			return (RETURN_FAILURE);
 		i++;
 	}
+	if (g_value == 1)
+		return (RETURN_FAILURE);
 	return (RETURN_SUCCESS);
 }

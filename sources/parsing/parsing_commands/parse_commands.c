@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:29:37 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 16:34:08 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:38:02 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static int	manage_pipe(t_command *command, t_token *token)
 {
 	if (!token->next)
 	{
-		print_error(ERROR_PIPE);
+		print_specific_error(ERROR_SYNTAX, '|');
 		g_value = 2;
 		return (RETURN_FAILURE);
 	}
