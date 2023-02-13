@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:49:39 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 09:19:59 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:22:03 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env, int len)
 	}
 	if (!arg[i])
 		return (-2 - len);
-	else if (i == 1)
-		add_new_token("\0", 0, 1, parse);
-	add_new_token(arg, start, i, parse);
-	define_rule_token(parse, COMMAND);
+	else if (i == 1 && add_new_token("\0", 0, 1, parse))
+		define_rule_token(parse, COMMAND);
+	if (add_new_token(arg, start, i, parse))
+		define_rule_token(parse, COMMAND);
 	return (i);
 }
 
@@ -129,6 +129,9 @@ int	manage_argument(char *cmd, t_parse *parse, int len, t_env *env)
 	else if (cmd[len] == '|')
 		add_new_token("|", 0, 1, parse);
 	if (len == -2)
+	{
 		print_error(ERROR_QUOTES);
+		g_value = 2;
+	}
 	return (len + 1);
 }

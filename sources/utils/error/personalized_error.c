@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 00:51:28 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 00:56:55 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:39:32 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,13 @@ int	print_perso_error(char *err_src, char *err_msg)
 		ft_putstr_fd(err_msg, 2);
 	g_value = 127;
 	return (g_value);
+}
+
+int	print_specific_error(char *err_msg, char err_arg)
+{
+	ft_putstr_fd(err_msg, 2);
+	ft_putchar_fd('\'', 2);
+	ft_putchar_fd(err_arg, 2);
+	ft_putstr_fd("\'\n", 2);
+	return (RETURN_FAILURE);
 }
