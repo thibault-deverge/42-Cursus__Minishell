@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:44:06 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 03:02:06 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:14:37 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static int	set_heredoc(t_command *command, int index, int stdin_dup)
 */
 static int	handle_heredocs(t_command *command, int *idx)
 {
-	int stdin_dup;
+	int	stdin_dup;
 
 	if (ft_strcmp(command->redi[*idx], "<<") == 0)
 	{

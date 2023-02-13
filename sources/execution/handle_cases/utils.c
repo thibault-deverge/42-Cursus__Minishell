@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:56:16 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 02:52:01 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:21:45 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,13 @@ int	make_dup_cmd(int pipes[][2], int idx_cmd)
  * 		- Print errno if parameter 'is_perror' is truthy.
  * 		- Free list of commands and envirornment then exit program.
 */
-void	exit_child(t_list *list_cmd, t_env *env, int is_perror, int exit_value)
+void	exit_child(t_list *lst, t_env *env, int is_perror, int exit_value)
 {
 	if (is_perror)
 		print_perror();
 	free_env(env->var);
 	free_matrix(env->envp);
-	free_commands(list_cmd->first);
+	free_commands(lst->first);
 	exit(exit_value);
 }
 

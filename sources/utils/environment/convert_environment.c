@@ -1,5 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   convert_environment.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/13 03:22:39 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/13 03:23:55 by tdeverge         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
+/*
+ * @summary:
+ * 		- Return number of variables in the environment
+ * 		linked list.
+*/
 static int	get_nb_var(t_env *env)
 {
 	t_variable	*tmp;
@@ -15,6 +32,11 @@ static int	get_nb_var(t_env *env)
 	return (nb_var);
 }
 
+/*
+ * @summary:
+ * 		- Loop throught environment linked list and convert
+ * 		it to a matrix (char **).
+*/
 char	**convert_env(t_env	*env)
 {
 	char		**envp;

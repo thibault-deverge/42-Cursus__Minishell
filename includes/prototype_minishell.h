@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 02:51:40 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 03:20:45 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int			is_empty_input(char *cmd);
 /*			signals								*/
 void		status_code(int status);
 void		modify_signals(int behavior);
+int			set_signal_heredoc(void);
 
 /* ********************************************	*/
 /*					PARSING						*/
@@ -71,7 +72,6 @@ int			check_builtins(t_command *command, t_env *env);
 int			is_builtin(t_command *command);
 int			redi_manager(t_command *command);
 int			heredoc_manager(t_list *lst);
-int			set_signal_heredoc(void);
 /*			single & multiples commands			*/
 int			pipex(t_list *list_commands, t_env *env);
 int			exec_command(char **command, char *paths, char **env);
@@ -80,7 +80,7 @@ int			last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			single_cmd(t_list *lst, t_command *cmd, t_env *env);
 /*			utils								*/
-void		exit_child(t_list *list_cmd, t_env *env, int perror, int exit_value);
+void		exit_child(t_list *lst, t_env *env, int perror, int exit_value);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
 int			heredoc_err(char *error, t_command *comman, int stdin_dup);
 void		print_redi_error(char *err_src, char *err_msg);
