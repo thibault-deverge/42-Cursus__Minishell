@@ -10,13 +10,13 @@ int	main(int argc, char **argv, char **envp)
 
 	(void)argc;
 	(void)argv;
-	get_env(&env, envp);
+	get_environment(&env, envp);
 	env.envp = NULL;
 	while (1)
 	{
 		modify_signals(PROMPT_SIGNAL);
 		cmd = get_input(&env);
-		if (is_empty_cmd(cmd))
+		if (is_empty_input(cmd))
 			continue ;
 		if (!main_parsing(&lst, cmd, &env))
 			continue ;

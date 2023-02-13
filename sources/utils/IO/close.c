@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_parsing.c                                     :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 21:30:07 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 21:30:10 by tdeverge         ###   ########.fr       */
+/*   Created: 2023/02/13 02:37:31 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/13 02:37:47 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*main_parsing(t_list *lst, char *cmd, t_env *env)
+/*
+ * @summary:
+ * 		- Check if files are open and close them if they are.
+*/
+void	close_files(t_command *command)
 {
-	t_parse	parse;
+	if (command->fds[0] != -1)
+		close(command->fds[0]);
+	if (command->fds[1] != -1)
+		close(command->fds[1]);
+}
 
-	parse.token = NULL;
-	if (!pre_parsing(&parse, cmd, env))
-	{
-		free(cmd);
-		free_tokens((&parse)->token);
-		return (RETURN_FAILURE);
-	}
-	if (!parse_commands(lst, &parse))
-	{
-		free(cmd);
-		free_commands(lst->first);
-		free_tokens((&parse)->token);
-		return (RETURN_FAILURE);
-	}
-	free_tokens((&parse)->token);
-	return (lst);
+/*
+ * @summary:
+ * 		- Close pipe passed as parameter.
+*/
+void	close_pipe(int *pipe)
+{
+	close(pipe[0]);
+	close(pipe[1]);
 }

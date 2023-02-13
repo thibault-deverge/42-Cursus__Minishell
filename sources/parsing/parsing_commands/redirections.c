@@ -1,12 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   redirections.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/12 21:12:42 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/13 01:14:50 by tdeverge         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-int	is_invalid_file(int rule)
-{
-	if (rule == REDI || rule == SPACEBAR || rule == PIPE)
-		return (1);
-	return (0);
-}
-
+/*
+ * @summary:
+ * 		- Loop throught token and join them together while file is valid.
+*/
 static char	*assemble_files(t_token *token, int *next_token)
 {
 	char	*redi_join;
@@ -50,7 +59,7 @@ static int	insert_file_to_redi(t_command *command, t_token *token)
 		else
 		{
 			redi_join = assemble_files(token, &next_token);
-			command->redi = insert_matrix(command->redi, redi_join);
+			command->redi = ft_insert_matrix(command->redi, redi_join);
 			free(redi_join);
 			return (next_token);
 		}
@@ -74,7 +83,7 @@ static int	insert_redirection(t_command *command, t_token *token, int redi_idx)
 	redi = ft_substr(token->arg, 0, redi_idx);
 	if (!redi)
 		return (print_perror());
-	command->redi = insert_matrix(command->redi, redi);
+	command->redi = ft_insert_matrix(command->redi, redi);
 	free(redi);
 	redi = NULL;
 	if (token->arg[redi_idx])
@@ -82,7 +91,7 @@ static int	insert_redirection(t_command *command, t_token *token, int redi_idx)
 		redi = ft_substr(token->arg, redi_idx, ft_strlen(token->arg));
 		if (!redi)
 			return (0);
-		command->redi = insert_matrix(command->redi, redi);
+		command->redi = ft_insert_matrix(command->redi, redi);
 		free(redi);
 		redi = NULL;
 	}

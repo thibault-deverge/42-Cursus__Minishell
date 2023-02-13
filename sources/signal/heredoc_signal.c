@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_parsing.c                                     :+:      :+:    :+:   */
+/*   heredoc_signal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 21:30:07 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 21:30:10 by tdeverge         ###   ########.fr       */
+/*   Created: 2023/02/13 03:17:48 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/13 03:17:49 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*main_parsing(t_list *lst, char *cmd, t_env *env)
+/*
+ * @summary:
+ * 		- Dupplique stdin and modify signal to handle heredoc case. 
+ * 		- If SIGINT is call in a heredoc, it'll close stdin to finish 
+ * 		readline() call and then replace stdin as default.
+*/
+int	set_signal_heredoc(void)
 {
-	t_parse	parse;
+	int	stdin_dup;
 
-	parse.token = NULL;
-	if (!pre_parsing(&parse, cmd, env))
-	{
-		free(cmd);
-		free_tokens((&parse)->token);
-		return (RETURN_FAILURE);
-	}
-	if (!parse_commands(lst, &parse))
-	{
-		free(cmd);
-		free_commands(lst->first);
-		free_tokens((&parse)->token);
-		return (RETURN_FAILURE);
-	}
-	free_tokens((&parse)->token);
-	return (lst);
+	stdin_dup = dup(0);
+	modify_signals(HEREDOC_SIGNAL);
+	return (stdin_dup);
 }

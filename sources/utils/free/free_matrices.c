@@ -1,35 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_parsing.c                                     :+:      :+:    :+:   */
+/*   free_matrices.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 21:30:07 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 21:30:10 by tdeverge         ###   ########.fr       */
+/*   Created: 2023/02/13 02:50:35 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/13 02:51:10 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*main_parsing(t_list *lst, char *cmd, t_env *env)
+/*
+ * @summary:
+ * 		- Free both matrices passed as parameter.
+*/
+void	free_matrices(char **matrix1, char **matrix2)
 {
-	t_parse	parse;
+	free_matrix(matrix1);
+	free_matrix(matrix2);
+}
 
-	parse.token = NULL;
-	if (!pre_parsing(&parse, cmd, env))
+/*
+ * @summary:
+ * 		- Iterate throught the matrice and free every strings it contains.
+ * 		- Free the matrice itself.
+*/
+void	free_matrix(char **matrice)
+{
+	int	i;
+
+	i = 0;
+	if (!matrice)
+		return ;
+	while (matrice[i])
 	{
-		free(cmd);
-		free_tokens((&parse)->token);
-		return (RETURN_FAILURE);
+		free(matrice[i]);
+		i++;
 	}
-	if (!parse_commands(lst, &parse))
-	{
-		free(cmd);
-		free_commands(lst->first);
-		free_tokens((&parse)->token);
-		return (RETURN_FAILURE);
-	}
-	free_tokens((&parse)->token);
-	return (lst);
+	free(matrice);
 }

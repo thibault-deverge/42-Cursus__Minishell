@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_parsing.c                                     :+:      :+:    :+:   */
+/*   is_last_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/12 21:30:07 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 21:30:10 by tdeverge         ###   ########.fr       */
+/*   Created: 2023/02/13 02:49:27 by tdeverge          #+#    #+#             */
+/*   Updated: 2023/02/13 02:49:40 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_list	*main_parsing(t_list *lst, char *cmd, t_env *env)
+/*
+ * @summary:
+ * 		- Check if the command we are handling is the last one.
+*/
+int	is_last_command(t_command *command)
 {
-	t_parse	parse;
-
-	parse.token = NULL;
-	if (!pre_parsing(&parse, cmd, env))
-	{
-		free(cmd);
-		free_tokens((&parse)->token);
-		return (RETURN_FAILURE);
-	}
-	if (!parse_commands(lst, &parse))
-	{
-		free(cmd);
-		free_commands(lst->first);
-		free_tokens((&parse)->token);
-		return (RETURN_FAILURE);
-	}
-	free_tokens((&parse)->token);
-	return (lst);
+	if (!command->next)
+		return (1);
+	return (0);
 }
