@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 03:18:07 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 03:19:09 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:18:50 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,16 @@
 */
 void	status_code(int status)
 {
+	int	num_signal;
+
 	if (WIFEXITED(status))
 		g_value = WEXITSTATUS(status);
 	else if (WIFSIGNALED(status))
-		g_value = WTERMSIG(status);
+	{
+		num_signal = WTERMSIG(status);
+		if (num_signal == 2)
+			g_value = 130;
+		else if (num_signal == 3)
+			g_value = 131;
+	}
 }

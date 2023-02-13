@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:09:00 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 16:58:36 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:36:05 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,6 @@
 # define ERROR_DIR		"Is a directory\n"
 # define ERROR_PERM		"Permission denied\n"
 # define INVALID_KEY	"not a valid identifier\n"
-
-/********************************************************/
-/*						EXIT							*/
-/********************************************************/
-# define EXIT_PROMPT	1
-# define EXIT_ALLOC		2
-# define EXIT_PARSE_CMD 3
-# define EXIT_CMD		4
-# define EXIT_BUILTIN	5
 
 /********************************************************/
 /*						RETURN							*/

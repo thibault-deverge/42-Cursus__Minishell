@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 03:17:27 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 03:24:12 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:27:54 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 static void	sigint_handler_prompt(int sig_id)
 {
 	(void)sig_id;
+	g_value = 130;
 	ft_putchar_fd('\n', 1);
+	rl_replace_line("", 0);
 	rl_on_new_line();
 	rl_redisplay();
 }
@@ -32,6 +34,7 @@ static void	sigint_handler_prompt(int sig_id)
 static void	sigint_handler_cmd(int sig_id)
 {
 	(void)sig_id;
+	g_value = 130;
 	ft_putchar_fd('\n', 1);
 }
 
@@ -44,6 +47,7 @@ static void	sigint_handler_heredoc(int sig_id)
 {
 	(void)sig_id;
 	close(0);
+	g_value = 130;
 	ft_putchar_fd('\n', 1);
 	rl_redisplay();
 }
@@ -57,6 +61,7 @@ static void	sigkill_handler_cmd(int sig_id)
 {
 	(void)sig_id;
 	ft_putstr_fd("Quit (core dumped)\n", 1);
+	g_value = 131;
 }
 
 /*
