@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 19:38:19 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 19:38:22 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:36:29 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	get_environment(t_env *env, char **envp)
 		if (!env)
 		{
 			free_env(env->var);
-			throw_perror(EXIT_ALLOC);
+			throw_perror(1);
 		}
 		set_ascii_index(env);
 		i++;

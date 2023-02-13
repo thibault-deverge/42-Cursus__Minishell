@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 00:51:28 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 16:39:32 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/13 17:40:14 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 /*
  * @summary:
- * 		- Print an error personalized depend the source of it. Receive both
+ * 		- Print a personalized error depend the source of it. Receive both
  * 		sources and messages as parameters.
  * 		- Error source will depend of the return value of the lstat syscall.
  * 		- Return global error variable.
@@ -45,6 +45,11 @@ int	print_perso_error(char *err_src, char *err_msg)
 	return (g_value);
 }
 
+/*
+ * @summary:
+ *		- Print a token error with the token concerned by the error
+ * 		at the end.
+*/
 int	print_specific_error(char *err_msg, char err_arg)
 {
 	ft_putstr_fd(err_msg, 2);

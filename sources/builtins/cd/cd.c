@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:43:10 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 23:48:52 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 19:07:45 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static int	modify_environment_node(t_env *env, char *name, char *content)
 	{
 		if (!ft_strcmp(tmp_var->name, name))
 		{
+			free(tmp_var->content);
 			tmp_var->content = content;
 			return (RETURN_SUCCESS);
 		}
