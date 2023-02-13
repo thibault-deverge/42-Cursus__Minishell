@@ -6,12 +6,16 @@
 /*   By: pmieuzet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 15:18:29 by pmieuzet          #+#    #+#             */
-/*   Updated: 2022/11/15 09:52:13 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/13 01:11:53 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+ * @summary:
+ * 		- Copy one string into another one in memory.
+*/
 static char	*ft_strcpy(char *dest, char const *str)
 {
 	int	i;
@@ -26,6 +30,11 @@ static char	*ft_strcpy(char *dest, char const *str)
 	return (dest);
 }
 
+/*
+ * @summary:
+ * 		- Concatenate 'str' with 'dest' received as parameter with
+ * 		character 'c' at beginning.
+*/
 static char	*ft_strcat(char *dest, char const *str, char c)
 {
 	int	i;
@@ -46,6 +55,11 @@ static char	*ft_strcat(char *dest, char const *str, char c)
 	return (dest);
 }
 
+/*
+ * @summary:
+ * 		- Join both strings received as parameter with character c 
+ * 		also received as parameter between them.
+*/
 char	*ft_sepjoin(char const *s1, char const *s2, char c)
 {
 	size_t		len;

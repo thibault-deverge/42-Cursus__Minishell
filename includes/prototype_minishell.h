@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 00:28:01 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 00:57:21 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,11 +108,7 @@ int			is_empty_command(t_command *command);
 /*			general								*/
 char		**insert_matrix(char **matrice, char *str);
 char		*ft_sepjoin(const char *s1, const char *s2, char c);
-
-/* ********************************************	*/
-/*					HELPERS						*/
-/* ********************************************	*/
-/*			free structures						*/
+/*			free memory							*/
 void		free_main_lists(t_command *command, t_env *env);
 void		free_env(t_variable *var);
 void		free_commands(t_command *command);
@@ -123,5 +119,9 @@ void		throw_perror(int exit_value);
 int			print_perso_error(char *err_sub, char *err_msg);
 int			print_error(char *err_msg);
 int			print_perror(void);
+
+/* ********************************************	*/
+/*					HELPERS						*/
+/* ********************************************	*/
 
 #endif

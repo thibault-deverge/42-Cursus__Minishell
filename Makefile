@@ -40,17 +40,18 @@ SRCS =	./main.c \
 		./sources/execution/pipex/utils_pipex.c \
 		./sources/signal/signal.c \
 		./sources/signal/status.c \
-    	./sources/utils/insert_matrix.c \
-		./sources/utils/ft_sepjoin.c \
 		./sources/utils/environment/convert_environment.c \
 		./sources/utils/environment/add_variable.c \
 		./sources/utils/environment/modify_content.c \
 		./sources/utils/environment/ascii.c \
 		./sources/utils/environment/getter.c \
 		./sources/utils/command/initialize_command.c \
-		./sources/utils/ft_atoll.c \
-		./sources/helpers/errors.c \
-		./sources/helpers/free.c \
+		./sources/utils/general/ft_atoll.c \
+		./sources/utils/general/ft_sepjoin.c \
+    	./sources/utils/general/ft_insert_matrix.c \
+		./sources/utils/error/std_error.c \
+		./sources/utils/error/personalized_error.c \
+		./sources/utils/free/free.c \
 
 OBJS	= $(SRCS:.c=.o)
 
