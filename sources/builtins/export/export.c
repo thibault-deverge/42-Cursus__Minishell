@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 23:57:13 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 23:57:16 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:18:03 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,17 @@ static void	print_export(t_env *env)
  * 		- Print complete error in the form :
  * 		"<err_src>: '<err_sub>': <err_msg>"
 */
-int	export_error(char *src, char *sub, int len, char *err_msg)
+int	export_error(char *src, char *sub, char *err_msg)
 {
 	int	i;
 
 	i = 0;
 	ft_putstr_fd(src, 2);
 	ft_putstr_fd(": \'", 2);
-	while (i < len)
-	{
-		ft_putchar_fd(sub[i], 2);
-		i++;
-	}
+	ft_putstr_fd(sub, 2);
 	ft_putstr_fd("\': ", 2);
 	ft_putstr_fd(err_msg, 2);
-	return (RETURN_FAILURE);
+	return (RETURN_SUCCESS);
 }
 
 /*

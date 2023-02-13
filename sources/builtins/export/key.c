@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 23:50:28 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 00:03:13 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:18:37 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ int	check_key_name(char *key, int len, char *built)
 	if (!ft_isalpha(key[0]) && key[0] != '_')
 	{
 		g_value = 1;
-		return (export_error(built, key, len, INVALID_KEY));
+		return (export_error(built, key, INVALID_KEY));
 	}
 	while (i < len)
 	{
 		if (!ft_isalnum(key[i]) && key[i] != '_')
 		{
 			g_value = 1;
-			return (export_error(built, key, len, INVALID_KEY));
+			return (export_error(built, key, INVALID_KEY));
 		}
 		i++;
 	}

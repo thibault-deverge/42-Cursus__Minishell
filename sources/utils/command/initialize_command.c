@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:08:37 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 02:47:45 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:54:36 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_empty_command(t_command *command)
 {
 	if (!command->cmd && !command->redi)
 	{
-		print_error(ERROR_SYNTAX);
+		print_specific_error(ERROR_SYNTAX, '|');
 		g_value = 2;
 		return (0);
 	}

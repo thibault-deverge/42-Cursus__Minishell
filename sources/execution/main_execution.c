@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:37:30 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 11:58:24 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:27:48 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,15 @@ static int	handle_single_command(t_list *lst, t_env *env)
 
 	stdin_save = -1;
 	stdout_save = -1;
-	if (is_builtin(lst->first) && lst->first->redi)
+	if ((!lst->first->cmd || is_builtin(lst->first)) && lst->first->redi)
 	{
 		stdin_save = dup(0);
 		stdout_save = dup(1);
 		if (!redi_manager(lst->first))
+		{
+			restore_fd(lst->first, stdout_save, stdin_save);
 			return (RETURN_FAILURE);
+		}
 	}
 	if (!check_builtins(lst->first, env))
 		single_cmd(lst, lst->first, env);

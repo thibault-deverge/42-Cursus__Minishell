@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:12:42 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 01:14:50 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:48:59 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ int	handle_redirection(t_command *command, t_token *token)
 	if (is_redirection_invalid(token->arg[i]))
 	{
 		g_value = 2;
-		return (print_error(ERROR_SYNTAX));
+		return (print_specific_error(ERROR_SYNTAX, token->arg[i]));
 	}
 	nb_redi_inserted = insert_redirection(command, token, i);
 	if (!nb_redi_inserted)
@@ -132,7 +132,7 @@ int	handle_redirection(t_command *command, t_token *token)
 	if (!nb_next_token)
 	{
 		g_value = 2;
-		return (print_error(ERROR_SYNTAX));
+		return (print_specific_error(ERROR_SYNTAX, token->arg[i - 1]));
 	}
 	return (nb_next_token);
 }

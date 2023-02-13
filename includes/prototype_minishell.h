@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 09:20:42 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:41:14 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int			exec_exit(t_command *command, t_env *env);
 int			exec_pwd(t_command *command, t_env *env);
 int			exec_unset(t_command *command, t_env *env);
 /*			utils								*/
-int			export_error(char *src, char *sub, int len, char *err_msg);
+int			export_error(char *src, char *sub, char *err_msg);
 int			manage_variable(char *new_var, t_env *env);
 int			check_key_name(char *key, int len, char *built);
 
@@ -122,6 +122,7 @@ void		free_matrices(char **matrix1, char **matrix2);
 /*			errors handler						*/
 void		throw_perror(int exit_value);
 int			print_perso_error(char *err_sub, char *err_msg);
+int			print_specific_error(char *err_msg, char err_arg);
 int			print_error(char *err_msg);
 int			print_perror(void);
 

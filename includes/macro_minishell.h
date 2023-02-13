@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:09:00 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 18:19:52 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:58:36 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /*						ERROR							*/
 /********************************************************/
 # define ERROR_PROMPT	"exit\n"
-# define ERROR_SYNTAX	"error: syntax error near redirection\n"
+# define ERROR_SYNTAX	"error: syntax error near unexpected token "
 # define ERROR_QUOTES	"error: missing terminating quote character\n"
 # define ERROR_CMD_LOST "error: No such file or directory\n"
 # define ERROR_ENV		"env: too many arguments\n"
