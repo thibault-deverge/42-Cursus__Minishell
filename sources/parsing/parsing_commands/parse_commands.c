@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:29:37 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 01:14:04 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/13 16:34:08 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,25 @@ static int	manage_commands(t_command *command, t_token *token)
 
 /*
  * @summary:
+ * 		- Check if pipe is the last token and throw a syntax error if its the
+ * 		case.
+ * 		- Check also if command before the pipe is empty.
+*/
+static int	manage_pipe(t_command *command, t_token *token)
+{
+	if (!token->next)
+	{
+		print_error(ERROR_PIPE);
+		g_value = 2;
+		return (RETURN_FAILURE);
+	}
+	if (!is_empty_command(command))
+		return (RETURN_FAILURE);
+	return (RETURN_SUCCESS);
+}
+
+/*
+ * @summary:
  * 		- Iterate throught the list_tokens and populate the list_commands
  * 		with the corrects values.
  * 		- Every command will have two matrices : one with the command and its
@@ -101,7 +120,7 @@ t_list	*parse_commands(t_list *list_commands, t_parse *list_tokens)
 		next_token = 1;
 		if (token->rule == PIPE)
 		{
-			if (!is_empty_command(command))
+			if (!manage_pipe(command, token))
 				return (RETURN_FAILURE);
 			command->next = initialize_command();
 			command = command->next;
