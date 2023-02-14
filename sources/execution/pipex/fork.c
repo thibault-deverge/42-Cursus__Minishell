@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:52:16 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 19:01:40 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:31:48 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 			exit_child(list_cmd, env, 1, 1);
 		if (!redi_manager(list_cmd->first))
 			exit_child(list_cmd, env, 0, 1);
-		close_files(list_cmd->first);
 		if (check_builtins(list_cmd->first, env) == 0)
 			exit_value = exec_command(list_cmd->first->cmd, paths, env->envp);
 		free(list_cmd->pid);
 		exit_child(list_cmd, env, 0, exit_value);
 	}
+	close_files(list_cmd->first);
 	close(pipes[0][1]);
 	return (RETURN_SUCCESS);
 }
@@ -122,12 +122,12 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 			exit_child(lst, env, 1, 1);
 		if (!redi_manager(cmd))
 			exit_child(lst, env, 0, 1);
-		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
 			exit_value = exec_command(cmd->cmd, paths, env->envp);
 		free(lst->pid);
 		exit_child(lst, env, 0, exit_value);
 	}
+	close_files(cmd);
 	close(pipes[0][0]);
 	return (lst->pid[cmd->index]);
 }
@@ -149,12 +149,12 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 			exit_child(lst, env, 1, 1);
 		if (!redi_manager(cmd))
 			exit_child(lst, env, 0, 1);
-		close_files(cmd);
 		if (check_builtins(cmd, env) == 0)
 			exit_value = exec_command(cmd->cmd, paths, env->envp);
 		free(lst->pid);
 		exit_child(lst, env, 0, exit_value);
 	}
+	close_files(cmd);
 	close(pipes[0][0]);
 	close(pipes[1][1]);
 	return (lst->pid[cmd->index]);

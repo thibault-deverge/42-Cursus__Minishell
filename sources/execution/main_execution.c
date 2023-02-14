@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:37:30 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 16:27:48 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/14 13:32:32 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,9 @@ static int	restore_fd(t_command *command, int fdout, int fdin)
 */
 static int	handle_multi_command(t_list *lst, t_env *env)
 {
+	t_command *command;
+
+	command = lst->first;
 	env->envp = convert_env(env);
 	if (!env->envp || !initialize_pid(lst))
 		return (print_perror());
