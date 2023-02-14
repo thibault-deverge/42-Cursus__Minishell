@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:09:00 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 16:36:05 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/14 09:48:35 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define ERROR_EXIT_NUM " numeric argument required\n"
 # define ERROR_OPEN_FD	"No such file or directory\n"
 # define ERROR_TEST		"command not found\n"
-# define ERROR_HEREDOC	" warning: here-document dilimited by end-of-file"
+# define ERROR_HEREDOC	" warning: here-document delimited by end-of-file"
 # define ERROR_DIR		"Is a directory\n"
 # define ERROR_PERM		"Permission denied\n"
 # define INVALID_KEY	"not a valid identifier\n"
