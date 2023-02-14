@@ -6,13 +6,13 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:49:39 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 19:09:58 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/14 09:45:31 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
+static int	manage_key_value(char *arg, t_parse *parse, t_env *env, int quote)
 {
 	int		i;
 	char	*content;
@@ -21,9 +21,10 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 	content = NULL;
 	if (arg[i] == '?')
 		return (get_exit_value(parse, i));
-	if (arg[i] && !ft_isalpha(arg[i]))
+	if (arg[i] && !ft_isalpha(arg[i]) && !check_argument(arg[i]))
 		i++;
-	while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
+	while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_')
+		&& !check_argument(arg[i]))
 		i++;
 	if (i > 1)
 		content = get_value_of_key(&arg[1], i - 1, env);
@@ -33,6 +34,8 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env)
 		parse = add_new_token(arg, 0, 1, parse);
 	else if (!ft_isalpha(arg[1]))
 		parse = add_new_token(arg, 2, i, parse);
+	else if (!content && quote)
+		parse = add_new_token("\0", 0, 1, parse);
 	if (!parse && i != 2)
 		return (print_perror() - 1);
 	return (i - 1);
@@ -51,7 +54,7 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env, int len)
 		{
 			if (start != i && add_new_token(&arg[start], 0, i - start, parse))
 				define_rule_token(parse, COMMAND);
-			i += manage_key_value(&arg[i], parse, env) + 1;
+			i += manage_key_value(&arg[i], parse, env, 1) + 1;
 			start = i;
 		}
 		else
@@ -120,7 +123,7 @@ int	manage_argument(char *cmd, t_parse *parse, int len, t_env *env)
 		return (len);
 	}
 	else if (cmd[len] == '$')
-		len += manage_key_value(&cmd[len], parse, env);
+		len += manage_key_value(&cmd[len], parse, env, 0);
 	else if (check_argument(cmd[len]) == -1)
 		len += manage_redirection(&cmd[len], parse);
 	else if (cmd[len] == '|')
