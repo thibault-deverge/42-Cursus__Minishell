@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:09:00 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/14 09:48:35 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/14 10:39:18 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define ERROR_SYNTAX	"error: syntax error near unexpected token "
 # define ERROR_QUOTES	"error: missing terminating quote character\n"
 # define ERROR_CMD_LOST "error: No such file or directory\n"
+# define ERROR_POINT	".: filename argument required\n\
+.: usage: . filename [arguments]\n"
 # define ERROR_ENV		"env: too many arguments\n"
 # define ERROR_CD_ARG	"cd: too many arguments\n"
 # define ERROR_CD_FILE  "cd: No such file or directory\n"

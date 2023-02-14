@@ -6,11 +6,30 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:09:25 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 21:12:35 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/14 10:38:14 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+ * @summary:
+ * 		- Check if command only contains a single point and throw an error
+ * 		if it's the case.
+*/
+int	is_single_point(t_command *command)
+{
+	if (!command->cmd)
+		return (RETURN_SUCCESS);
+	if (!ft_strcmp(command->cmd[0], ".")
+		&& !command->cmd[1] && !command->redi)
+	{
+		print_error(ERROR_POINT);
+		g_value = 2;
+		return (RETURN_FAILURE);
+	}
+	return (RETURN_SUCCESS);
+}
 
 /*
  * @summary:
