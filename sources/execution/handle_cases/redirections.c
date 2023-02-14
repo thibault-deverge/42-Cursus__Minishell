@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redi_manager.c                                     :+:      :+:    :+:   */
+/*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:44:51 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 01:56:35 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:42:27 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static int	open_file(char *file, int old_fd, int status)
 	if (new_fd < 0)
 	{
 		print_redi_error(file, ERROR_OPEN_FD);
+		g_value = 1;
 		return (-2);
 	}
 	return (new_fd);
@@ -92,7 +93,8 @@ int	redi_manager(t_command *command)
 			fdout = open_file(command->redi[i + 1], fdout, ADD_OUT);
 		if (fdin == -2 || fdout == -2)
 		{
-			g_value = 1;
+			if (command->fds[0] != NO_FILE)
+				close(command->fds[0]);
 			return (RETURN_FAILURE);
 		}
 		i += 2;

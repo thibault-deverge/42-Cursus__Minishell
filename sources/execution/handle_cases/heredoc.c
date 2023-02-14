@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:44:06 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 03:14:37 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:36:03 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
  * @summary:
  * 		- Store here_doc received as one string in parameter.
 */
-static int	store_str(t_command *command, char *str)
+static int	store_str(t_command *command, char *str, int stdin_dup)
 {
+	if (!check_signal(stdin_dup))
+		return (RETURN_FAILURE);
 	if (command->fds[0] != NO_FILE)
 		close(command->fds[0]);
 	if (pipe(command->fds))
@@ -29,6 +31,7 @@ static int	store_str(t_command *command, char *str)
 	if (str && write(command->fds[1], str, ft_strlen(str)) <= 0)
 	{
 		free(str);
+		close (command->fds[1]);
 		return (RETURN_FAILURE);
 	}
 	close (command->fds[1]);
@@ -66,7 +69,7 @@ static int	set_heredoc(t_command *command, int index, int stdin_dup)
 			return (heredoc_err(command->redi[index + 1], command, stdin_dup));
 		}
 	}
-	if (!store_str(command, content))
+	if (!store_str(command, content, stdin_dup))
 		return (print_perror());
 	return (RETURN_SUCCESS);
 }

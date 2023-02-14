@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:56:16 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 16:16:49 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:24:56 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,30 @@ void	print_redi_error(char *err_src, char *err_msg)
 
 /*
  * @summary:
+ * 		- Check at end of here_doc if SIGINT was used to terminate
+ * 		the input. Restore stdin if it's the case.
+*/
+int	check_signal(int stdin_dup)
+{
+	int	check_stdin;
+
+	check_stdin = dup(0);
+	if (check_stdin == -1)
+	{
+		if (dup2(stdin_dup, 0))
+			return (RETURN_FAILURE);
+		close(stdin_dup);
+	}
+	else
+	{
+		close(check_stdin);
+		close(stdin_dup);
+	}
+	return (RETURN_SUCCESS);
+}
+
+/*
+ * @summary:
  * 		- Replace input with the standard one if stdin is close.
  * 		- If not, throw an error like bash would do it.
 */
@@ -96,6 +120,7 @@ int	heredoc_err(char *error, t_command *command, int stdin_dup)
 	else
 	{
 		close(check_stdin);
+		close(stdin_dup);
 		ft_putstr_fd(ERROR_HEREDOC, 2);
 		ft_putstr_fd(" (wanted \'", 2);
 		ft_putstr_fd(error, 2);

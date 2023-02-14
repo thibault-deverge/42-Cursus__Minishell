@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 19:21:36 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:26:41 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int			manage_argument(char *cmd, t_parse *parse, int len, t_env *env);
 int			get_exit_value(t_parse *parse, int len);
 int			check_argument(char c);
 /*			parse_command						*/
-t_list		*parse_commands(t_list *list_commands, t_parse *list_tokens);
+int			parse_commands(t_list *list_commands, t_parse *list_tokens);
 int			handle_redirection(t_command *command, t_token *token);
+int			is_single_point(t_command *command);
 int			is_invalid_file(int rule);
 int			is_redirection_invalid(char c);
 int			is_command(t_token *token);
@@ -82,6 +83,7 @@ int			middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			single_cmd(t_list *lst, t_command *cmd, t_env *env);
 /*			utils								*/
 void		exit_child(t_list *lst, t_env *env, int perror, int exit_value);
+int			check_signal(int stdin_dup);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
 int			heredoc_err(char *error, t_command *comman, int stdin_dup);
 void		print_redi_error(char *err_src, char *err_msg);

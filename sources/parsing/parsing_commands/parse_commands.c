@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:29:37 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 17:38:02 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/14 10:34:45 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static int	manage_commands(t_command *command, t_token *token)
 */
 static int	manage_pipe(t_command *command, t_token *token)
 {
+	if (!is_single_point(command))
+		return (RETURN_FAILURE);
 	if (!token->next)
 	{
 		print_specific_error(ERROR_SYNTAX, '|');
@@ -106,7 +108,7 @@ static int	manage_pipe(t_command *command, t_token *token)
  * 		arguments and the other with the redirections and corresponding files.
  * 		- Return 'list_commands' updated or NULL if an error occured.
 */
-t_list	*parse_commands(t_list *list_commands, t_parse *list_tokens)
+int	parse_commands(t_list *list_commands, t_parse *list_tokens)
 {
 	t_token		*token;
 	t_command	*command;
@@ -131,5 +133,5 @@ t_list	*parse_commands(t_list *list_commands, t_parse *list_tokens)
 			return (RETURN_FAILURE);
 		token = traverse_next_token(token, next_token);
 	}
-	return (list_commands);
+	return (is_single_point(command));
 }
