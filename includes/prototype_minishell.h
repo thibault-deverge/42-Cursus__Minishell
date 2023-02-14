@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/14 11:26:41 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:24:26 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ int			check_builtins(t_command *command, t_env *env);
 int			is_builtin(t_command *command);
 int			redi_manager(t_command *command);
 int			heredoc_manager(t_list *lst);
+void		close_heredoc(t_list *lst);
 /*			single & multiples commands			*/
 int			pipex(t_list *list_commands, t_env *env);
 int			exec_command(char **command, char *paths, char **env);

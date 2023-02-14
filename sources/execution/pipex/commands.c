@@ -6,11 +6,24 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 03:09:34 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 03:11:23 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/14 18:00:10 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	close_heredoc(t_list *lst)
+{
+	t_command	*command;
+
+	command = lst->first;
+	while (command)
+	{
+		if (command->fds[0] != NO_FILE)
+			close(command->fds[0]);
+		command = command->next;
+	}
+}
 
 /*
  * @summary:

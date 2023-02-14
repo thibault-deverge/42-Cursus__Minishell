@@ -6,11 +6,20 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:52:16 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/14 13:31:48 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:59:40 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	close_all(t_command *command, int fdin, int fdout)
+{
+	close_files(command);
+	close(fdin);
+	if (fdout != NO_FILE)
+		close(fdout);
+	return (RETURN_SUCCESS);
+}
 
 /*
  * @summary:
@@ -82,9 +91,9 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 	int		exit_value;
 
 	exit_value = 0;
+	if (!list_cmd->first->cmd)
+		return (close_all(list_cmd->first, pipes[0][1], NO_FILE));
 	list_cmd->pid[0] = fork();
-	if (list_cmd->pid[0] == -1)
-		return (print_perror());
 	if (list_cmd->pid[0] == 0)
 	{
 		modify_signals(FORK_SIGNAL);
@@ -93,14 +102,13 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 			exit_child(list_cmd, env, 1, 1);
 		if (!redi_manager(list_cmd->first))
 			exit_child(list_cmd, env, 0, 1);
+		close_heredoc(list_cmd);
 		if (check_builtins(list_cmd->first, env) == 0)
 			exit_value = exec_command(list_cmd->first->cmd, paths, env->envp);
 		free(list_cmd->pid);
 		exit_child(list_cmd, env, 0, exit_value);
 	}
-	close_files(list_cmd->first);
-	close(pipes[0][1]);
-	return (RETURN_SUCCESS);
+	return (close_all(list_cmd->first, pipes[0][1], NO_FILE));
 }
 
 int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
@@ -109,27 +117,26 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 	int		exit_value;
 
 	exit_value = 0;
+	if (!cmd->cmd)
+		return (close_all(cmd, pipes[0][0], NO_FILE));
 	lst->pid[cmd->index] = fork();
 	if (lst->pid[cmd->index] == -1)
 		return (print_perror());
 	if (lst->pid[cmd->index] == 0)
 	{
 		modify_signals(FORK_SIGNAL);
-		if (!cmd->cmd)
-			exit_child(lst, env, 0, 1);
 		paths = get_environment_content(env, "PATH");
 		if (!make_dup_cmd(pipes, LAST_CMD))
 			exit_child(lst, env, 1, 1);
 		if (!redi_manager(cmd))
 			exit_child(lst, env, 0, 1);
+		close_heredoc(lst);
 		if (check_builtins(cmd, env) == 0)
 			exit_value = exec_command(cmd->cmd, paths, env->envp);
 		free(lst->pid);
 		exit_child(lst, env, 0, exit_value);
 	}
-	close_files(cmd);
-	close(pipes[0][0]);
-	return (lst->pid[cmd->index]);
+	return (close_all(cmd, pipes[0][0], NO_FILE));
 }
 
 int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
@@ -138,6 +145,8 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 	int		exit_value;
 
 	exit_value = 0;
+	if (!cmd->cmd)
+		return (close_all(cmd, pipes[0][0], pipes[1][1]));
 	lst->pid[cmd->index] = fork();
 	if (lst->pid[cmd->index] == -1)
 		return (print_perror());
@@ -149,13 +158,11 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 			exit_child(lst, env, 1, 1);
 		if (!redi_manager(cmd))
 			exit_child(lst, env, 0, 1);
+		close_heredoc(lst);
 		if (check_builtins(cmd, env) == 0)
 			exit_value = exec_command(cmd->cmd, paths, env->envp);
 		free(lst->pid);
 		exit_child(lst, env, 0, exit_value);
 	}
-	close_files(cmd);
-	close(pipes[0][0]);
-	close(pipes[1][1]);
-	return (lst->pid[cmd->index]);
+	return (close_all(cmd, pipes[0][0], pipes[1][1]));
 }

@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:47:29 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 02:48:47 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/14 17:42:14 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@ int	initialize_pid(t_list *lst)
 	lst->nb_cmd = 0;
 	while (tmp)
 	{
-		tmp->index = lst->nb_cmd;
-		lst->nb_cmd++;
+		if (tmp->cmd)
+		{
+			tmp->index = lst->nb_cmd;
+			lst->nb_cmd++;
+		}
+		else
+			tmp->index = -1;
 		tmp = tmp->next;
 	}
 	lst->pid = malloc(sizeof(int) * (lst->nb_cmd + 1));
