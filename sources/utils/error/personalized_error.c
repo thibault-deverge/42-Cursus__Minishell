@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 00:51:28 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 17:40:14 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:42:34 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,33 @@ int	print_specific_error(char *err_msg, char err_arg)
 	ft_putchar_fd('\'', 2);
 	ft_putchar_fd(err_arg, 2);
 	ft_putstr_fd("\'\n", 2);
+	return (RETURN_FAILURE);
+}
+
+/*
+ * @summary:
+ * 		- Replace input with the standard one if stdin is close.
+ * 		- If not, throw an error like bash would do it.
+*/
+int	heredoc_err(char *error, t_command *command, int stdin_dup)
+{
+	int	check_stdin;
+
+	check_stdin = dup(0);
+	if (check_stdin == -1)
+	{
+		dup2(stdin_dup, 0);
+		close(stdin_dup);
+	}
+	else
+	{
+		close(check_stdin);
+		close(stdin_dup);
+		ft_putstr_fd(ERROR_HEREDOC, 2);
+		ft_putstr_fd(" (wanted \'", 2);
+		ft_putstr_fd(error, 2);
+		ft_putstr_fd("\')\n", 2);
+	}
+	free_commands(command);
 	return (RETURN_FAILURE);
 }

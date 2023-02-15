@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:56:16 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/15 12:33:19 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:42:28 by tdeverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,21 @@ void	exit_child(t_list *lst, t_env *env, int is_perror, int exit_value)
 	exit(exit_value);
 }
 
-void	exit_single_child(t_list *lst, t_env *env, int is_perror, int exit_value)
+/*
+ * @summary:
+ * 		- Print errno if parameter 'is_perror' is truthy.
+ * 		- Free list of commands and envirornment then exit program.
+*/
+void	exit_single_child(t_list *lst, t_env *env, int perror, int exit_val)
 {
-	if (is_perror)
+	if (perror)
 		print_perror();
 	free_env(env->var);
 	free_matrix(env->envp);
 	free_commands(lst->first);
 	if (g_value == 131)
 		exit(g_value);
-	exit(exit_value);
+	exit(exit_val);
 }
 
 /*
@@ -113,32 +118,4 @@ int	check_signal(int stdin_dup)
 		close(stdin_dup);
 	}
 	return (RETURN_SUCCESS);
-}
-
-/*
- * @summary:
- * 		- Replace input with the standard one if stdin is close.
- * 		- If not, throw an error like bash would do it.
-*/
-int	heredoc_err(char *error, t_command *command, int stdin_dup)
-{
-	int	check_stdin;
-
-	check_stdin = dup(0);
-	if (check_stdin == -1)
-	{
-		dup2(stdin_dup, 0);
-		close(stdin_dup);
-	}
-	else
-	{
-		close(check_stdin);
-		close(stdin_dup);
-		ft_putstr_fd(ERROR_HEREDOC, 2);
-		ft_putstr_fd(" (wanted \'", 2);
-		ft_putstr_fd(error, 2);
-		ft_putstr_fd("\')\n", 2);
-	}
-	free_commands(command);
-	return (RETURN_FAILURE);
 }
