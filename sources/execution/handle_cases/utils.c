@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:56:16 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/15 17:28:03 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:33:19 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ int	make_dup_cmd(int pipes[][2], int idx_cmd)
 	}
 	else
 	{
-		close(pipes[0][1]);
 		if (dup2(pipes[0][0], STDIN_FILENO) == -1)
 			return (print_perror());
 		close(pipes[0][0]);
@@ -48,7 +47,7 @@ int	make_dup_cmd(int pipes[][2], int idx_cmd)
 /*
  * @summary:
  * 		- Print errno if parameter 'is_perror' is truthy.
- * 		- Free list of commands, pids and environment then exit program.
+ * 		- Free list of commands and envirornment then exit program.
 */
 void	exit_child(t_list *lst, t_env *env, int is_perror, int exit_value)
 {
@@ -63,11 +62,6 @@ void	exit_child(t_list *lst, t_env *env, int is_perror, int exit_value)
 	exit(exit_value);
 }
 
-/*
- * @summary:
- * 		- Print errno if parameter 'is_perror' is truthy.
- * 		- Free list of commands and environment then exit program.
-*/
 void	exit_single_child(t_list *lst, t_env *env, int is_perror, int exit_value)
 {
 	if (is_perror)

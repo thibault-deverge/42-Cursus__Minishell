@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:52:16 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/15 15:21:57 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:21:19 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 
 	exit_value = 0;
 	if (!list_cmd->first->cmd)
-		return (close_all(list_cmd->first, NO_FILE, NO_FILE));
+		return (close_all(list_cmd->first, pipes[0][1], NO_FILE));
 	list_cmd->pid[0] = fork();
 	if (list_cmd->pid[0] == 0)
 	{
@@ -98,7 +98,7 @@ int	first_cmd(t_list *list_cmd, int pipes[][2], t_env *env)
 			exit_value = exec_command(list_cmd->first->cmd, paths, env->envp);
 		exit_child(list_cmd, env, 0, exit_value);
 	}
-	return (close_all(list_cmd->first, NO_FILE, NO_FILE));
+	return (close_all(list_cmd->first, pipes[0][1], NO_FILE));
 }
 
 int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
@@ -108,7 +108,7 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 
 	exit_value = 0;
 	if (!cmd->cmd)
-		return (close_all(cmd, pipes[0][0], pipes[0][1]));
+		return (close_all(cmd, pipes[0][0], NO_FILE));
 	lst->pid[cmd->index] = fork();
 	if (lst->pid[cmd->index] == -1)
 		return (print_perror());
@@ -125,7 +125,7 @@ int	last_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 			exit_value = exec_command(cmd->cmd, paths, env->envp);
 		exit_child(lst, env, 0, exit_value);
 	}
-	return (close_all(cmd, pipes[0][0], pipes[0][1]));
+	return (close_all(cmd, pipes[0][0], NO_FILE));
 }
 
 int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
@@ -152,5 +152,5 @@ int	middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env)
 			exit_value = exec_command(cmd->cmd, paths, env->envp);
 		exit_child(lst, env, 0, exit_value);
 	}
-	return (close_all(cmd, pipes[0][0], pipes[0][1]));
+	return (close_all(cmd, pipes[0][0], pipes[1][1]));
 }

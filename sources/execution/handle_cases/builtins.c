@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:50:24 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 01:50:31 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/15 17:23:10 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ int	check_builtins(t_command *command, t_env *env)
 
 	builtins = get_builtins();
 	i = 0;
+	if (command->next && !command->next->cmd)
+		return (1);
 	while (i < 7)
 	{
 		if (command->cmd && ft_strcmp(command->cmd[0], builtins[i].name) == 0)

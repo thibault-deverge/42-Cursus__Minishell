@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 03:09:34 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/15 15:00:40 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:33:37 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	pipex(t_list *list_commands, t_env *env)
 	command = list_commands->first;
 	if (pipe(pipes[0]) == -1)
 		return (print_perror());
-	//command->fdout = pipes[0][0];
+	command->fdout = pipes[0][1];
 	if (!first_cmd(list_commands, pipes, env))
 		return (RETURN_FAILURE);
 	command = command->next;
@@ -65,7 +65,7 @@ int	pipex(t_list *list_commands, t_env *env)
 	{
 		if (pipe(pipes[1]) == -1)
 			return (print_perror());
-	//	command->fdout = pipes[1][0];
+		command->fdout = pipes[1][1];
 		if (!middle_cmd(list_commands, command, pipes, env))
 			return (RETURN_FAILURE);
 		pipes[0][0] = pipes[1][0];
