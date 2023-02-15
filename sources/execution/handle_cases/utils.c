@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:56:16 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/14 11:24:56 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:33:19 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ int	make_dup_cmd(int pipes[][2], int idx_cmd)
  * 		- Free list of commands and envirornment then exit program.
 */
 void	exit_child(t_list *lst, t_env *env, int is_perror, int exit_value)
+{
+	if (is_perror)
+		print_perror();
+	free_env(env->var);
+	free_matrix(env->envp);
+	free_commands(lst->first);
+	free(lst->pid);
+	if (g_value == 131)
+		exit(g_value);
+	exit(exit_value);
+}
+
+void	exit_single_child(t_list *lst, t_env *env, int is_perror, int exit_value)
 {
 	if (is_perror)
 		print_perror();

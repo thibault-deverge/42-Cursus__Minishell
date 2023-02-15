@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/15 10:14:42 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 12:33:57 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int			middle_cmd(t_list *lst, t_command *cmd, int pipes[][2], t_env *env);
 int			single_cmd(t_list *lst, t_command *cmd, t_env *env);
 /*			utils								*/
 void		exit_child(t_list *lst, t_env *env, int perror, int exit_value);
+void		exit_single_child(t_list *lst, t_env *env, int perror, int exit_value);
 int			check_signal(int stdin_dup);
 int			make_dup_cmd(int pipes[][2], int idx_cmd);
 int			heredoc_err(char *error, t_command *comman, int stdin_dup);
