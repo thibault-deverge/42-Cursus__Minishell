@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:37:31 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/15 11:27:56 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:05:08 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,15 @@
 void	close_files(t_command *command)
 {
 	if (command->fds[0] != -1)
+	{
 		close(command->fds[0]);
+		command->fds[0] = NO_FILE;
+	}
 	if (command->fds[1] != -1)
+	{
 		close(command->fds[1]);
-	command->fds[0] = NO_FILE;
-	command->fds[1] = NO_FILE;
+		command->fds[1] = NO_FILE;
+	}
 }
 
 /*

@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:44:06 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/14 11:36:03 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/15 15:10:34 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ static int	store_str(t_command *command, char *str, int stdin_dup)
 		close (command->fds[1]);
 		return (RETURN_FAILURE);
 	}
-	close (command->fds[1]);
-	command->fds[1] = NO_FILE;
+//	close (command->fds[1]);
+//	command->fds[1] = NO_FILE;
 	free(str);
 	return (RETURN_SUCCESS);
 }
