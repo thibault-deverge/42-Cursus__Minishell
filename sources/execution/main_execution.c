@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:37:30 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/14 18:00:27 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:21:23 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static int	handle_single_command(t_list *lst, t_env *env)
 
 	stdin_save = -1;
 	stdout_save = -1;
+	lst->first->fdout = 1;
 	if ((!lst->first->cmd || is_builtin(lst->first)) && lst->first->redi)
 	{
 		stdin_save = dup(0);

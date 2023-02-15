@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:21:15 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/12 18:32:04 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:10:29 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_command
 	char				**cmd;
 	char				**redi;
 	int					fds[2];
+	int					fdout;
 	int					index;
 	struct s_command	*next;
 }	t_command;

@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:49:39 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/15 10:13:30 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:28:45 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,7 +141,7 @@ static int	manage_redirection(char *cmd, t_parse *parse)
  *	@summary: 
  *				- Main function manager that redirects to the function
  *				corresponding to the argument passed as a parameter.
- *				- Return 'len' which is the new start index of strinf 'cmd'.
+ *				- Return 'len' which is the new start index of string 'cmd'.
 */
 int	manage_argument(char *cmd, t_parse *parse, int len, t_env *env)
 {

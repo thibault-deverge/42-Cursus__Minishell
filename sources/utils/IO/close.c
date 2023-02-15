@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:37:31 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/15 10:14:08 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:27:56 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ void	close_files(t_command *command)
 
 /*
  * @summary:
- * 		- Iterate trhough the linked list 'list_commands' and check in each
+ * 		- Iterate through the linked list 'list_commands' and check in each
  *		command if pipes of here_doc are open and close them if they are.
 */
-void	close_heredoc(t_list *lst)
+void	close_heredoc(t_list *list_commands)
 {
 	t_command	*command;
 
-	command = lst->first;
+	command = list_commands->first;
 	while (command)
 	{
 		if (command->fds[0] != NO_FILE)

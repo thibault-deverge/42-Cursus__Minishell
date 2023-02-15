@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 21:42:59 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/14 16:53:48 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:16:58 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ int	exec_echo(t_command *command, t_env *env)
 		i++;
 	}
 	if (cmd_args[i])
-		ft_putstr_fd(cmd_args[i++], 1);
+		ft_putstr_fd(cmd_args[i++], command->fdout);
 	while (cmd_args[i])
 	{
-		ft_putchar_fd(' ', 1);
-		ft_putstr_fd(cmd_args[i], 1);
+		ft_putchar_fd(' ', command->fdout);
+		ft_putstr_fd(cmd_args[i], command->fdout);
 		i++;
 	}
 	if (!is_option)
-		ft_putchar_fd('\n', 1);
+		ft_putchar_fd('\n', command->fdout);
 	return (RETURN_SUCCESS);
 }

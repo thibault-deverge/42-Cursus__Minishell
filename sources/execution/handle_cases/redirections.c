@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 01:44:51 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/14 11:42:27 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/15 11:16:26 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	update_dup(t_command *command, int fdin, int fdout)
 	}
 	if (command->fds[1] != NO_FILE)
 	{
+		command->fdout = command->fds[1];
 		if (dup2(command->fds[1], 1) < 0)
 			return ;
 		close (command->fds[1]);
