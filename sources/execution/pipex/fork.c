@@ -6,20 +6,11 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 02:52:16 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/14 17:59:40 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:21:01 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	close_all(t_command *command, int fdin, int fdout)
-{
-	close_files(command);
-	close(fdin);
-	if (fdout != NO_FILE)
-		close(fdout);
-	return (RETURN_SUCCESS);
-}
 
 /*
  * @summary:

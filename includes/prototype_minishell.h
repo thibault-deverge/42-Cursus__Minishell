@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 18:33:12 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/14 17:24:26 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:14:42 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ char		*ft_joinpath(char const *s1, char const *s2);
 /*			Input/Output						*/
 void		close_files(t_command *command);
 void		close_pipe(int *pipe);
+int			close_all(t_command *command, int fdin, int fdout);
 /*			free memory							*/
 void		free_main_lists(t_command *command, t_env *env);
 void		free_env(t_variable *var);

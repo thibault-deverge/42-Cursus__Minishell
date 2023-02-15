@@ -6,11 +6,21 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/12 20:49:39 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/14 09:45:31 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/15 10:13:30 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+ *	@summary: 
+ *				- Handle command as a key.
+ *				- Check if it is the exit value.
+ *				- Check if the variable already exist at the env and return the
+ *				content corresponding.
+ *				- Check rules of variable's name.
+ *				- Return new start index of argument.
+*/
 
 static int	manage_key_value(char *arg, t_parse *parse, t_env *env, int quote)
 {
@@ -41,6 +51,13 @@ static int	manage_key_value(char *arg, t_parse *parse, t_env *env, int quote)
 	return (i - 1);
 }
 
+/*
+ *	@summary: 
+ *				- Handle command in double quotes.
+ *				- Check the argument contains a key.
+ *				- Check if the quotes are closed.
+ *				- Return new start index of argument.
+*/
 static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env, int len)
 {
 	int	i;
@@ -69,6 +86,12 @@ static int	manage_double_quotes(char *arg, t_parse *parse, t_env *env, int len)
 	return (i);
 }
 
+/*
+ *	@summary: 
+ *				- Handle command in single quotes.
+ *				- Check if the quotes are closed.
+ *				- Return new start index of argument.
+*/
 static int	manage_simple_quotes(char *arg, t_parse *parse, int len)
 {
 	int	i;
@@ -85,6 +108,13 @@ static int	manage_simple_quotes(char *arg, t_parse *parse, int len)
 	return (i);
 }
 
+/*
+ *	@summary: 
+ *				- Handle command as a redirection.
+ *				- Check if the redirection is a heredoc and the command which
+ *				follow is not a key.
+ *				- Return new start index of argument.
+*/
 static int	manage_redirection(char *cmd, t_parse *parse)
 {
 	int	i;
@@ -107,6 +137,12 @@ static int	manage_redirection(char *cmd, t_parse *parse)
 	return (i - 1);
 }
 
+/*
+ *	@summary: 
+ *				- Main function manager that redirects to the function
+ *				corresponding to the argument passed as a parameter.
+ *				- Return 'len' which is the new start index of strinf 'cmd'.
+*/
 int	manage_argument(char *cmd, t_parse *parse, int len, t_env *env)
 {
 	add_new_token(cmd, 0, len, parse);
