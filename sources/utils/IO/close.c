@@ -56,6 +56,29 @@ void	close_pipe(int *pipe)
 
 /*
  * @summary:
+ * 		- Close all pipes opened for the heredocs.
+*/
+void	close_all_pipes(t_list *lst, t_command *command)
+{
+	t_command	*tmp;
+
+	tmp = lst->first;
+	while (tmp && tmp != command)
+	{
+		if (tmp->fds[0] != NO_FILE)
+			close(tmp->fds[0]);
+		if (tmp->fds[1] != NO_FILE)
+			close(tmp->fds[1]);
+		tmp = tmp->next;
+	}
+	if (tmp->fds[0] != NO_FILE)
+		close(tmp->fds[0]);
+	if (tmp->fds[1] != NO_FILE)
+		close(tmp->fds[1]);
+}
+
+/*
+ * @summary:
  * 		- Call close_files function.
  *		- Close fdin and fdout of pipe if they are opened.
 */

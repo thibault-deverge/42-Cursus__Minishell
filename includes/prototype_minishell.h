@@ -116,6 +116,7 @@ char		*ft_joinpath(char const *s1, char const *s2);
 /*			Input/Output						*/
 void		close_files(t_command *command);
 void		close_pipe(int *pipe);
+void		close_all_pipes(t_list *lst, t_command *command);
 int			close_all(t_command *command, int fdin, int fdout);
 /*			free memory							*/
 void		free_main_lists(t_command *command, t_env *env);

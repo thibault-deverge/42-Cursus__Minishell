@@ -104,25 +104,6 @@ static int	handle_heredocs(t_command *command, int *idx)
 	return (RETURN_SUCCESS);
 }
 
-static void	close_all_pipes(t_list *lst, t_command *command)
-{
-	t_command	*tmp;
-
-	tmp = lst->first;
-	while (tmp && tmp != command)
-	{
-		if (tmp->fds[0] != NO_FILE)
-			close(tmp->fds[0]);
-		if (tmp->fds[1] != NO_FILE)
-			close(tmp->fds[1]);
-		tmp = tmp->next;
-	}
-	if (tmp->fds[0] != NO_FILE)
-		close(tmp->fds[0]);
-	if (tmp->fds[1] != NO_FILE)
-		close(tmp->fds[1]);
-}
-
 /*
  * @summary:
  * 		- Loop through the commands and handle all here_docs one by one.
