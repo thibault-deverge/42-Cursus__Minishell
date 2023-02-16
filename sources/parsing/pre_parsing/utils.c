@@ -18,6 +18,8 @@ int	get_exit_value(t_parse *parse, int len)
 
 	content = ft_itoa(g_value);
 	parse = add_new_token(content, 0, ft_strlen(content), parse);
+	free(content);
+	content = NULL;
 	if (!parse)
 		return (print_perror() - 1);
 	return (len);

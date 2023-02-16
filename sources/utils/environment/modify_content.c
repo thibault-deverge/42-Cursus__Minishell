@@ -19,6 +19,8 @@
 */
 char	*set_new_content(t_variable *var, char *value)
 {
+	free(var->content);
+	var->content = NULL;
 	var->content = ft_strdup(value);
 	if (!var->content)
 		return (NULL);
@@ -39,7 +41,7 @@ int	add_new_content(t_variable *var, char *value)
 	}
 	else
 	{
-		var->content = ft_strjoin(var->content, value);
+		var->content = ft_strjoin_safe(var->content, value);
 		if (!var->content)
 			return (print_perror());
 	}

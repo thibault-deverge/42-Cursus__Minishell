@@ -39,7 +39,7 @@ static int	store_str(t_command *command, char *str, int stdin_dup)
 	if (!command->cmd)
 	{
 		close(command->fds[0]);
-		command->fds[1] = NO_FILE;
+		command->fds[0] = NO_FILE;
 	}
 	free(str);
 	return (RETURN_SUCCESS);
@@ -104,6 +104,25 @@ static int	handle_heredocs(t_command *command, int *idx)
 	return (RETURN_SUCCESS);
 }
 
+static void	close_all_pipes(t_list *lst, t_command *command)
+{
+	t_command	*tmp;
+
+	tmp = lst->first;
+	while (tmp && tmp != command)
+	{
+		if (tmp->fds[0] != NO_FILE)
+			close(tmp->fds[0]);
+		if (tmp->fds[1] != NO_FILE)
+			close(tmp->fds[1]);
+		tmp = tmp->next;
+	}
+	if (tmp->fds[0] != NO_FILE)
+		close(tmp->fds[0]);
+	if (tmp->fds[1] != NO_FILE)
+		close(tmp->fds[1]);
+}
+
 /*
  * @summary:
  * 		- Loop through the commands and handle all here_docs one by one.
@@ -122,7 +141,11 @@ int	heredoc_manager(t_list *lst)
 		while (command->redi && command->redi[i])
 		{
 			if (!handle_heredocs(command, &i))
+			{
+				close_all_pipes(lst, command);
+				free_commands(lst->first);
 				return (RETURN_FAILURE);
+			}
 		}
 		command = command->next;
 	}

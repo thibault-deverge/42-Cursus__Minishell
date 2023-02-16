@@ -73,7 +73,11 @@ int	is_empty_input(char *cmd)
 	while (cmd && cmd[i] && ft_is_whitespace(cmd[i]))
 		i++;
 	if (ft_strlen(cmd) == i)
+	{
+		free(cmd);
+		cmd = NULL;
 		return (1);
+	}
 	return (0);
 }
 

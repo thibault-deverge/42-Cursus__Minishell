@@ -103,6 +103,8 @@ int	exec_exit(t_command *command, t_env *env)
 		if (!handle_arg(command, env, &exit_status))
 			return (RETURN_FAILURE);
 	}
+	free_commands(command);
+	free_env(env->var);
 	g_value = exit_status % 256;
 	exit(g_value);
 	return (RETURN_FAILURE);

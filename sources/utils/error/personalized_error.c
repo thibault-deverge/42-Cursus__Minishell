@@ -73,6 +73,7 @@ int	heredoc_err(char *error, t_command *command, int stdin_dup)
 	{
 		dup2(stdin_dup, 0);
 		close(stdin_dup);
+		return (RETURN_FAILURE);
 	}
 	else
 	{
@@ -83,6 +84,7 @@ int	heredoc_err(char *error, t_command *command, int stdin_dup)
 		ft_putstr_fd(error, 2);
 		ft_putstr_fd("\')\n", 2);
 	}
-	free_commands(command);
-	return (RETURN_FAILURE);
+	if (command->fds[0] != NO_FILE)
+		close(command->fds[0]);
+	return (RETURN_SUCCESS);
 }
