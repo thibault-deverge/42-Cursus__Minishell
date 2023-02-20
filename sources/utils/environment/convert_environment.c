@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 03:22:39 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/13 03:23:55 by tdeverge         ###   ########.fr       */
+/*   Updated: 2023/02/20 09:04:51 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static int	get_nb_var(t_env *env)
 	tmp = env->var;
 	while (tmp)
 	{
-		nb_var++;
+		if (tmp->content)
+			nb_var++;
 		tmp = tmp->next;
 	}
 	return (nb_var);
@@ -58,9 +59,9 @@ char	**convert_env(t_env	*env)
 				free_matrix(envp);
 				return (NULL);
 			}
+			i++;
 		}
 		tmp = tmp->next;
-		i++;
 	}
 	envp[i] = NULL;
 	return (envp);

@@ -6,7 +6,7 @@
 /*   By: tdeverge <tdeverge@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/13 03:09:34 by tdeverge          #+#    #+#             */
-/*   Updated: 2023/02/15 12:33:37 by pmieuzet         ###   ########.fr       */
+/*   Updated: 2023/02/20 08:59:04 by pmieuzet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	single_cmd(t_list *lst, t_command *cmd, t_env *env)
 			return (RETURN_FAILURE);
 		env->envp = convert_env(env);
 		if (!env->envp)
-			exit_child(lst, env, 1, 1);
+			exit_single_child(lst, env, 1, 1);
 		paths = get_environment_content(env, "PATH");
 		exit_value = exec_command(cmd->cmd, paths, env->envp);
 		exit_single_child(lst, env, 0, exit_value);
