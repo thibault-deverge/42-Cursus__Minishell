@@ -47,9 +47,6 @@ static void	print_export(t_env *env)
 */
 int	export_error(char *src, char *sub, char *err_msg)
 {
-	int	i;
-
-	i = 0;
 	ft_putstr_fd(src, 2);
 	ft_putstr_fd(": \'", 2);
 	ft_putstr_fd(sub, 2);

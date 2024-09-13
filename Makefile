@@ -2,7 +2,7 @@
 ## VARIABLES
 
 NAME	= minishell
-CFLAGS	= -Wall -Wextra -Werror -I$(INCDIR) -Ilibft -g
+CFLAGS	= -Wall -Wextra -I$(INCDIR) -Ilibft -g
 CC	= clang
 LIBFT = ./libft/libft.a
 INCDIR	= includes
