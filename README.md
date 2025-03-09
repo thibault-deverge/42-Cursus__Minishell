@@ -40,7 +40,7 @@ Through the development of **Minishell**, I have gained hands-on experience with
 
 ## **Installation and Usage**
 
-You will need clange and C library to compile the project !
+You will need clang and C library to compile the project !
 
 1. Clone the repository and compile it.
 ```bash
